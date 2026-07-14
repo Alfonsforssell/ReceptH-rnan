@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@font-face {
+    font-family: ;
+    src: url();
+}
+
+:root {
+    --dominant: black;
+    --complementary: white;
+    --margin-xxs: .25rem;
+    --margin-xs: .5rem;
+    --margin-s: .75rem;
+    --margin-m: 1rem;
+    --margin-l: 1.25rem;
+    --margin-xl: 1.75rem;
+    --margin-xxl: 2.5rem;
+
+    --bg-light: hsl(0, 0%, 100%);
+    --bg: hsl(0, 0%, 90%);
+    --bg-dark: hsl(0, 0%, 80%);
+
+    --text-dark: hsl(0, 0%, 0%);
+    --text: hsl(0, 0%, 15%);
+    --text-light: hsl(0, 0%, 30%);
+    --invert: 0;
+}
+
+body {
+    background-image: url(../assets/images/hero.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+header {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: var(--bg);
+}
+
+header h1 {
+    font-size: 50px;
+}
+
+main {
+    width: 100%;
+    height: calc(100dvh - 200px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#loginContainer {
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr;
+    width: 75%;
+    height: 75%;
+    border-radius: 20px;
+    box-shadow: inset 2px 2px 1px 0 rgba(255, 255, 255, 0.5),
+        inset -1px -1px 1px 1px rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(3px);
+    filter: url(#glass-distortion);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.line {
+    width: 2px;
+    height: 100%;
+    background-color: var(--bg);
+}
+
+#login form,
+#register form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: var(--bg);
+}
+
+#login form input,
+#login form button {
+    width: 50%;
+    height: 50px;
+    border: 2px solid var(--bg-dark);
+    border-radius: 20px;
+    padding: 10px;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    transition: all 0.5s ease;
+}
+
+form input:focus-visible {
+    outline: none;
+}
+
+#register form input,
+#register form button {
+    width: 50%;
+    height: 50px;
+    border: 2px solid var(--bg-dark);
+    border-radius: 20px;
+    padding: 10px;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    transition: all 0.5s ease;
+}
+
+#register form #agree {
+    height: 15px;
+    cursor: pointer;
+}
+
+#register form p {
+    font-size: 10px;
+    width: 50%;
+    color: var(--bg);
+}
+
+#cookies {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#cookies a {
+    color: var(--bg);
+    font-size: 15px;
+}
+
+button:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+footer {
+    margin: auto;
+    width: 90%;
+    height: 100px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 50px;
+    border-top: 1px solid var(--bg);
+}
+
+#copyright {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 20px;
+    color: white;
+}
