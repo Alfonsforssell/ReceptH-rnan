@@ -1,11 +1,60 @@
-# Deno
-# https://deno.com/
+# ==========================
+# Operating System
+# ==========================
 
-# Cache directory (when using project-local DENO_DIR)
-# https://docs.deno.com/runtime/fundamentals/setup/#deno_dir
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Editors
+# ==========================
+
+.vscode/
+
+# ==========================
+# Environment variables
+# ==========================
+
+.env
+
+# ==========================
+# Logs
+# ==========================
+
+*.log
+
+# ==========================
+# Temporary files
+# ==========================
+
+*.tmp
+*.temp
+
+# ==========================
+# Deno
+# ==========================
+
 .deno/
 
-# Coverage reports
-# https://docs.deno.com/runtime/reference/cli/coverage/
+# Coverage
+
 coverage/
-*.lcov
+
+# ==========================
+# Node (if used later)
+# ==========================
+
+node_modules/
+
+# ==========================
+# Build folders
+# ==========================
+
+dist/
+build/
+
+# ==========================
+# Misc
+# ==========================
+
+*.bak
