@@ -9,42 +9,24 @@
 </head>
 
 <body>
-    <header>
-        <img src="" alt="logo">
-        <h1>ReceptHörnan</h1>
-    </header>
     <main>
-        <div id="loginContainer">
-            <div id="login">
-                <form action="submit">
-                    <h1>Logga in</h1>
-                    <input name="logInUsername" type="text" placeholder="Användarnamn">
-                    <input name="logInPassword" type="password" placeholder="Lösenord">
-                    <button id="loginButton">Logga in</button>
-                </form>
-            </div>
-            <div class="line"></div>
-            <div id="register">
-                <form action="submit">
-                    <h1>Skapa konto</h1>
-                    <input name="signUpMail" type="text" placeholder="Mail">
-                    <input name="signUpUsername" type="text" placeholder="Användarnamn">
-                    <input name="signUpPassword" type="password" placeholder="Lösenord">
-                    <input name="signUpRepeatPassword" type="password" placeholder="Upprepa lösenord">
-                    <p>Jag har läst och godkänner Recepthörnans användarvillkor och cookiepolicy. Jag samtycker till att
-                        nödvändiga cookies används för inloggning och sessionshantering.</p>
-                    <input id="agree" name="agree" type="checkbox">
-                    <div id="cookies">
-                        <a href="#">Användarvillkor</a>
-                        <a href="#">Cookiepolicy</a>
-                    </div>
-                    <button id="signUpButton">Registrera dig</button>
-                </form>
-            </div>
+        <div class="hero">
+            <img class="logo" src="assets/images/LogoBlack.svg" alt="">
+            <h1>Låt dig inspireras, dela dina recept<br>och hitta nya favoriter varje dag</h1>
+        </div>
+        <div id="login">
+            <form action="submit">
+                <h1>Logga in</h1>
+                <input name="logInUsername" type="text" placeholder="Användarnamn">
+                <input name="logInPassword" type="password" placeholder="Lösenord">
+                <button id="loginButton">Logga in</button>
+                <a href="#">Glömt lösenordet?</a>
+            </form>
+            <button id="createUser">Skapa konto</button>
         </div>
     </main>
     <footer>
-        <img src="" alt="logo">
+        <img class="logo" src="assets/images/LogoBlack.svg" alt="logo">
         <div id="copyright">
             <p>Copyright © 2026 ReceptHörnan. All rights reserved.</p>
             <p>Created by Alfons Forssell</p>
