@@ -1,11 +1,13 @@
 import * as users from "users.js";
 
-export function login(request) {
-    let allUsers = users.getUsers();
+export function login(credentials) {
+    const allUsers = users.getUsers();
     let matchedUser = null;
-    for (let user of allUsers) {
-        if (user.username === request.username && user.password === request.password) {
+
+    for (const user of allUsers) {
+        if (user.username === credentials.username && user.password === credentials.password) {
             matchedUser = user;
+            break;
         }
     }
 
@@ -13,9 +15,15 @@ export function login(request) {
         return null;
     }
 
-    let sessionId = crypto.randomUUID();
+    const sessionId = crypto.randomUUID();
     matchedUser.cookie = sessionId;
     users.saveUsers(allUsers);
+
+    return {
+        user: matchedUser,
+        sessionId: sessionId
+    };
+
 }
 
 export function logout(request) {
