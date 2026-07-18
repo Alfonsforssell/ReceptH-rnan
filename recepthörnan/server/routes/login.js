@@ -15,15 +15,18 @@ export function login(credentials) {
         return null;
     }
 
-    const sessionId = crypto.randomUUID();
-    matchedUser.cookie = sessionId;
+    const session = crypto.randomUUID();
+    matchedUser.sessionId = session;
     users.saveUsers(allUsers);
 
-    return {
-        user: matchedUser,
-        sessionId: sessionId
-    };
+    const user = { ...matchedUser };
+    delete user.password;
+    delete user.sessionId;
 
+    return {
+        user,
+        sessionId: session
+    };
 }
 
 export function logout(request) {
@@ -33,11 +36,13 @@ export function logout(request) {
         let allUsers = users.getUsers();
         for (let usr of allUsers) {
             if (usr.id === user.id) {
-                usr.cookie = null;
+                usr.sessionId = null;
             }
         }
         users.saveUsers(allUsers);
+        return true
     }
+    return false
 }
 
 export function getProfile(request) {
@@ -50,7 +55,7 @@ export function getProfile(request) {
     let allUsers = users.getUsers();
 
     for (let user of allUsers) {
-        if (cookieHeader.includes(user.cookie)) {
+        if (cookieHeader.includes(user.sessionId)) {
             return user;
 
         }

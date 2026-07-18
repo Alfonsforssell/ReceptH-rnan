@@ -1,154 +1,156 @@
-[
+{
+  "recipes": [
     {
-        "id": 1,
-        "authorId": 1,
-        "name": "Classic Pancakes",
-        "description": "Fluffy homemade pancakes.",
-        "country": "USA",
-        "category": "Breakfast",
-        "time": 20,
-        "dietary": [
-            "Vegetarian"
-        ],
-        "ingredients": [
-            {
-                "name": "Flour",
-                "amount": 300,
-                "unit": "g"
-            },
-            {
-                "name": "Milk",
-                "amount": 500,
-                "unit": "ml"
-            },
-            {
-                "name": "Egg",
-                "amount": 2,
-                "unit": "pcs"
-            }
-        ],
-        "instructions": [
-            "Mix the ingredients.",
-            "Heat a frying pan.",
-            "Cook until golden."
-        ],
-        "imageUrl": "/images/pancakes.jpg"
+      "id": 1,
+      "author": 1,
+      "name": "Classic Pancakes",
+      "description": "Fluffy homemade pancakes.",
+      "country": "USA",
+      "category": "Breakfast",
+      "time": 20,
+      "dietary": [
+        "Vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Flour",
+          "amount": 300,
+          "unit": "g"
+        },
+        {
+          "name": "Milk",
+          "amount": 500,
+          "unit": "ml"
+        },
+        {
+          "name": "Egg",
+          "amount": 2,
+          "unit": "pcs"
+        }
+      ],
+      "instructions": [
+        "Mix the ingredients.",
+        "Heat a frying pan.",
+        "Cook until golden."
+      ],
+      "imageUrl": "/images/pancakes.jpg"
     },
     {
-        "id": 2,
-        "authorId": 2,
-        "name": "Chicken Curry",
-        "description": "Creamy chicken curry.",
-        "country": "India",
-        "category": "Dinner",
-        "time": 45,
-        "dietary": [],
-        "ingredients": [
-            {
-                "name": "Chicken",
-                "amount": 500,
-                "unit": "g"
-            },
-            {
-                "name": "Curry paste",
-                "amount": 2,
-                "unit": "tbsp"
-            }
-        ],
-        "instructions": [
-            "Cook the chicken.",
-            "Add curry paste.",
-            "Simmer."
-        ],
-        "imageUrl": "/images/curry.jpg"
+      "id": 2,
+      "author": 2,
+      "name": "Chicken Curry",
+      "description": "Creamy chicken curry.",
+      "country": "India",
+      "category": "Dinner",
+      "time": 45,
+      "dietary": [],
+      "ingredients": [
+        {
+          "name": "Chicken",
+          "amount": 500,
+          "unit": "g"
+        },
+        {
+          "name": "Curry paste",
+          "amount": 2,
+          "unit": "tbsp"
+        }
+      ],
+      "instructions": [
+        "Cook the chicken.",
+        "Add curry paste.",
+        "Simmer."
+      ],
+      "imageUrl": "/images/curry.jpg"
     },
     {
-        "id": 3,
-        "authorId": 3,
-        "name": "Greek Salad",
-        "description": "Fresh summer salad.",
-        "country": "Greece",
-        "category": "Lunch",
-        "time": 10,
-        "dietary": [
-            "Vegetarian",
-            "Gluten Free"
-        ],
-        "ingredients": [
-            {
-                "name": "Tomatoes",
-                "amount": 3,
-                "unit": "pcs"
-            },
-            {
-                "name": "Feta cheese",
-                "amount": 150,
-                "unit": "g"
-            }
-        ],
-        "instructions": [
-            "Chop vegetables.",
-            "Mix together.",
-            "Serve."
-        ],
-        "imageUrl": "/images/salad.jpg"
+      "id": 3,
+      "author": 3,
+      "name": "Greek Salad",
+      "description": "Fresh summer salad.",
+      "country": "Greece",
+      "category": "Lunch",
+      "time": 10,
+      "dietary": [
+        "Vegetarian",
+        "Gluten Free"
+      ],
+      "ingredients": [
+        {
+          "name": "Tomatoes",
+          "amount": 3,
+          "unit": "pcs"
+        },
+        {
+          "name": "Feta cheese",
+          "amount": 150,
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Chop vegetables.",
+        "Mix together.",
+        "Serve."
+      ],
+      "imageUrl": "/images/salad.jpg"
     },
     {
-        "id": 4,
-        "authorId": 4,
-        "name": "Chocolate Cake",
-        "description": "Rich chocolate cake.",
-        "country": "Sweden",
-        "category": "Dessert",
-        "time": 70,
-        "dietary": [
-            "Vegetarian"
-        ],
-        "ingredients": [
-            {
-                "name": "Flour",
-                "amount": 250,
-                "unit": "g"
-            },
-            {
-                "name": "Cocoa",
-                "amount": 50,
-                "unit": "g"
-            }
-        ],
-        "instructions": [
-            "Mix ingredients.",
-            "Bake.",
-            "Cool before serving."
-        ],
-        "imageUrl": "/images/cake.jpg"
+      "id": 4,
+      "author": 4,
+      "name": "Chocolate Cake",
+      "description": "Rich chocolate cake.",
+      "country": "Sweden",
+      "category": "Dessert",
+      "time": 70,
+      "dietary": [
+        "Vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Flour",
+          "amount": 250,
+          "unit": "g"
+        },
+        {
+          "name": "Cocoa",
+          "amount": 50,
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Mix ingredients.",
+        "Bake.",
+        "Cool before serving."
+      ],
+      "imageUrl": "/images/cake.jpg"
     },
     {
-        "id": 5,
-        "authorId": 5,
-        "name": "Sushi Rolls",
-        "description": "Homemade sushi.",
-        "country": "Japan",
-        "category": "Dinner",
-        "time": 60,
-        "dietary": [],
-        "ingredients": [
-            {
-                "name": "Sushi rice",
-                "amount": 300,
-                "unit": "g"
-            },
-            {
-                "name": "Salmon",
-                "amount": 200,
-                "unit": "g"
-            }
-        ],
-        "instructions": [
-            "Cook rice.",
-            "Roll sushi.",
-            "Slice and serve."
-        ],
-        "imageUrl": "/images/sushi.jpg"
+      "id": 5,
+      "author": 5,
+      "name": "Sushi Rolls",
+      "description": "Homemade sushi.",
+      "country": "Japan",
+      "category": "Dinner",
+      "time": 60,
+      "dietary": [],
+      "ingredients": [
+        {
+          "name": "Sushi rice",
+          "amount": 300,
+          "unit": "g"
+        },
+        {
+          "name": "Salmon",
+          "amount": 200,
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Cook rice.",
+        "Roll sushi.",
+        "Slice and serve."
+      ],
+      "imageUrl": "/images/sushi.jpg"
     }
-]
+  ]
+}

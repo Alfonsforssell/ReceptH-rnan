@@ -44,7 +44,7 @@ function notFound() {
 
 function badRequest(message) {
     return new Response(JSON.stringify({ Error: `Bad Request, ${message}` }), {
-        headers: HEADERS,
+        headers: jsonHeaders,
         status: 400
     });
 }
@@ -71,8 +71,6 @@ let jsonHeaders = {
 
 async function handler(request) {
     let url = new URL(request.url);
-    let userIdRoute = new URLPattern({ pathname: "/api/users/:id" });
-    let recipeIdRoute = new URLPattern({ pathname: "/api/recipe/:id" });
 
     if (url.pathname.startsWith("/api/")) {
 
@@ -122,9 +120,6 @@ async function handler(request) {
                     return unauthorized();
                 }
                 let userFavourites = favourites.getFavourites(user.id);
-                if (userFavourites.length === 0) {
-                    return notFound();
-                }
                 return jsonResponse(userFavourites);
             }
 
@@ -139,6 +134,7 @@ async function handler(request) {
                 if (!validateJsonAccept(request)) {
                     return notAcceptable();
                 }
+                return jsonResponse(recipes.getDietaries());
             }
 
             if (url.pathname === "/api/profile/recipes") {
@@ -192,18 +188,10 @@ async function handler(request) {
                     return notAcceptable();
                 }
 
-                let user = login.getProfile(request);
-                if (!user) {
+                let loggedOut = login.logout(request);
+                if (!loggedOut) {
                     return unauthorized();
                 }
-
-                let allUsers = users.getUsers();
-                for (let usr of allUsers) {
-                    if (usr.id === user.id) {
-                        usr.cookie = "";
-                    }
-                }
-                users.saveUsers(allUsers);
 
                 const response = jsonResponse({ message: "Logout succeeded" });
                 response.headers.set(
@@ -214,7 +202,7 @@ async function handler(request) {
                 return response;
             }
 
-            if (url.pathname === "/api/user") {
+            if (url.pathname === "/api/users") {
                 if (!validateJsonAccept(request)) {
                     return notAcceptable();
                 }
@@ -242,6 +230,10 @@ async function handler(request) {
 
                 if (!newUser.username || !newUser.email || !newUser.password) {
                     return badRequest("Username, email and password are required.");
+                }
+
+                if (newUser.password !== newUser.repeatPassword) {
+                    return badRequest("Repeated password was incorrect");
                 }
 
                 return jsonResponse(users.createUser(newUser), 201);
@@ -273,8 +265,7 @@ async function handler(request) {
                     return badRequest("All recipe fields are required.");
                 }
 
-                newRecipe.author = user.id;
-                return jsonResponse(recipes.createRecipe(newRecipe), 201);
+                return jsonResponse(recipes.createRecipe(newRecipe, user.id), 201);
 
             }
 
@@ -310,63 +301,135 @@ async function handler(request) {
         }
 
         if (request.method === "PATCH") {
-            if (url.pathname === "/api/recipes/:id") {
-                const recipeIdRoute = new URLPattern({
-                    pathname: "/api/recipes/:id"
-
-                });
-
-                const match = recipeIdRoute.exec(url);
-
-                if (match) {
-                    const id = Number(match.pathname.groups.id);
+            if (url.pathname === "/api/profile") {
+                if (!validateJsonAccept(request)) {
+                    return notAcceptable();
                 }
+
+                if (!validateJsonContent(request)) {
+                    return unsupportedMediaType();
+                }
+
+                let user = login.getProfile(request);
+
+                if (!user) {
+                    return unauthorized();
+                }
+
+                let newUserData = await getRequestBody(request);
+                if (!newUserData.username) {
+                    return badRequest("Username is required.");
+                }
+                if (!newUserData.email) {
+                    return badRequest("Email is required.");
+                }
+                if (!newUserData.password) {
+                    return badRequest("Password is required.");
+                }
+
+                return jsonResponse(users.updateUser(user.id, newUserData));
             }
 
-            if (url.pathname === "/api/profile") {
+            const recipeIdRoute = new URLPattern({
+                pathname: "/api/recipes/:id"
 
+            });
+
+            if (!validateJsonAccept(request)) {
+                return notAcceptable();
+            }
+
+            if (!validateJsonContent(request)) {
+                return unsupportedMediaType();
+            }
+
+            const recipeMatch = recipeIdRoute.exec(url);
+            if (recipeMatch) {
+                const user = login.getProfile(request);
+
+                if (!user) {
+                    return unauthorized();
+                }
+
+                const id = Number(recipeMatch.pathname.groups.id);
+
+                let newRecipe = await getRequestBody(request);
+                if (!newRecipe) {
+                    return badRequest("Invalid or missing JSON body.");
+                }
+
+                if (!newRecipe.name || !newRecipe.description || !newRecipe.country || !newRecipe.category || !newRecipe.time || !newRecipe.dietary || !newRecipe.ingredients ||
+                    !newRecipe.instructions || !newRecipe.imageUrl) {
+                    return badRequest("All recipe fields are required.");
+                }
+
+                const recipeChanged = recipes.updateRecipe(id, newRecipe, user.id);
+
+                if (!recipeChanged) {
+                    return badRequest("Recipe not found or you do not own this recipe");
+                }
+
+                return jsonResponse(recipeChanged);
             }
         }
 
         if (request.method === "DELETE") {
-            if (url.pathname === "/api/recipes/:id") {
-                const recipeIdRoute = new URLPattern({
-                    pathname: "/api/recipes/:id"
+            const recipeIdRoute = new URLPattern({
+                pathname: "/api/recipes/:id"
+            });
 
-                });
+            const recipeMatch = recipeIdRoute.exec(url);
+            if (recipeMatch) {
+                const user = login.getProfile(request);
 
-                const match = recipeIdRoute.exec(url);
-
-                if (match) {
-                    const id = Number(match.pathname.groups.id);
+                if (!user) {
+                    return unauthorized();
                 }
+
+                const id = Number(recipeMatch.pathname.groups.id);
+                const recipeDeleted = recipes.removeRecipe(id, user.id);
+
+                if (!recipeDeleted) {
+                    return badRequest("Recipe not found or you do not own this recipe");
+                }
+
+                return jsonResponse(recipeDeleted);
             }
 
-            if (url.pathname === "/api/favourites/:id") {
-                const favouriteIdRoute = new URLPattern({
-                    pathname: "/api/favourites/:id"
+            const favouriteIdRoute = new URLPattern({
+                pathname: "/api/favourites/:id"
+            });
 
-                });
+            const favouriteMatch = favouriteIdRoute.exec(url);
 
-                const match = favouriteIdRoute.exec(url);
-
-                if (match) {
-                    const id = Number(match.pathname.groups.id);
+            if (favouriteMatch) {
+                const user = login.getProfile(request);
+                if (!user) {
+                    return unauthorized();
                 }
+
+                const id = Number(favouriteMatch.pathname.groups.id);
+                const favouriteRemoved = favourites.removeFavourite(id, user.id);
+
+                if (!favouriteRemoved) {
+                    return badRequest("Recipe is not marked as favourite");
+                }
+
+                return jsonResponse(favouriteRemoved);
             }
         }
         return new Response("Not Found", { status: 404 });
     }
 
     if (url.pathname === "/" || url.pathname === "/login") {
-        return serveFile(request, "../public/index.html");
+        return serveFile(request, "./public/index.html");
     }
     if (url.pathname === "/register") {
-        return serveFile(request, "../public/register.html");
+        return serveFile(request, "./public/register.html");
     }
     return serveDir(request, {
-        fsRoot: "../public",
-        urlRoot: "../public",
+        fsRoot: "./public",
+        urlRoot: "./public",
         showIndex: true,
     });
 }

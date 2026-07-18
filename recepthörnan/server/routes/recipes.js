@@ -1,8 +1,7 @@
 export function getRecipes() {
     let text = Deno.readTextFileSync("data/recipes.json");
     let data = JSON.parse(text);
-    console.log(data.recipes);
-    return data;
+    return data.recipes;
 }
 
 export function getRecipeById(id) {
@@ -15,32 +14,34 @@ export function getRecipeById(id) {
     return null;
 }
 
-export function createRecipe(request) {
+export function createRecipe(recipe, userId) {
     const text = Deno.readTextFileSync("data/recipes.json");
     const data = JSON.parse(text);
-    let recipes = data.recipes;
+    const recipes = data.recipes;
 
     let highestId = 0;
 
-    for (let recipe of recipes) {
-        if (recipe.id > highestId) {
-            highestId = recipe.id;
+    for (const recipeData of recipes) {
+        if (recipeData.id > highestId) {
+            highestId = recipeData.id;
         }
     }
 
-    request.id = highestId + 1;
+    recipe.id = highestId + 1;
+    recipe.author = userId;
+    recipe.createdAt = new Date().toISOString();
 
-    data.recipes.push(request);
+    data.recipes.push(recipe);
 
     Deno.writeTextFileSync(
         "data/recipes.json",
-        JSON.stringify(data)
+        JSON.stringify(data, null, 2)
     );
 
-    return request;
+    return recipe;
 }
 
-export function updateRecipe(id, request) {
+export function updateRecipe(id, request, userId) {
     const text = Deno.readTextFileSync("data/recipes.json");
     const data = JSON.parse(text);
     let recipes = data.recipes;
@@ -49,48 +50,63 @@ export function updateRecipe(id, request) {
 
     for (let recipe of recipes) {
         if (recipe.id === id) {
-            matchedRecipe = recipe;
+            if (recipe.author === userId) {
+                matchedRecipe = recipe;
+            }
         }
     }
 
     if (!matchedRecipe) return false;
 
-    for (let key in request) {
-        matchedRecipe[key] = request[key];
-    }
+    matchedRecipe.name = request.name;
+    matchedRecipe.description = request.description;
+    matchedRecipe.country = request.country;
+    matchedRecipe.category = request.category;
+    matchedRecipe.time = request.time;
+    matchedRecipe.dietary = request.dietary;
+    matchedRecipe.ingredients = request.ingredients;
+    matchedRecipe.instructions = request.instructions;
+    matchedRecipe.imageUrl = request.imageUrl;
 
     Deno.writeTextFileSync(
         "data/recipes.json",
         JSON.stringify(data, null, 2)
     );
 
-    return true;
+    return matchedRecipe;
 }
 
-export function deleteRecipe(id) {
+export function removeRecipe(recipeId, userId) {
     const text = Deno.readTextFileSync("data/recipes.json");
     const data = JSON.parse(text);
-    let recipes = data.recipes;
-    let remainingRecipes = [];
+    const recipes = data.recipes;
+    const remainingRecipes = [];
 
-    let found = false;
+    let result = false;
 
-    for (let recipe of recipes) {
-        if (recipe.id === id) {
-            found = true;
+    for (const recipe of recipes) {
+        if (recipe.id === recipeId) {
+            if (recipe.author === userId) {
+                result = true;
+            } else {
+                remainingRecipes.push(recipe);
+                result = null;
+            }
         } else {
             remainingRecipes.push(recipe);
         }
     }
 
-    data.recipes = remainingRecipes;
+    if (result === true) {
+        data.recipes = remainingRecipes;
 
-    Deno.writeTextFileSync(
-        "data/recipes.json",
-        JSON.stringify(data, null, 2)
-    );
+        Deno.writeTextFileSync(
+            "data/recipes.json",
+            JSON.stringify(data, null, 2)
+        );
+    }
 
-    return found;
+    return result;
 }
 
 export function searchRecipes(query) {
@@ -141,7 +157,7 @@ export function getRecipesByDietary(recipes, dietaryId) {
 
     for (let id of dietaryId) {
         for (let recipe of recipes) {
-            if (recipe.dietary.includes(parseInt(id)) && !matchedRecipes.includes(recipe)) {
+            if (recipe.dietary.includes(id) && !matchedRecipes.includes(recipe)) {
                 matchedRecipes.push(recipe);
             }
         }
@@ -202,9 +218,14 @@ export function getCategories() {
 export function getDietaries() {
     let allRecipes = getRecipes();
     let allDietaries = [];
+
     for (let recipe of allRecipes) {
-        if (allDietaries.includes(recipe.dietary)) continue;
-        allDietaries.push(recipe.dietary);
+        for (let diet of recipe.dietary) {
+            if (allDietaries.includes(diet)) {
+                continue;
+            }
+            allDietaries.push(diet);
+        }
     }
     return allDietaries;
 }

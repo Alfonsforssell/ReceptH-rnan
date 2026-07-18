@@ -1,37 +1,56 @@
 [
-    {
-        "id": 1,
-        "username": "alfons",
-        "email": "alfons@example.com",
-        "password": "password123",
-        "createdAt": "2026-07-16T10:00:00Z"
-    },
-    {
-        "id": 2,
-        "username": "emma",
-        "email": "emma@example.com",
-        "password": "password123",
-        "createdAt": "2026-07-15T18:20:00Z"
-    },
-    {
-        "id": 3,
-        "username": "lucas",
-        "email": "lucas@example.com",
-        "password": "password123",
-        "createdAt": "2026-07-14T13:42:00Z"
-    },
-    {
-        "id": 4,
-        "username": "sofia",
-        "email": "sofia@example.com",
-        "password": "password123",
-        "createdAt": "2026-07-13T11:30:00Z"
-    },
-    {
-        "id": 5,
-        "username": "erik",
-        "email": "erik@example.com",
-        "password": "password123",
-        "createdAt": "2026-07-12T08:15:00Z"
-    }
+  {
+    "id": 1,
+    "username": "alfons",
+    "email": "alfons@example.com",
+    "password": "password123",
+    "createdAt": "2026-07-16T10:00:00Z",
+    "sessionId": "c7348d03-7012-4761-ad4b-5d6b27781aac",
+    "favourites": []
+  },
+  {
+    "id": 2,
+    "username": "emma",
+    "email": "emma@example.com",
+    "password": "password123",
+    "createdAt": "2026-07-15T18:20:00Z",
+    "sessionId": null,
+    "favourites": []
+  },
+  {
+    "id": 3,
+    "username": "lucas",
+    "email": "lucas@example.com",
+    "password": "password123",
+    "createdAt": "2026-07-14T13:42:00Z",
+    "sessionId": null,
+    "favourites": []
+  },
+  {
+    "id": 4,
+    "username": "sofia",
+    "email": "sofia@example.com",
+    "password": "password123",
+    "createdAt": "2026-07-13T11:30:00Z",
+    "sessionId": null,
+    "favourites": []
+  },
+  {
+    "id": 5,
+    "username": "erik",
+    "email": "erik@example.com",
+    "password": "password123",
+    "createdAt": "2026-07-12T08:15:00Z",
+    "sessionId": null,
+    "favourites": []
+  },
+  {
+    "username": "test",
+    "email": "test@test.se",
+    "password": "1234",
+    "id": 6,
+    "sessionId": null,
+    "favourites": [],
+    "createdAt": "2026-07-18T18:17:22.589Z"
+  }
 ]

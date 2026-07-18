@@ -25,37 +25,62 @@ export function getHighestId() {
     return max;
 }
 
-export function saveUsers(request) {
-    Deno.writeTextFileSync("data/users.json", JSON.stringify(request));
+export function saveUsers(users) {
+    Deno.writeTextFileSync(
+        "data/users.json",
+        JSON.stringify(users, null, 2)
+    );
 }
 
 export function createUser(request) {
     let allUsers = getUsers();
     let highestId = getHighestId();
     request.id = parseInt(highestId + 1);
+    request.sessionId = null;
+    request.favourites = [];
+    request.createdAt = new Date().toISOString();
+    delete request.repeatPassword;
     allUsers.push(request);
     let stringifiedData = JSON.stringify(allUsers);
     Deno.writeTextFileSync("data/users.json", stringifiedData);
+    return request;
 }
 
 export function updateUser(id, request) {
-    let allUsers = getUsers();
-    for (let user of allUsers) {
-        if (id === user.id) {
-            user = request;
-            let stringifiedData = JSON.stringify(allUsers);
-            Deno.writeTextFileSync("data/users.json", stringifiedData);
+    const allUsers = getUsers();
+
+    for (const user of allUsers) {
+        if (user.id === id) {
+            user.username = request.username;
+            user.email = request.email;
+
+            if (request.password) {
+                user.password = request.password;
+            }
+
+            Deno.writeTextFileSync(
+                "data/users.json",
+                JSON.stringify(allUsers, null, 2)
+            );
+            return user;
         }
     }
+    return null;
 }
 
 export function deleteUser(id) {
-    let allUsers = getUsers();
-    for (let user of allUsers) {
-        if (id === user.id) {
-            allUsers.remove(user);
-            let stringifiedData = JSON.stringify(allUsers);
-            Deno.writeTextFileSync("data/users.json", stringifiedData);
+    const allUsers = getUsers();
+
+    for (let i = 0; i < allUsers.length; i++) {
+        if (allUsers[i].id === id) {
+            allUsers.splice(i, 1);
+            Deno.writeTextFileSync(
+                "data/users.json",
+                JSON.stringify(allUsers, null, 2)
+            );
+
+            return true;
         }
     }
+    return false;
 }

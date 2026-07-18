@@ -1,12 +1,12 @@
 import * as users from "./users.js";
 import * as recipes from "./recipes.js";
 
-export function getFavorites(request) {
+export function getFavourites(userId) {
     let allUsers = users.getUsers();
-    let allRecipes = recipes.getRecipes;
+    let allRecipes = recipes.getRecipes();
     let matchedRecipes = [];
     for (let user of allUsers) {
-        if (user.id === request) {
+        if (user.id === userId) {
             for (let recipe of allRecipes) {
                 if (user.favourites.includes(recipe.id)) {
                     matchedRecipes.push(recipe);
@@ -17,50 +17,68 @@ export function getFavorites(request) {
     return matchedRecipes;
 }
 
-export function addFavorite(recipeId, request) {
-    let users = users.getUsers();
+export function addFavourite(recipeId, userId) {
+    const allUsers = users.getUsers();
 
-    for (let user of users) {
-        if (user.id == request) {
+    for (const user of allUsers) {
+        if (user.id === userId) {
+
             if (!user.favourites) {
                 user.favourites = [];
             }
 
-            for (let favorit of user.favourites) {
-                if (favorit == recipeId)
-                    return user;
+            for (const favourite of user.favourites) {
+                if (favourite === recipeId) {
+                    return null;
+                }
+            }
+
+            const recipe = recipes.getRecipeById(recipeId);
+            if (!recipe) {
+                return null;
             }
 
             user.favourites.push(recipeId);
-
-            users.saveUsers(users);
+            users.saveUsers(allUsers);
 
             return user;
         }
     }
+
     return null;
 }
 
-export function removeFavorite(recipeId, request) {
-    let users = users.getUsers();
+export function removeFavourite(recipeId, userId) {
+    const allUsers = users.getUsers();
 
-    for (let user of users) {
-        if (user.id === request) {
+    for (const user of allUsers) {
+        if (user.id === userId) {
 
             if (!user.favourites) {
                 user.favourites = [];
             }
 
+            let removed = false;
             let newFavs = [];
-            for (let fav of user.favourites) {
-                if (fav != recipeId) {
+
+            for (const fav of user.favourites) {
+                if (fav === recipeId) {
+                    removed = true;
+                } else {
                     newFavs.push(fav);
                 }
             }
+
+            if (!removed) {
+                return null;
+            }
+
             user.favourites = newFavs;
-            users.saveUsers(users);
+            users.saveUsers(allUsers);
+
             return user;
         }
     }
+
     return null;
 }
