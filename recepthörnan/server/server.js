@@ -1,8 +1,8 @@
 import { serveDir, serveFile } from "jsr:@std/http/file-server";
-import * as favourites from "routes/favourites.js";
-import * as users from "routes/users.js";
-import * as recipes from "routes/recipes.js";
-import * as login from "routes/login.js";
+import * as favourites from "./routes/favourites.js";
+import * as users from "./routes/users.js";
+import * as recipes from "./routes/recipes.js";
+import * as login from "./routes/login.js";
 
 function validateJsonContent(request) {
     let content = request.headers.get("Content-Type");
@@ -106,7 +106,11 @@ async function handler(request) {
                     time: url.searchParams.get("time"),
                     dietary: url.searchParams.getAll("dietary"),
                 }
-                return jsonResponse(recipes.filterRecipes(filters));
+                const filteredRecipes = recipes.filterRecipes(filters);
+
+                console.log(filteredRecipes);
+
+                return jsonResponse(filteredRecipes);
             }
 
             if (url.pathname === "/api/favourites") {

@@ -1,0 +1,27 @@
+[
+    {
+        "sessionId": "a7f91d4b",
+        "userId": 1,
+        "expires": "2026-07-23T10:00:00Z"
+    },
+    {
+        "sessionId": "c92bb9e1",
+        "userId": 2,
+        "expires": "2026-07-23T09:45:00Z"
+    },
+    {
+        "sessionId": "d18fa73c",
+        "userId": 3,
+        "expires": "2026-07-23T12:10:00Z"
+    },
+    {
+        "sessionId": "f2b47aa0",
+        "userId": 4,
+        "expires": "2026-07-23T15:00:00Z"
+    },
+    {
+        "sessionId": "8ed671c9",
+        "userId": 5,
+        "expires": "2026-07-23T18:20:00Z"
+    }
+]

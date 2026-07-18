@@ -1,5 +1,5 @@
 export function getUsers() {
-    let text = Deno.readTextFileSync("../../data/users.json");
+    let text = Deno.readTextFileSync("data/users.json");
     let data = JSON.parse(text);
     return data;
 }
@@ -26,7 +26,7 @@ export function getHighestId() {
 }
 
 export function saveUsers(request) {
-    Deno.writeTextFileSync("../../data/users.json", JSON.stringify(request));
+    Deno.writeTextFileSync("data/users.json", JSON.stringify(request));
 }
 
 export function createUser(request) {
@@ -35,7 +35,7 @@ export function createUser(request) {
     request.id = parseInt(highestId + 1);
     allUsers.push(request);
     let stringifiedData = JSON.stringify(allUsers);
-    Deno.writeTextFileSync("../../data/users.json", stringifiedData);
+    Deno.writeTextFileSync("data/users.json", stringifiedData);
 }
 
 export function updateUser(id, request) {
@@ -44,7 +44,7 @@ export function updateUser(id, request) {
         if (id === user.id) {
             user = request;
             let stringifiedData = JSON.stringify(allUsers);
-            Deno.writeTextFileSync("../../data/users.json", stringifiedData);
+            Deno.writeTextFileSync("data/users.json", stringifiedData);
         }
     }
 }
@@ -55,7 +55,7 @@ export function deleteUser(id) {
         if (id === user.id) {
             allUsers.remove(user);
             let stringifiedData = JSON.stringify(allUsers);
-            Deno.writeTextFileSync("../../data/users.json", stringifiedData);
+            Deno.writeTextFileSync("data/users.json", stringifiedData);
         }
     }
 }

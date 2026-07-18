@@ -1,5 +1,5 @@
-import * as users from "users.js";
-import * as recipes from "recipes.js";
+import * as users from "./users.js";
+import * as recipes from "./recipes.js";
 
 export function getFavorites(request) {
     let allUsers = users.getUsers();

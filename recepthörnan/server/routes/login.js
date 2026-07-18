@@ -1,4 +1,4 @@
-import * as users from "users.js";
+import * as users from "./users.js";
 
 export function login(credentials) {
     const allUsers = users.getUsers();

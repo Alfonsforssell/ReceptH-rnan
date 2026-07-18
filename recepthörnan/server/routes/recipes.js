@@ -1,7 +1,8 @@
 export function getRecipes() {
-    let text = Deno.readTextFileSync("../../data/recipes.json");
+    let text = Deno.readTextFileSync("data/recipes.json");
     let data = JSON.parse(text);
-    return data.recipes;
+    console.log(data.recipes);
+    return data;
 }
 
 export function getRecipeById(id) {
@@ -15,7 +16,7 @@ export function getRecipeById(id) {
 }
 
 export function createRecipe(request) {
-    const text = Deno.readTextFileSync("../../data/recipes.json");
+    const text = Deno.readTextFileSync("data/recipes.json");
     const data = JSON.parse(text);
     let recipes = data.recipes;
 
@@ -32,7 +33,7 @@ export function createRecipe(request) {
     data.recipes.push(request);
 
     Deno.writeTextFileSync(
-        "../../data/recipes.json",
+        "data/recipes.json",
         JSON.stringify(data)
     );
 
@@ -40,7 +41,7 @@ export function createRecipe(request) {
 }
 
 export function updateRecipe(id, request) {
-    const text = Deno.readTextFileSync("../../data/recipes.json");
+    const text = Deno.readTextFileSync("data/recipes.json");
     const data = JSON.parse(text);
     let recipes = data.recipes;
 
@@ -59,7 +60,7 @@ export function updateRecipe(id, request) {
     }
 
     Deno.writeTextFileSync(
-        "../../data/recipes.json",
+        "data/recipes.json",
         JSON.stringify(data, null, 2)
     );
 
@@ -67,7 +68,7 @@ export function updateRecipe(id, request) {
 }
 
 export function deleteRecipe(id) {
-    const text = Deno.readTextFileSync("../../data/recipes.json");
+    const text = Deno.readTextFileSync("data/recipes.json");
     const data = JSON.parse(text);
     let recipes = data.recipes;
     let remainingRecipes = [];
@@ -85,7 +86,7 @@ export function deleteRecipe(id) {
     data.recipes = remainingRecipes;
 
     Deno.writeTextFileSync(
-        "../../data/recipes.json",
+        "data/recipes.json",
         JSON.stringify(data, null, 2)
     );
 
@@ -155,20 +156,27 @@ export function filterRecipes(searchParams) {
     let category = searchParams.category;
     let time = searchParams.time;
     let dietary = searchParams.dietary;
-    if (country != null) {
+
+    console.log(searchParams);
+    if (country) {
         filteredRecipes = getRecipesByCountry(filteredRecipes, country);
     }
-    if (category != null) {
+
+    if (category) {
         filteredRecipes = getRecipesByCategory(filteredRecipes, category);
     }
-    if (time != null) {
+
+    if (time) {
         filteredRecipes = getRecipesByTime(filteredRecipes, time);
     }
+
     if (dietary.length > 0) {
         filteredRecipes = getRecipesByDietary(filteredRecipes, dietary);
     }
 
-    return filterRecipes;
+    console.log("Returnerar:", filteredRecipes);
+
+    return filteredRecipes;
 }
 
 export function getCountries() {
