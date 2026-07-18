@@ -26,7 +26,6 @@ export async function getRequest(url, credentials = false) {
 }
 
 export async function postRequest(url, body, credentials = false) {
-    let response;
     try {
         let options = {
             method: "POST",
@@ -41,16 +40,16 @@ export async function postRequest(url, body, credentials = false) {
             options.credentials = "include";
         }
 
-        response = await fetch(url, options);
+        let response = await fetch(url, options);
 
         if (!response.ok) {
-            throw new Error("HTTP ERROR: " + response.status);
+            let error = await response.json();
+            throw new Error(error.Error);
         }
-
         return await response.json();
     }
     catch (error) {
-        throw new Error("NETWORK ERROR: " + error.message);
+        throw error;
     }
 }
 

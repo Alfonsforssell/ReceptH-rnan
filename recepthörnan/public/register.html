@@ -15,12 +15,13 @@
             <h1>Låt dig inspireras, dela dina recept<br>och hitta nya favoriter varje dag</h1>
         </div>
         <div id="signUp">
-            <form action="submit">
+            <form action="">
                 <h1>Skapa Konto</h1>
-                <input name="signUpMail" type="text" placeholder="Mail">
-                <input name="signUpUsername" type="text" placeholder="Användarnamn">
-                <input name="signUpPassword" type="password" placeholder="Lösenord">
-                <input name="logInRepeatPassword" type="password" placeholder="Upprepa lösenordet">
+                <input name="signUpMail" type="text" placeholder="Mail" required>
+                <input name="signUpUsername" type="text" placeholder="Användarnamn" required>
+                <input name="signUpPassword" type="password" placeholder="Lösenord" required>
+                <input name="signUpRepeatPassword" type="password" placeholder="Upprepa lösenordet" required>
+                <span id="signUpError"></span>
                 <button id="signUpButton">Skapa konto</button>
                 <a href="/login">Har du redan konto?</a>
             </form>
@@ -33,6 +34,7 @@
             <p>Created by Alfons Forssell</p>
         </div>
     </footer>
+    <script type="module" src="js/register.js"></script>
 </body>
 
 </html>

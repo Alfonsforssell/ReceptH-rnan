@@ -43,7 +43,7 @@ function notFound() {
 }
 
 function badRequest(message) {
-    return new Response(JSON.stringify({ Error: `Bad Request, ${message}` }), {
+    return new Response(JSON.stringify({ Error: message }), {
         headers: jsonHeaders,
         status: 400
     });
@@ -220,11 +220,11 @@ async function handler(request) {
 
                 for (let usr of allUsers) {
                     if (usr.username === newUser.username) {
-                        return badRequest("Username already exists");
+                        return badRequest("Användarnamnet är upptaget");
                     }
 
                     if (usr.email === newUser.email) {
-                        return badRequest("Email already exists");
+                        return badRequest("Angiven mailadress används redan");
                     }
                 }
 
@@ -429,8 +429,6 @@ async function handler(request) {
     }
     return serveDir(request, {
         fsRoot: "./public",
-        urlRoot: "./public",
-        showIndex: true,
     });
 }
 
