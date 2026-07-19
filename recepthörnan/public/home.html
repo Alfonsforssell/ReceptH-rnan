@@ -13,8 +13,8 @@
         <div id="left"><img class="logo" src="assets/images/LogoBlack.svg" alt=""></div>
         <div id="right">
             <a id="aboutUs" class="headerLink" href="/about">Om oss</a>
-            <a id="myRecipesLink" class="headerLink" href="">Mina Recept</a>
-            <a id="favoritesLink" class="headerLink" href="">Favoriter</a>
+            <a class="myRecipesLink headerLink" href="">Mina Recept</a>
+            <a class="favoritesLink headerLink" href="">Favoriter</a>
             <a href=""><img src="assets/icons/profile.png" alt=""></a>
             <a href=""><img src="assets/icons/plus.png" alt=""></a>
         </div>
@@ -72,12 +72,28 @@
         </form>
         <form id="search" action="">
             <input id="searchValue" type="text" placeholder="Sök recept...">
+            <button type="button" id="removeFilters">Rensa filter</button>
         </form>
         <div id="recipeContainer">
         </div>
-
     </main>
-    <footer></footer>
+    <footer>
+        <div id="copyright">
+            <img src="assets/images/LogoBlack.svg" alt="">
+            <h1>Copyright © 2026 ReceptHörnan. All Rights Reserved.</h1>
+            <h1>Created by Alfons Forssell</h1>
+        </div>
+        <div id="links">
+            <ul>
+                <li><a class="footerLink" href="/about">Om oss</a></li>
+                <li><a class="myRecipesLink footerLink" href="">Mina recept</a></li>
+                <li><a class="favoritesLink footerLink" href="">Favoriter</a></li>
+                <li><a class="footerLink" href="">Profil</a></li>
+                <li><a class="footerLink" href="">Publicera recept</a></li>
+                <li><a id="logout" class="footerLink" href="">Logga ut</a></li>
+            </ul>
+        </div>
+    </footer>
     <script type="module" src="js/home.js"></script>
 </body>
 

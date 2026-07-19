@@ -479,8 +479,13 @@ async function handler(request) {
         if (!user) {
             return serveFile(request, "./public/error.html");
         }
-        return serveFile(request, "./public/home.html");
+
+        const response = await serveFile(request, "./public/home.html");
+        response.headers.set("Cache-Control", "no-store, no-cache, must-revalidate");
+
+        return response;
     }
+
     if (url.pathname === "/about") {
         return serveFile(request, "./public/about.html");
     }
