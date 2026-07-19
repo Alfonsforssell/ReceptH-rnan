@@ -94,6 +94,20 @@ async function handler(request) {
                 return jsonResponse(users.getUsers());
             }
 
+            if (url.pathname === "/api/recipes/search") {
+                if (!validateJsonAccept(request)) {
+                    return notAcceptable();
+                }
+
+                let query = url.searchParams.get("q");
+
+                if (!query) {
+                    return badRequest("Search query is required.");
+                }
+
+                return jsonResponse(recipes.searchRecipes(query));
+            }
+
             if (url.pathname === "/api/recipes") {
                 if (!validateJsonAccept(request)) {
                     return notAcceptable();
@@ -109,14 +123,27 @@ async function handler(request) {
                     category: url.searchParams.get("category"),
                     time: url.searchParams.get("time"),
                     dietary: url.searchParams.getAll("dietary"),
+                    favs: url.searchParams.get("favs")
                 }
                 const filteredRecipes = recipes.filterRecipes(filters);
                 let showingRecipes = [];
 
                 for (let recipe of filteredRecipes) {
-                    if (recipe.author !== user.id) {
-                        showingRecipes.push(recipe);
+                    if (recipe.author === user.id) {
+                        continue;
                     }
+
+                    recipe.isFavourite = user.favourites.includes(recipe.id);
+
+                    if (filters.favs === "favorites" && !recipe.isFavourite) {
+                        continue;
+                    }
+
+                    if (filters.favs === "nonfavorites" && recipe.isFavourite) {
+                        continue;
+                    }
+
+                    showingRecipes.push(recipe);
                 }
 
                 return jsonResponse(showingRecipes);
@@ -139,6 +166,14 @@ async function handler(request) {
                     return notAcceptable();
                 }
                 return jsonResponse(recipes.getCategories());
+            }
+
+            if (url.pathname === "/api/countries") {
+                if (!validateJsonAccept(request)) {
+                    return notAcceptable();
+                }
+
+                return jsonResponse(recipes.getCountries());
             }
 
             if (url.pathname === "/api/dietaries") {
@@ -445,6 +480,9 @@ async function handler(request) {
             return serveFile(request, "./public/error.html");
         }
         return serveFile(request, "./public/home.html");
+    }
+    if (url.pathname === "/about") {
+        return serveFile(request, "./public/about.html");
     }
     return serveDir(request, {
         fsRoot: "./public",

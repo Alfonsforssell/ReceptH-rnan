@@ -14,28 +14,26 @@ html {
 }
 
 :root {
-    --dominant: black;
-    --complementary: white;
-    --margin-xxs: .25rem;
-    --margin-xs: .5rem;
-    --margin-s: .75rem;
-    --margin-m: 1rem;
-    --margin-l: 1.25rem;
-    --margin-xl: 1.75rem;
-    --margin-xxl: 2.5rem;
+    --dominant: #2E7D32;
+    --dominant-light: #7dcf81;
+    --dominant-hover: #1B5E20;
+    --complementary: #F57C00;
+    --link: #58A6FF;
+    --error: #F85149;
+    --noFav: #A1A1AA;
+    --fav: #F85149;
 
-    --bg-light: hsl(0, 0%, 100%);
-    --bg: hsl(0, 0%, 90%);
-    --bg-dark: hsl(0, 0%, 80%);
+    --text-light: hsl(0, 0%, 100%);
+    --text: hsl(0, 0%, 90%);
+    --text-dark: hsl(0, 0%, 80%);
 
-    --text-dark: hsl(0, 0%, 0%);
-    --text: hsl(0, 0%, 15%);
-    --text-light: hsl(0, 0%, 30%);
-    --invert: 0;
+    --bg-dark: hsl(0, 0%, 0%);
+    --bg: hsl(0, 0%, 15%);
+    --bg-light: hsl(0, 0%, 30%);
 }
 
 body {
-    background-color: var(--text);
+    background-color: var(--bg);
     font-family: Manrope, Arial, Helvetica, sans-serif;
     max-height: 100vh;
     overflow-y: hidden;
@@ -57,7 +55,7 @@ main {
     background-image: url("../assets/images/hero.jpg");
     background-position: center;
     background-size: cover;
-    color: var(--bg-light);
+    color: var(--text-light);
     text-align: center;
 
 }
@@ -91,16 +89,16 @@ main {
     justify-content: center;
     align-items: center;
     gap: 20px;
-    color: var(--bg-light);
+    color: var(--text-light);
 }
 
 #login form input,
 #login form button {
     width: 50%;
     height: 50px;
-    color: var(--text-dark);
+    color: var(--text-light);
     background-color: var(--bg-light);
-    border: 2px solid var(--bg);
+    border: 2px solid var(--bg-dark);
     border-radius: 20px;
     padding: 10px;
     transition: all .5s ease;
@@ -110,16 +108,16 @@ main {
     margin: 20px;
     width: 50%;
     height: 50px;
-    color: var(--text-dark);
+    color: var(--text-light);
     background-color: var(--bg-light);
-    border: 2px solid var(--bg);
+    border: 2px solid var(--bg-dark);
     border-radius: 20px;
     padding: 10px;
     transition: all .5s ease;
 }
 
 #createUser a {
-    color: var(--text-dark);
+    color: var(--text-light);
     text-decoration: none;
     font-size: 13px;
 }
@@ -130,12 +128,17 @@ main {
     cursor: pointer;
 }
 
+#login form button:active,
+#createUser:active {
+    transform: scale(.8);
+}
+
 #login form input:focus {
     outline: none;
 }
 
 #login form a {
-    color: rgb(121, 189, 241);
+    color: var(--link);
     font-size: 10px;
 }
 
@@ -159,11 +162,11 @@ footer .logo {
     flex-direction: column;
     justify-content: center;
     align-items: start;
-    color: white;
+    color: var(--text-light);
 }
 
 #loginError {
-    color: red;
+    color: var(--error);
     font-size: 10px;
     height: 20px;
     margin: -15px;

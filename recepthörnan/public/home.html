@@ -12,16 +12,73 @@
     <header>
         <div id="left"><img class="logo" src="assets/images/LogoBlack.svg" alt=""></div>
         <div id="right">
-            <a class="headerLink" href="">Om oss</a>
-            <a class="headerLink" href="">Sök</a>
-            <a class="headerLink" href="">Mina Recept</a>
-            <a class="headerLink" href="">Favoriter</a>
+            <a id="aboutUs" class="headerLink" href="/about">Om oss</a>
+            <a id="myRecipesLink" class="headerLink" href="">Mina Recept</a>
+            <a id="favoritesLink" class="headerLink" href="">Favoriter</a>
             <a href=""><img src="assets/icons/profile.png" alt=""></a>
             <a href=""><img src="assets/icons/plus.png" alt=""></a>
         </div>
     </header>
-    <main></main>
+    <div id="hero">
+        <div id="text">
+            <h1><span>Välkommen till</span><br>ReceptHörnan</h1>
+            <p>Välkommen till ReceptHörnan. ReceptHörnan är en plats där matglädje, kunskap och gemenskap står i
+                centrum. Här kan
+                du upptäcka recept från människor med olika erfarenheter, dela dina egna favoriter och inspireras av
+                nya smaker från hela världen. Oavsett om du är nybörjare i köket eller en passionerad hemmakock
+                finns det alltid något nytt att lära och utforska.
+            </p>
+            <p>
+                Vi tror att de bästa recepten blir ännu bättre när de delas. Genom att skapa, spara och inspireras
+                av varandras recept bygger vi tillsammans ett community där kunskap sprids och matlagning blir både
+                enklare och roligare. Med fokus på god, varierad och näringsrik mat vill vi göra det lättare för
+                fler att hitta hälsosamma alternativ som passar både vardagen och speciella tillfällen. ReceptHörnan
+                är mer än en receptsamling, det är en mötesplats där människor hjälper varandra att utvecklas,
+                hitta inspiration och upptäcka glädjen i att laga mat tillsammans.
+            </p>
+            <div id="buttons">
+                <button id="profile">Profil</button>
+                <button id="add">Publicera recept</button>
+            </div>
+        </div>
+        <div id="image">
+        </div>
+    </div>
+    <main>
+        <form id="filter" action="">
+            <select name="country" id="country">
+                <option value="All countries">Alla länder</option>
+            </select>
+            <select name="category" id="category">
+                <option value="All categories">Alla kategorier</option>
+            </select>
+            <select name="time" id="time">
+                <option value="All">Alla tider</option>
+                <option value="15">Mindre än 15min</option>
+                <option value="30">Mindre än 30min</option>
+                <option value="45">Mindre än 45min</option>
+                <option value="60">Mindre än 60min</option>
+                <option value="100">Mer än 60min</option>
+            </select>
+            <select name="preference" id="preference">
+                <option value="All">Ingen preferens</option>
+            </select>
+            <select name="favs" id="favs">
+                <option value="all">Alla recept</option>
+                <option value="favorites">Endast favoriter</option>
+                <option value="nonfavorites">Exklusive favoriter</option>
+            </select>
+            <button id="filterbutton">Filtrera</button>
+        </form>
+        <form id="search" action="">
+            <input id="searchValue" type="text" placeholder="Sök recept...">
+        </form>
+        <div id="recipeContainer">
+        </div>
+
+    </main>
     <footer></footer>
+    <script type="module" src="js/home.js"></script>
 </body>
 
 </html>

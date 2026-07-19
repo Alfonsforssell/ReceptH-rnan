@@ -13,5 +13,15 @@ function login() {
     })
 }
 
+function reload() {
+    if (!sessionStorage.getItem("reloaded")) {
+        sessionStorage.setItem("reloaded", "true");
+        window.location.reload();
+    } else {
+        sessionStorage.removeItem("reloaded");
+    }
+}
+
 login()
 createUser();
+reload();

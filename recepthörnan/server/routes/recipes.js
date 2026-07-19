@@ -173,7 +173,6 @@ export function filterRecipes(searchParams) {
     let time = searchParams.time;
     let dietary = searchParams.dietary;
 
-    console.log(searchParams);
     if (country) {
         filteredRecipes = getRecipesByCountry(filteredRecipes, country);
     }
@@ -189,8 +188,6 @@ export function filterRecipes(searchParams) {
     if (dietary.length > 0) {
         filteredRecipes = getRecipesByDietary(filteredRecipes, dietary);
     }
-
-    console.log("Returnerar:", filteredRecipes);
 
     return filteredRecipes;
 }

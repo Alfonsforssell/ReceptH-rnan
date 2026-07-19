@@ -9,7 +9,7 @@
       "category": "Breakfast",
       "time": 20,
       "dietary": [
-        "Vegetarian"
+        "Vegan"
       ],
       "ingredients": [
         {
@@ -72,7 +72,7 @@
       "category": "Lunch",
       "time": 10,
       "dietary": [
-        "Vegetarian",
+        "Vegan",
         "Gluten Free"
       ],
       "ingredients": [
@@ -103,7 +103,7 @@
       "category": "Dessert",
       "time": 70,
       "dietary": [
-        "Vegetarian"
+        "Vegan"
       ],
       "ingredients": [
         {

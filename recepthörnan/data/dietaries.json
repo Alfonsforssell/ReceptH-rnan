@@ -1,8 +1,9 @@
 [
-    "Vegetarian",
     "Vegan",
-    "Gluten Free",
-    "Lactose Free",
+    "GlutenFree",
+    "LactoseFree",
     "Halal",
-    "Nut Free"
+    "FishFree",
+    "Health",
+    "MeatFree"
 ]

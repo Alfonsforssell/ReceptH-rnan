@@ -47,7 +47,7 @@ export function logout(request) {
 
 export function getProfile(request) {
     let cookieHeader = request.headers.get("cookie");
-
+    console.log("Cookie:", cookieHeader);
     if (!cookieHeader) {
         return null;
     }
@@ -55,10 +55,13 @@ export function getProfile(request) {
     let allUsers = users.getUsers();
 
     for (let user of allUsers) {
+        console.log(user.username, user.sessionId);
         if (cookieHeader.includes(user.sessionId)) {
+            console.log("Match!");
             return user;
 
         }
     }
+    console.log("Ingen match");
     return null;
 }
