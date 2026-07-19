@@ -35,8 +35,8 @@ function unauthorized() {
     });
 }
 
-function notFound() {
-    return new Response(JSON.stringify({ Error: "Not found" }), {
+function notFound(message) {
+    return new Response(JSON.stringify({ Error: `Not found. ${message}` }), {
         headers: jsonHeaders,
         status: 404
     });
@@ -98,6 +98,12 @@ async function handler(request) {
                 if (!validateJsonAccept(request)) {
                     return notAcceptable();
                 }
+
+                let user = login.getProfile(request);
+                if (!user) {
+                    return unauthorized();
+                }
+
                 let filters = {
                     country: url.searchParams.get("country"),
                     category: url.searchParams.get("category"),
@@ -105,10 +111,15 @@ async function handler(request) {
                     dietary: url.searchParams.getAll("dietary"),
                 }
                 const filteredRecipes = recipes.filterRecipes(filters);
+                let showingRecipes = [];
 
-                console.log(filteredRecipes);
+                for (let recipe of filteredRecipes) {
+                    if (recipe.author !== user.id) {
+                        showingRecipes.push(recipe);
+                    }
+                }
 
-                return jsonResponse(filteredRecipes);
+                return jsonResponse(showingRecipes);
             }
 
             if (url.pathname === "/api/favourites") {
@@ -426,6 +437,14 @@ async function handler(request) {
     }
     if (url.pathname === "/register") {
         return serveFile(request, "./public/register.html");
+    }
+    if (url.pathname === "/home") {
+        const user = login.getProfile(request);
+
+        if (!user) {
+            return serveFile(request, "./public/error.html");
+        }
+        return serveFile(request, "./public/home.html");
     }
     return serveDir(request, {
         fsRoot: "./public",
