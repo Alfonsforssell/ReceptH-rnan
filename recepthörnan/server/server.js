@@ -489,6 +489,10 @@ async function handler(request) {
     if (url.pathname === "/about") {
         return serveFile(request, "./public/about.html");
     }
+
+    if (url.pathname === "/profile") {
+        return serveFile(request, "./public/profile.html");
+    }
     return serveDir(request, {
         fsRoot: "./public",
     });

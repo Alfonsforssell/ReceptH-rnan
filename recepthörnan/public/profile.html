@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReceptHörnan</title>
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+
+<body>
+    <header>
+        <div id="left"><img class="logo" src="assets/images/LogoBlack.svg" alt=""></div>
+        <div id="right">
+            <a href="/home">Tillbaka till startsidan</a>
+            <a href=""><img src="assets/icons/plus.png" alt=""></a>
+        </div>
+    </header>
+    <main>
+        <div id="userInfo"></div>
+        <form action="">
+            <h2>Användarnamn</h2>
+            <h2>Mail-adress</h2>
+
+            <div>
+                <input type="text" name="username" placeholder="Användarnamn">
+                <span id="usernameError" class="profileError"></span>
+            </div>
+
+            <div>
+                <input type="text" name="mail" placeholder="Mail">
+                <span id="mailError" class="profileError"></span>
+            </div>
+
+            <h2>Lösenord</h2>
+            <h2>Uppdatera lösenord</h2>
+
+            <div>
+                <input type="password" name="password" placeholder="Lösenord">
+            </div>
+
+            <div>
+                <input type="password" name="repeatPassword" placeholder="Upprepa lösenord">
+                <span id="passwordError" class="profileError"></span>
+            </div>
+
+            <button id="updateProfile" type="button">
+                Uppdatera uppgifter
+            </button>
+        </form>
+    </main>
+    <footer>
+        <div id="copyright">
+            <img src="assets/images/LogoBlack.svg" alt="">
+            <h1>Copyright © 2026 ReceptHörnan. All Rights Reserved.</h1>
+            <h1>Created by Alfons Forssell</h1>
+        </div>
+        <div id="links">
+            <ul>
+                <li><a class="footerLink" href="/about">Om oss</a></li>
+                <li><a class="myRecipesLink footerLink" href="">Mina recept</a></li>
+                <li><a class="favoritesLink footerLink" href="">Favoriter</a></li>
+                <li><a class="footerLink" href="/profile">Profil</a></li>
+                <li><a class="footerLink" href="">Publicera recept</a></li>
+                <li><a id="logout" class="footerLink" href="">Logga ut</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script type="module" src="js/profile.js"></script>
+</body>
+
+</html>

@@ -1,15 +1,15 @@
 [
   {
     "id": 1,
-    "username": "alfons",
+    "username": "slaffe",
     "email": "alfons@example.com",
-    "password": "password123",
+    "password": "123",
     "createdAt": "2026-07-16T10:00:00Z",
-    "sessionId": "f9a9a13c-daa5-415b-813e-6ad7c22b05d9",
+    "sessionId": "c37d5dce-2536-4dce-906e-7ecc0ee5055c",
     "favourites": [
-      1,
+      4,
       3,
-      4
+      2
     ]
   },
   {
