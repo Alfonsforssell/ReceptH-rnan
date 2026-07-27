@@ -3,11 +3,18 @@ import * as api from "./api.js";
 let recipes = [];
 let myRecipes = [];
 let users = [];
+let categories = [];
+let countries = [];
+let dietaries = [];
 let currentUser;
+let selectedRecipeId = null;
 
 async function getData() {
     recipes = await api.getRequest("/api/recipes", true);
     myRecipes = await api.getRequest("/api/profile/recipes", true);
+    categories = await api.getRequest("/api/categories");
+    countries = await api.getRequest("/api/countries");
+    dietaries = await api.getRequest("/api/dietaries");
 }
 
 async function getUser() {
@@ -24,6 +31,11 @@ function getFavAmount(user) {
     return user.favourites.length;
 }
 
+function getDate(user) {
+    let arr = user.createdAt.split("T");
+    return arr[0];
+}
+
 function createUserInfo(user) {
     let userInfo = document.getElementById("userInfo");
     let firstLetter = user.username.charAt(0).toUpperCase();
@@ -33,7 +45,7 @@ function createUserInfo(user) {
             <div id="info">
                 <h1 id="one">${user.username.toUpperCase()}</h1 >
                 <h2 id="two">${user.email}</h2>
-                <h2 id="three">${user.createdAt}</h2>
+                <h2 id="three">${getDate(user)}</h2>
                 <h2 id="four"><img src="assets/icons/recipe.png" alt="">${getRecipeAmount()}</h2>
                 <h2 id="five"><img src="assets/icons/heart.png" alt="">${getFavAmount(user)}</h2>
             </div >
@@ -115,17 +127,141 @@ function logout() {
     })
 }
 
+
+
+function renderRecipes(filteredRecipes = myRecipes) {
+    let recipeContainer = document.getElementById("recipeContainer");
+    recipeContainer.innerHTML = "";
+
+    for (let oneRecipe of filteredRecipes) {
+        let a = document.createElement("a");
+        a.href = "/assets/html/productPage.html?id=" + oneRecipe.id;
+
+        a.dataset.recipeId = oneRecipe.id;
+
+        a.innerHTML = `
+        <div class="empty"></div>
+        <div class="content">
+                <h1>${oneRecipe.name}</h1>
+                <p>${oneRecipe.description}</p>
+                <div class="info">
+                    <h2>${oneRecipe.time} min</h2>
+                    <h2>${oneRecipe.category}</h2>
+                    <h2>${oneRecipe.country}</h2>
+                </div>
+                <div class="diets"></div>
+                <button class="edit">&bull;&bull;&bull;</button>
+        </div>`;
+        a.style.backgroundImage = `url(assets${oneRecipe.imageUrl})`
+
+        for (let diet of dietaries) {
+            if (oneRecipe.dietary.includes(diet)) {
+                let diets = a.querySelector(".diets");
+                let img = document.createElement("img");
+                img.src = `assets/icons/${diet}.svg`;
+                img.classList.add("icon");
+                diets.appendChild(img);
+            }
+        }
+        recipeContainer.appendChild(a);
+        a.classList.add("card");
+    }
+    if (recipeContainer.children.length === 0) {
+        recipeContainer.innerHTML = `<p id="notFound">Hittade inga recept</p>`;
+    }
+
+}
+function openPopup() {
+    let buttons = document.querySelectorAll(".edit");
+
+    for (let button of buttons) {
+        button.addEventListener("click", function (e) {
+            e.preventDefault();
+            selectedRecipeId = button.closest(".card").dataset.recipeId;
+            document.getElementById("overlay").classList.add("show");
+        });
+    }
+}
+
+function editRecipe() {
+    if (selectedRecipeId === null) {
+        return;
+    }
+    window.location.href = "/edit?id=" + selectedRecipeId;
+}
+
+function showDeleteConfirmation() {
+    console.log("showDeleteConfirmation");
+    document.getElementById("popupTitle").textContent = "Är du säker?";
+
+    document.getElementById("contentButtons").innerHTML = `
+        <button id="confirmDelete">Ta bort</button>
+        <button id="cancelDelete">Avbryt</button>
+    `;
+
+    document.getElementById("confirmDelete").addEventListener("click", deleteRecipe);
+
+    document.getElementById("cancelDelete").addEventListener("click", restorePopup);
+
+}
+
+function restorePopup() {
+    document.getElementById("popupTitle").textContent = "Hantera recept";
+
+    document.getElementById("contentButtons").innerHTML = `
+        <button id="editRecipe">Redigera recept</button>
+        <button id="deleteRecipe">Ta bort recept</button>
+    `;
+
+    document.getElementById("editRecipe").addEventListener("click", editRecipe);
+
+    document.getElementById("deleteRecipe").addEventListener("click", showDeleteConfirmation);
+}
+
+async function deleteRecipe() {
+    if (selectedRecipeId === null) {
+        return;
+    }
+
+    try {
+        await api.deleteRequest("/api/recipes/" + selectedRecipeId, true);
+        document.querySelector(`[data-recipe-id="${selectedRecipeId}"]`).remove();
+        document.getElementById("overlay").classList.remove("show");
+        selectedRecipeId = null;
+        restorePopup();
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+}
+
+function closePopup() {
+    let button = document.getElementById("closePopup");
+    button.addEventListener("click", function () {
+        document.getElementById("overlay").classList.remove("show");
+        restorePopup();
+        selectedRecipeId = null;
+    });
+
+}
+
 async function init() {
     try {
         await getData();
         await getUser();
-    } catch (error) {
+    }
+    catch (error) {
         window.location.href = "/login";
         return;
     }
 
     updateUserInfo();
     logout();
+    renderRecipes();
+    openPopup();
+    closePopup();
+    restorePopup();
 }
 
 init();

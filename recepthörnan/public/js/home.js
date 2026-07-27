@@ -5,6 +5,7 @@ let categories = [];
 let countries = [];
 let dietaries = [];
 let users = [];
+let showEditButtons = false;
 
 async function getData() {
     recipes = await api.getRequest("/api/recipes", true);
@@ -32,6 +33,13 @@ function renderRecipes(filteredRecipes = recipes) {
 
         a.dataset.recipeId = oneRecipe.id;
 
+        let buttonHtml;
+        if (showEditButtons) {
+            buttonHtml = `<button class="edit">…</button>`;
+        }
+        else {
+            buttonHtml = `<button class="heart">♥</button>`;
+        }
         a.innerHTML = `
         <div class="empty"></div>
         <div class="content">
@@ -44,7 +52,7 @@ function renderRecipes(filteredRecipes = recipes) {
                     <a>@${getUserNameById(oneRecipe.author)}</a>
                 </div>
                 <div class="diets"></div>
-                <button class="heart">♥</button>
+                ${buttonHtml}
         </div>`;
         a.style.backgroundImage = `url(assets${oneRecipe.imageUrl})`
         let button = a.querySelector(".heart");
@@ -67,7 +75,12 @@ function renderRecipes(filteredRecipes = recipes) {
     if (recipeContainer.children.length === 0) {
         recipeContainer.innerHTML = `<p id="notFound">Hittade inga recept</p>`;
     }
-    favorite();
+    if (showEditButtons) {
+        openPopup();
+    }
+    else {
+        favorite();
+    }
 
 }
 
@@ -168,6 +181,7 @@ async function updateRecipes() {
 
     try {
         let recipes = await api.getRequest(url, true);
+        showEditButtons = false;
         renderRecipes(recipes);
     } catch (err) {
         console.log(err.message);
@@ -189,6 +203,7 @@ async function removeFilters() {
         let filterForm = document.getElementById("filter");
         filterForm.reset();
         let recipes = await api.getRequest("/api/recipes", true);
+        showEditButtons = false;
         renderRecipes(recipes);
     });
 }
@@ -214,6 +229,7 @@ async function showMyRecipes() {
             e.preventDefault();
             try {
                 let myRecipes = await api.getRequest("/api/profile/recipes", true);
+                showEditButtons = true;
                 renderRecipes(myRecipes);
                 document.getElementById("recipeContainer").scrollIntoView();
             }
@@ -238,6 +254,7 @@ function search() {
             } else {
                 result = await api.getRequest("/api/recipes/search?q=" + encodeURIComponent(searchValue), true);
             }
+            showEditButtons = false;
             renderRecipes(result);
         } catch (error) {
             console.log(error);

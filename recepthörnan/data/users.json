@@ -5,11 +5,9 @@
     "email": "alfons@example.com",
     "password": "123",
     "createdAt": "2026-07-16T10:00:00Z",
-    "sessionId": "c37d5dce-2536-4dce-906e-7ecc0ee5055c",
+    "sessionId": "3a531b68-64c3-4d08-a957-aaeae743ecc5",
     "favourites": [
-      4,
-      3,
-      2
+      3
     ]
   },
   {

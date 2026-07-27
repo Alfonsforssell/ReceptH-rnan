@@ -370,6 +370,28 @@ main {
             .fav {
                 color: var(--fav)
             }
+
+            .edit {
+                height: 40px;
+                aspect-ratio: 1/1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                top: 10px;
+                right: 15px;
+                border: none;
+                font-size: 20px;
+                text-align: center;
+                z-index: 5;
+                background-color: var(--text-light);
+                border-radius: 50%;
+                border: 2px solid var(--bg-light);
+            }
+
+            .edit:hover {
+                cursor: pointer;
+            }
         }
 
         .card:hover {

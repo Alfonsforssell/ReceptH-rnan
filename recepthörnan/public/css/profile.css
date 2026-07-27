@@ -140,8 +140,9 @@ main {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(3, 1fr);
-            width: 300px;
+            width: 250px;
             height: 100px;
+            margin-left: 10px;
 
             #one {
                 grid-column: 1/4;
@@ -158,6 +159,7 @@ main {
                 grid-row: 3;
                 font-size: 10px;
                 color: var(--text);
+                margin: 0px auto;
             }
 
             #four {
@@ -234,7 +236,6 @@ main {
         justify-items: start;
         align-items: start;
         gap: 10px;
-        background-color: var(--bg-light);
         border-radius: 20px;
         padding: 20px;
         color: var(--text-dark);
@@ -244,7 +245,7 @@ main {
             height: 50px;
             color: var(--text-light);
             background-color: var(--bg-light);
-            border: 2px solid var(--bg-dark);
+            border: none;
             border-radius: 20px;
             padding: 10px;
             transition: all .5s ease;
@@ -281,6 +282,237 @@ main {
             color: var(--error);
             font-size: 14px;
             min-height: 18px;
+        }
+    }
+
+    #recipeContainer {
+        width: 75%;
+        margin: 50px auto;
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: flex-start;
+        background-size: cover;
+        background-position: center;
+        gap: 20px;
+
+        .content {
+            width: 100%;
+            height: 50%;
+            padding: 90px 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(transparent, rgba(0, 0, 0, .85) 25%);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .card {
+            width: 100%;
+            aspect-ratio: 1/1.1;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: space-between;
+            color: var(--text-light);
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+            transition: all .5s ease;
+            border-radius: 20px 20px 0px 0px;
+
+            img {
+                width: 100%;
+                aspect-ratio: 1.5/1;
+                object-fit: cover;
+                object-position: center;
+                border-radius: 10px 10px 0px 0px;
+            }
+
+            h1,
+            p {
+                margin-left: 10px;
+                letter-spacing: 2px;
+                line-height: 1.3;
+            }
+
+            p {
+                font-size: 10px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .info {
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                gap: 10px;
+                margin: 10px 0px 0px 5px;
+
+                h2 {
+                    font-size: 10px;
+                    padding: 5px;
+                    color: var(--text-light);
+                }
+
+                a {
+                    border: 2px solid var(--text-light);
+                    border-radius: 10px;
+                    font-size: 10px;
+                    padding: 5px;
+                    color: var(--text-light);
+                    background-color: var(--bg);
+                }
+            }
+
+            .diets {
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                gap: 10px;
+                padding: 20px 10px;
+                height: 20px;
+
+                .icon {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            .edit {
+                height: 40px;
+                aspect-ratio: 1/1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                top: 10px;
+                right: 15px;
+                border: none;
+                font-size: 20px;
+                text-align: center;
+                z-index: 5;
+                background-color: var(--text-light);
+                border-radius: 50%;
+                border: 2px solid var(--bg-light);
+            }
+
+            .edit:hover {
+                cursor: pointer;
+            }
+
+
+            .fav {
+                color: var(--fav)
+            }
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        .card:active {
+            transform: scale(.8);
+        }
+
+        #notFound {
+            color: var(--text-light);
+            font-size: 20px;
+            letter-spacing: 2px;
+            line-height: 1.3;
+        }
+    }
+
+    #overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.75);
+        z-index: 98;
+    }
+
+    #overlay.show {
+        display: block;
+    }
+
+
+
+    #editPopup {
+        width: 500px;
+        height: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: var(--bg-light);
+        color: var(--text-light);
+        position: fixed;
+        top: 50dvh;
+        left: 50dvw;
+        transform: translate(-50%, -50%);
+        z-index: 99;
+        border-radius: 10px;
+    }
+
+
+    #closePopup {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: var(--text-light);
+        font-weight: 800;
+        transition: all .5s ease;
+    }
+
+    #closePopup:hover {
+        transform: scale(1.2);
+    }
+
+    .popupContent {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        h2 {
+            font-size: 15px;
+            font-weight: 500;
+            position: relative;
+            bottom: 75px;
+            text-align: center;
+        }
+
+        #contentButtons {
+            display: flex;
+            gap: 50px;
+
+            button {
+                width: 150px;
+                height: 50px;
+                color: var(--text-light);
+                background-color: var(--bg);
+                border: none;
+                border-radius: 20px;
+                padding: 10px;
+                transition: all .5s ease;
+            }
+
+            button:hover {
+                transform: scale(1.05);
+                cursor: pointer;
+            }
+
         }
     }
 }
