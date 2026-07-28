@@ -108,6 +108,28 @@ async function handler(request) {
                 return jsonResponse(recipes.searchRecipes(query));
             }
 
+            const recipeIdRoute = new URLPattern({
+                pathname: "/api/recipes/:id"
+            });
+
+            const recipeMatch = recipeIdRoute.exec(url);
+
+            if (recipeMatch) {
+                if (!validateJsonAccept(request)) {
+                    return notAcceptable();
+                }
+
+                const id = Number(recipeMatch.pathname.groups.id);
+
+                const recipe = recipes.getRecipeById(id);
+
+                if (!recipe) {
+                    return notFound("Recipe does not exist.");
+                }
+
+                return jsonResponse(recipe);
+            }
+
             if (url.pathname === "/api/recipes") {
                 if (!validateJsonAccept(request)) {
                     return notAcceptable();
@@ -493,6 +515,13 @@ async function handler(request) {
     if (url.pathname === "/profile") {
         return serveFile(request, "./public/profile.html");
     }
+
+    let recipePattern = new URLPattern({ pathname: "/recipe/:id" });
+    let recipeMatch = recipePattern.exec(url);
+    if (recipeMatch) {
+        return await serveFile(request, "./public/recipe.html");
+    }
+
     return serveDir(request, {
         fsRoot: "./public",
     });

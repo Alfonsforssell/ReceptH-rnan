@@ -293,6 +293,7 @@ main {
             border-radius: 10px;
             background-position: center;
             background-size: cover;
+            position: relative;
             transition: all .5s ease;
             border-radius: 20px 20px 0px 0px;
 
@@ -302,6 +303,10 @@ main {
                 object-fit: cover;
                 object-position: center;
                 border-radius: 10px 10px 0px 0px;
+            }
+
+            .content {
+                cursor: pointer;
             }
 
             h1,
@@ -358,8 +363,8 @@ main {
 
             .heart {
                 position: relative;
-                bottom: 440px;
-                left: 170px;
+                bottom: 90px;
+                left: 350px;
                 background-color: transparent;
                 border: none;
                 font-size: 40px;
@@ -373,7 +378,8 @@ main {
 
             .edit {
                 height: 40px;
-                aspect-ratio: 1/1;
+                width: 40px;
+                padding: 0;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -394,20 +400,96 @@ main {
             }
         }
 
-        .card:hover {
-            transform: scale(1.05);
-            cursor: pointer;
-        }
-
-        .card:active {
-            transform: scale(.8);
-        }
-
         #notFound {
             color: var(--text-light);
             font-size: 20px;
             letter-spacing: 2px;
             line-height: 1.3;
+        }
+    }
+
+    #overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.75);
+        z-index: 98;
+    }
+
+    #overlay.show {
+        display: block;
+    }
+
+
+
+    #editPopup {
+        width: 500px;
+        height: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: var(--bg-light);
+        color: var(--text-light);
+        position: fixed;
+        top: 50dvh;
+        left: 50dvw;
+        transform: translate(-50%, -50%);
+        z-index: 99;
+        border-radius: 10px;
+    }
+
+
+    #closePopup {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: var(--text-light);
+        font-weight: 800;
+        transition: all .5s ease;
+    }
+
+    #closePopup:hover {
+        transform: scale(1.2);
+    }
+
+    .popupContent {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        h2 {
+            font-size: 15px;
+            font-weight: 500;
+            position: relative;
+            bottom: 75px;
+            text-align: center;
+        }
+
+        #contentButtons {
+            display: flex;
+            gap: 50px;
+
+            button {
+                width: 150px;
+                height: 50px;
+                color: var(--text-light);
+                background-color: var(--bg);
+                border: none;
+                border-radius: 20px;
+                padding: 10px;
+                transition: all .5s ease;
+            }
+
+            button:hover {
+                transform: scale(1.05);
+                cursor: pointer;
+            }
+
         }
     }
 }

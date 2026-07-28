@@ -388,7 +388,8 @@ main {
 
             .edit {
                 height: 40px;
-                aspect-ratio: 1/1;
+                width: 40px;
+                padding: 0;
                 display: flex;
                 justify-content: center;
                 align-items: center;

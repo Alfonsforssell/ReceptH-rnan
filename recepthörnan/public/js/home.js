@@ -6,6 +6,7 @@ let countries = [];
 let dietaries = [];
 let users = [];
 let showEditButtons = false;
+let selectedRecipeId = null;
 
 async function getData() {
     recipes = await api.getRequest("/api/recipes", true);
@@ -28,10 +29,9 @@ function renderRecipes(filteredRecipes = recipes) {
     recipeContainer.innerHTML = "";
 
     for (let oneRecipe of filteredRecipes) {
-        let a = document.createElement("a");
-        a.href = "/assets/html/productPage.html?id=" + oneRecipe.id;
+        let div = document.createElement("div");
 
-        a.dataset.recipeId = oneRecipe.id;
+        div.dataset.recipeId = oneRecipe.id;
 
         let buttonHtml;
         if (showEditButtons) {
@@ -40,8 +40,9 @@ function renderRecipes(filteredRecipes = recipes) {
         else {
             buttonHtml = `<button class="heart">♥</button>`;
         }
-        a.innerHTML = `
+        div.innerHTML = `
         <div class="empty"></div>
+        ${buttonHtml}
         <div class="content">
                 <h1>${oneRecipe.name}</h1>
                 <p>${oneRecipe.description}</p>
@@ -52,25 +53,29 @@ function renderRecipes(filteredRecipes = recipes) {
                     <a>@${getUserNameById(oneRecipe.author)}</a>
                 </div>
                 <div class="diets"></div>
-                ${buttonHtml}
         </div>`;
-        a.style.backgroundImage = `url(assets${oneRecipe.imageUrl})`
-        let button = a.querySelector(".heart");
+        div.style.backgroundImage = `url(assets${oneRecipe.imageUrl})`
+        let button = div.querySelector(".heart");
         if (oneRecipe.isFavourite) {
             button.classList.add("fav");
         }
 
         for (let diet of dietaries) {
             if (oneRecipe.dietary.includes(diet)) {
-                let diets = a.querySelector(".diets");
+                let diets = div.querySelector(".diets");
                 let img = document.createElement("img");
                 img.src = `assets/icons/${diet}.svg`;
                 img.classList.add("icon");
                 diets.appendChild(img);
             }
         }
-        recipeContainer.appendChild(a);
-        a.classList.add("card");
+        recipeContainer.appendChild(div);
+        div.classList.add("card");
+
+        let content = div.querySelector(".content");
+        content.addEventListener("click", function (e) {
+            location.href = "/recipe/" + oneRecipe.id;
+        })
     }
     if (recipeContainer.children.length === 0) {
         recipeContainer.innerHTML = `<p id="notFound">Hittade inga recept</p>`;
@@ -90,7 +95,7 @@ function favorite() {
         heart.addEventListener("click", async function (e) {
             e.preventDefault();
 
-            let recipeId = Number(heart.closest("a").dataset.recipeId);
+            let recipeId = Number(heart.closest("div").dataset.recipeId);
 
             let body = {
                 recipeId: recipeId
@@ -276,6 +281,83 @@ function logout() {
     })
 }
 
+function openPopup() {
+    let buttons = document.querySelectorAll(".edit");
+
+    for (let button of buttons) {
+        button.addEventListener("click", function (e) {
+            console.log("Edit klickad");
+            e.preventDefault();
+            e.stopPropagation();
+            selectedRecipeId = Number(button.closest("[data-recipe-id]").dataset.recipeId);
+            document.getElementById("overlay").classList.add("show");
+        });
+    }
+}
+
+function editRecipe() {
+    if (selectedRecipeId === null) {
+        return;
+    }
+    window.location.href = "/edit?id=" + selectedRecipeId;
+}
+
+function showDeleteConfirmation() {
+    console.log("showDeleteConfirmation");
+    document.getElementById("popupTitle").textContent = "Är du säker?";
+
+    document.getElementById("contentButtons").innerHTML = `
+        <button id="confirmDelete">Ta bort</button>
+        <button id="cancelDelete">Avbryt</button>
+    `;
+
+    document.getElementById("confirmDelete").addEventListener("click", deleteRecipe);
+
+    document.getElementById("cancelDelete").addEventListener("click", restorePopup);
+
+}
+
+function restorePopup() {
+    document.getElementById("popupTitle").textContent = "Hantera recept";
+
+    document.getElementById("contentButtons").innerHTML = `
+        <button id="editRecipe">Redigera recept</button>
+        <button id="deleteRecipe">Ta bort recept</button>
+    `;
+
+    document.getElementById("editRecipe").addEventListener("click", editRecipe);
+
+    document.getElementById("deleteRecipe").addEventListener("click", showDeleteConfirmation);
+}
+
+async function deleteRecipe() {
+    if (selectedRecipeId === null) {
+        return;
+    }
+
+    try {
+        await api.deleteRequest("/api/recipes/" + selectedRecipeId, true);
+        document.querySelector(`[data-recipe-id="${selectedRecipeId}"]`).remove();
+        document.getElementById("overlay").classList.remove("show");
+        selectedRecipeId = null;
+        restorePopup();
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+}
+
+function closePopup() {
+    let button = document.getElementById("closePopup");
+    button.addEventListener("click", function () {
+        document.getElementById("overlay").classList.remove("show");
+        restorePopup();
+        selectedRecipeId = null;
+    });
+
+}
+
 async function init() {
     try {
         await getData();
@@ -291,6 +373,8 @@ async function init() {
     showMyRecipes();
     removeFilters();
     logout();
+    closePopup();
+    restorePopup();
 }
 
 init();
