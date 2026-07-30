@@ -3,6 +3,7 @@ import * as favourites from "./routes/favourites.js";
 import * as users from "./routes/users.js";
 import * as recipes from "./routes/recipes.js";
 import * as login from "./routes/login.js";
+import * as comments from "./routes/comments.js";
 
 function validateJsonContent(request) {
     let content = request.headers.get("Content-Type");
@@ -43,7 +44,7 @@ function notFound(message) {
 }
 
 function badRequest(message) {
-    return new Response(JSON.stringify({ Error: message }), {
+    return new Response(JSON.stringify({ error: message }), {
         headers: jsonHeaders,
         status: 400
     });
@@ -121,12 +122,20 @@ async function handler(request) {
 
                 const id = Number(recipeMatch.pathname.groups.id);
 
-                const recipe = recipes.getRecipeById(id);
+                let recipe = recipes.getRecipeById(id);
 
                 if (!recipe) {
+
                     return notFound("Recipe does not exist.");
+
                 }
 
+                recipes.addView(id);
+                recipe = recipes.getRecipeById(id);
+                recipe.favoriteCount = recipes.getFavouriteCount(id);
+                let rating = comments.getRating(id);
+                recipe.averageRating = rating.average;
+                recipe.ratingCount = rating.amount;
                 return jsonResponse(recipe);
             }
 
@@ -151,11 +160,15 @@ async function handler(request) {
                 let showingRecipes = [];
 
                 for (let recipe of filteredRecipes) {
-                    if (recipe.author === user.id) {
+                    if (Number(recipe.author) === Number(user.id)) {
                         continue;
                     }
-
                     recipe.isFavourite = user.favourites.includes(recipe.id);
+                    recipe.favoriteCount = recipes.getFavouriteCount(recipe.id);
+
+                    let rating = comments.getRating(recipe.id);
+                    recipe.averageRating = rating.average;
+                    recipe.ratingCount = rating.amount;
 
                     if (filters.favs === "favorites" && !recipe.isFavourite) {
                         continue;
@@ -213,7 +226,69 @@ async function handler(request) {
                 if (!user) {
                     return unauthorized();
                 }
-                return jsonResponse(recipes.getProfileRecipes(user.id));
+
+                let myRecipes = recipes.getProfileRecipes(user.id);
+
+                for (let recipe of myRecipes) {
+                    recipe.favoriteCount = recipes.getFavouriteCount(recipe.id);
+                    let rating = comments.getRating(recipe.id);
+                    recipe.averageRating = rating.average;
+                    recipe.ratingCount = rating.amount;
+                }
+
+                return jsonResponse(myRecipes);
+            }
+
+            const userRatingRoute = new URLPattern({
+                pathname: "/api/ratings/:recipeId/user"
+            });
+
+            const userRatingMatch = userRatingRoute.exec(url);
+            if (userRatingMatch) {
+                if (!validateJsonAccept(request)) {
+                    return notAcceptable();
+                }
+
+                let user = login.getProfile(request);
+                if (!user) {
+                    return unauthorized();
+                }
+
+                let recipeId = Number(
+                    userRatingMatch.pathname.groups.recipeId
+                );
+
+                let rating = comments.getUserRating(
+                    recipeId,
+                    user.id
+                );
+
+                return jsonResponse(rating);
+            }
+
+            const commentsRoute = new URLPattern({
+                pathname: "/api/comments/:recipeId"
+            });
+
+            const commentsMatch = commentsRoute.exec(url);
+            if (commentsMatch) {
+                if (!validateJsonAccept(request)) {
+                    return notAcceptable();
+                }
+
+                let user = login.getProfile(request);
+                if (!user) {
+                    return unauthorized();
+                }
+
+                let recipeId = Number(
+                    commentsMatch.pathname.groups.recipeId
+                );
+
+                let recipeComments =
+                    comments.getCommentsByRecipe(recipeId);
+
+                return jsonResponse(recipeComments);
             }
         }
 
@@ -312,29 +387,41 @@ async function handler(request) {
                     return notAcceptable();
                 }
 
-                if (!validateJsonContent(request)) {
-                    return unsupportedMediaType();
-                }
-
                 let user = login.getProfile(request);
 
                 if (!user) {
                     return unauthorized();
                 }
 
-                let newRecipe = await getRequestBody(request);
+                let form = await request.formData();
 
-                if (!newRecipe) {
-                    return badRequest("Invalid or missing JSON body.");
+                let image = form.get("image");
+
+                if (!image) {
+                    return badRequest("Image is required.");
                 }
 
-                if (!newRecipe.name || !newRecipe.description || !newRecipe.country || !newRecipe.category || !newRecipe.time || !newRecipe.dietary || !newRecipe.ingredients ||
-                    !newRecipe.instructions || !newRecipe.imageUrl) {
-                    return badRequest("All recipe fields are required.");
-                }
+                let imageName = crypto.randomUUID() + "." + image.name.split(".").pop();
+
+                await Deno.writeFile(
+                    "./public/assets/uploads/" + imageName,
+                    new Uint8Array(await image.arrayBuffer())
+                );
+
+                let newRecipe = {
+                    name: form.get("name"),
+                    description: form.get("description"),
+                    category: form.get("category"),
+                    time: Number(form.get("time")),
+                    country: form.get("country"),
+                    servings: Number(form.get("servings")),
+                    dietary: JSON.parse(form.get("dietary")),
+                    ingredients: JSON.parse(form.get("ingredients")),
+                    instructions: JSON.parse(form.get("instructions")),
+                    imageUrl: "/uploads/" + imageName
+                };
 
                 return jsonResponse(recipes.createRecipe(newRecipe, user.id), 201);
-
             }
 
             if (url.pathname === "/api/favourites") {
@@ -366,6 +453,43 @@ async function handler(request) {
                 return jsonResponse(updatedFavouritesList);
 
             }
+
+            if (url.pathname === "/api/comments") {
+                if (!validateJsonAccept(request)) {
+                    return notAcceptable();
+                }
+
+                if (!validateJsonContent(request)) {
+                    return unsupportedMediaType();
+                }
+
+                let user = login.getProfile(request);
+                if (!user) {
+                    return unauthorized();
+                }
+
+                let body = await getRequestBody(request);
+                if (!body.recipeId || !body.rating) {
+                    return badRequest(
+                        "Recipe ID and rating required."
+                    );
+                }
+
+
+                let newComment = comments.addComment(
+                    body.recipeId,
+                    user.id,
+                    body.text ?? "",
+                    body.rating
+                );
+                if (!newComment) {
+                    return badRequest(
+                        "You already reviewed this recipe."
+                    );
+                }
+
+                return jsonResponse(newComment);
+            }
         }
 
         if (request.method === "PATCH") {
@@ -395,23 +519,29 @@ async function handler(request) {
                     return badRequest("Password is required.");
                 }
 
-                return jsonResponse(users.updateUser(user.id, newUserData));
+                let updatedUser = users.updateUser(user.id, newUserData);
+
+                if (updatedUser === "username") {
+                    return badRequest("Username already exists.");
+                }
+
+                if (updatedUser === "email") {
+                    return badRequest("Email already exists.");
+                }
+
+                return jsonResponse(updatedUser);
             }
 
             const recipeIdRoute = new URLPattern({
                 pathname: "/api/recipes/:id"
-
             });
 
             if (!validateJsonAccept(request)) {
                 return notAcceptable();
             }
 
-            if (!validateJsonContent(request)) {
-                return unsupportedMediaType();
-            }
-
             const recipeMatch = recipeIdRoute.exec(url);
+
             if (recipeMatch) {
                 const user = login.getProfile(request);
 
@@ -421,13 +551,52 @@ async function handler(request) {
 
                 const id = Number(recipeMatch.pathname.groups.id);
 
-                let newRecipe = await getRequestBody(request);
-                if (!newRecipe) {
-                    return badRequest("Invalid or missing JSON body.");
+                const oldRecipe = recipes.getRecipeById(id);
+
+                if (!oldRecipe) {
+                    return badRequest("Recipe not found.");
                 }
 
-                if (!newRecipe.name || !newRecipe.description || !newRecipe.country || !newRecipe.category || !newRecipe.time || !newRecipe.dietary || !newRecipe.ingredients ||
-                    !newRecipe.instructions || !newRecipe.imageUrl) {
+                const form = await request.formData();
+
+                let image = form.get("image");
+                let imageUrl = oldRecipe.imageUrl;
+
+                if (image && image.size > 0) {
+                    let imageName =
+                        crypto.randomUUID() + "." + image.name.split(".").pop();
+
+                    await Deno.writeFile(
+                        "./public/assets/uploads/" + imageName,
+                        new Uint8Array(await image.arrayBuffer())
+                    );
+
+                    imageUrl = "/uploads/" + imageName;
+                }
+
+                const newRecipe = {
+                    name: form.get("name"),
+                    description: form.get("description"),
+                    category: form.get("category"),
+                    time: Number(form.get("time")),
+                    country: form.get("country"),
+                    servings: Number(form.get("servings")),
+                    dietary: JSON.parse(form.get("dietary")),
+                    ingredients: JSON.parse(form.get("ingredients")),
+                    instructions: JSON.parse(form.get("instructions")),
+                    imageUrl: imageUrl
+                };
+
+                if (
+                    !newRecipe.name ||
+                    !newRecipe.description ||
+                    !newRecipe.country ||
+                    !newRecipe.category ||
+                    !newRecipe.time ||
+                    !newRecipe.dietary ||
+                    !newRecipe.ingredients ||
+                    !newRecipe.instructions
+                ) {
                     return badRequest("All recipe fields are required.");
                 }
 
@@ -438,6 +607,49 @@ async function handler(request) {
                 }
 
                 return jsonResponse(recipeChanged);
+            }
+
+            const commentIdRoute = new URLPattern({
+                pathname: "/api/comments/:id"
+            });
+
+            const commentMatch = commentIdRoute.exec(url);
+            if (commentMatch) {
+                if (!validateJsonAccept(request)) {
+                    return notAcceptable();
+                }
+
+                if (!validateJsonContent(request)) {
+                    return unsupportedMediaType();
+                }
+
+                let user = login.getProfile(request);
+                if (!user) {
+                    return unauthorized();
+                }
+
+                let id = Number(commentMatch.pathname.groups.id);
+                let body = await getRequestBody(request);
+
+                if (!body.text || body.text.trim() === "") {
+                    return badRequest("Comment text is required.");
+                }
+                if (!body.rating) {
+                    return badRequest("Rating is required.");
+                }
+
+                let updatedComment = comments.updateComment(
+                    id,
+                    body.text,
+                    body.rating,
+                    user.id
+                );
+
+                if (!updatedComment) {
+                    return forbidden("You cannot edit this comment.");
+                }
+
+                return jsonResponse(updatedComment);
             }
         }
 
@@ -485,6 +697,36 @@ async function handler(request) {
 
                 return jsonResponse(favouriteRemoved);
             }
+
+            const commentDeleteRoute = new URLPattern({
+                pathname: "/api/comments/:id"
+            });
+
+            const commentDeleteMatch = commentDeleteRoute.exec(url);
+            if (commentDeleteMatch) {
+                let user = login.getProfile(request);
+                if (!user) {
+                    return unauthorized();
+                }
+
+                let id = Number(
+                    commentDeleteMatch.pathname.groups.id
+                );
+
+                let deleted = comments.deleteComment(
+                    id,
+                    user.id
+                );
+                if (!deleted) {
+                    return badRequest(
+                        "Could not delete comment."
+                    );
+                }
+
+                return jsonResponse({
+                    message: "Review deleted!"
+                });
+            }
         }
         return new Response("Not Found", { status: 404 });
     }
@@ -520,6 +762,16 @@ async function handler(request) {
     let recipeMatch = recipePattern.exec(url);
     if (recipeMatch) {
         return await serveFile(request, "./public/recipe.html");
+    }
+
+    let editRecipePattern = new URLPattern({ pathname: "/edit/recipe/:id" });
+    let editRecipeMatch = editRecipePattern.exec(url);
+    if (editRecipeMatch) {
+        return await serveFile(request, "./public/edit.html");
+    }
+
+    if (url.pathname === "/publish") {
+        return serveFile(request, "./public/create.html");
     }
 
     return serveDir(request, {

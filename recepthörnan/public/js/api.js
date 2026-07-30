@@ -30,11 +30,16 @@ export async function postRequest(url, body, credentials = false) {
         let options = {
             method: "POST",
             headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
+                "Accept": "application/json"
+            }
         };
+
+        if (body instanceof FormData) {
+            options.body = body;
+        } else {
+            options.headers["Content-Type"] = "application/json";
+            options.body = JSON.stringify(body);
+        }
 
         if (credentials) {
             options.credentials = "include";
@@ -44,41 +49,46 @@ export async function postRequest(url, body, credentials = false) {
 
         if (!response.ok) {
             let error = await response.json();
-            throw new Error(error.Error);
+            console.log("Fel från server:", error);
+            throw new Error(error.error);
         }
+
         return await response.json();
-    }
-    catch (error) {
+    } catch (error) {
         throw error;
     }
 }
 
 export async function patchRequest(url, body, credentials = false) {
-    let response;
     try {
         let options = {
             method: "PATCH",
             headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
+                "Accept": "application/json"
+            }
         };
+
+        if (body instanceof FormData) {
+            options.body = body;
+        } else {
+            options.headers["Content-Type"] = "application/json";
+            options.body = JSON.stringify(body);
+        }
 
         if (credentials) {
             options.credentials = "include";
         }
 
-        response = await fetch(url, options);
+        let response = await fetch(url, options);
 
         if (!response.ok) {
-            throw new Error("HTTP ERROR: " + response.status);
+            let error = await response.json();
+            throw new Error(error.error);
         }
 
         return await response.json();
-    }
-    catch (error) {
-        throw new Error("NETWORK ERROR: " + error.message);
+    } catch (error) {
+        throw error;
     }
 }
 

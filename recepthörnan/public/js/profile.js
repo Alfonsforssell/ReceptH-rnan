@@ -95,15 +95,11 @@ function updateUserInfo() {
             form.elements.repeatPassword.value = "";
         }
         catch (error) {
-
-            if (error.message.includes("Username already exists")) {
+            if (error.message.includes("Username")) {
                 usernameError.textContent = "Användarnamnet används redan.";
             }
-            else if (error.message.includes("Email already exists")) {
+            else if (error.message.includes("Email")) {
                 mailError.textContent = "Mailadressen används redan.";
-            }
-            else if (error.message.includes("Repeated password")) {
-                passwordError.textContent = "Lösenorden matchar inte.";
             }
             else {
                 usernameError.textContent = error.message;
@@ -134,12 +130,11 @@ function renderRecipes(filteredRecipes = myRecipes) {
     recipeContainer.innerHTML = "";
 
     for (let oneRecipe of filteredRecipes) {
-        let a = document.createElement("a");
-        a.href = "/assets/html/productPage.html?id=" + oneRecipe.id;
+        let div = document.createElement("div");
 
-        a.dataset.recipeId = oneRecipe.id;
+        div.dataset.recipeId = oneRecipe.id;
 
-        a.innerHTML = `
+        div.innerHTML = `
         <div class="empty"></div>
         <div class="content">
                 <h1>${oneRecipe.name}</h1>
@@ -152,19 +147,23 @@ function renderRecipes(filteredRecipes = myRecipes) {
                 <div class="diets"></div>
                 <button class="edit">&bull;&bull;&bull;</button>
         </div>`;
-        a.style.backgroundImage = `url(assets${oneRecipe.imageUrl})`
+        div.style.backgroundImage = `url(assets${oneRecipe.imageUrl})`
 
         for (let diet of dietaries) {
             if (oneRecipe.dietary.includes(diet)) {
-                let diets = a.querySelector(".diets");
+                let diets = div.querySelector(".diets");
                 let img = document.createElement("img");
                 img.src = `assets/icons/${diet}.svg`;
                 img.classList.add("icon");
                 diets.appendChild(img);
             }
         }
-        recipeContainer.appendChild(a);
-        a.classList.add("card");
+        recipeContainer.appendChild(div);
+        div.classList.add("card");
+
+        div.addEventListener("click", function (e) {
+            location.href = "/recipe/" + oneRecipe.id;
+        })
     }
     if (recipeContainer.children.length === 0) {
         recipeContainer.innerHTML = `<p id="notFound">Hittade inga recept</p>`;
@@ -187,11 +186,10 @@ function editRecipe() {
     if (selectedRecipeId === null) {
         return;
     }
-    window.location.href = "/edit?id=" + selectedRecipeId;
+    window.location.href = "/edit/recipe/" + selectedRecipeId;
 }
 
 function showDeleteConfirmation() {
-    console.log("showDeleteConfirmation");
     document.getElementById("popupTitle").textContent = "Är du säker?";
 
     document.getElementById("contentButtons").innerHTML = `

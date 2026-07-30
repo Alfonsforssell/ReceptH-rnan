@@ -175,6 +175,11 @@ header {
             background-color: var(--dominant);
             color: var(--bg);
             border: none;
+
+            a {
+                color: var(--bg);
+                text-decoration: none;
+            }
         }
 
         #add {
@@ -182,6 +187,11 @@ header {
             border: 4px solid var(--dominant);
             background-color: transparent;
             color: var(--dominant);
+
+            a {
+                color: var(--dominant);
+                text-decoration: none;
+            }
         }
     }
 }
@@ -199,11 +209,11 @@ main {
         align-items: center;
         justify-content: center;
         gap: 5px;
-        width: 50%;
-        margin: 10px;
+        width: 75%;
+        margin: 5px;
 
         select {
-            width: 50%;
+            flex: 1;
             aspect-ratio: 5/1;
             border-radius: 10px;
             font-weight: 800;
@@ -211,11 +221,12 @@ main {
             border: none;
             background-color: var(--dominant);
             color: var(--bg);
+            cursor: pointer;
         }
 
         button {
             width: 10%;
-            aspect-ratio: 2/1;
+            aspect-ratio: 4/1;
             border-radius: 10px;
             font-weight: 800;
             padding: 10px;
@@ -237,7 +248,7 @@ main {
 
     input {
         width: 100%;
-        aspect-ratio: 20/1;
+        aspect-ratio: 30/1;
         border-radius: 10px;
         font-weight: 800;
         padding: 10px;
@@ -251,7 +262,7 @@ main {
     }
 
     #removeFilters {
-        aspect-ratio: 2/1;
+        aspect-ratio: 3/1;
         font-size: 10px;
         line-height: 1;
     }
@@ -370,6 +381,7 @@ main {
                 font-size: 40px;
                 color: var(--noFav);
                 -webkit-text-stroke: 2px black;
+                cursor: pointer;
             }
 
             .fav {
@@ -392,11 +404,8 @@ main {
                 z-index: 5;
                 background-color: var(--text-light);
                 border-radius: 50%;
-                border: 2px solid var(--bg-light);
-            }
-
-            .edit:hover {
                 cursor: pointer;
+                border: 2px solid var(--bg-light);
             }
         }
 

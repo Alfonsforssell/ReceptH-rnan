@@ -7,6 +7,7 @@ let dietaries = [];
 let users = [];
 let showEditButtons = false;
 let selectedRecipeId = null;
+let currentSort = "default";
 
 async function getData() {
     recipes = await api.getRequest("/api/recipes", true);
@@ -24,7 +25,112 @@ function getUserNameById(id) {
     }
 }
 
-function renderRecipes(filteredRecipes = recipes) {
+function getPopularScore(recipe) {
+    let views = recipe.views || 0;
+    let favourites = recipe.favourites || 0;
+    let rating = recipe.rating || 0;
+
+    return (
+        views * 0.2 +
+        favourites * 0.4 +
+        rating * 20 * 0.4
+    );
+}
+
+
+function getDiscoverScore(recipe) {
+    let views = recipe.views || 0;
+    let favourites = recipe.favourites || 0;
+    let rating = recipe.rating || 0;
+
+    return (
+        rating * 50 -
+        views * 0.05 -
+        favourites * 2
+    );
+}
+
+function sortRecipes(recipeList) {
+    let sortedRecipes = [...recipeList];
+
+    switch (currentSort) {
+        case "popular":
+            sortedRecipes.sort(function (a, b) {
+                return getPopularScore(b) - getPopularScore(a);
+            });
+            break;
+
+        case "discover":
+            sortedRecipes.sort(function (a, b) {
+                return getDiscoverScore(b) - getDiscoverScore(a);
+            });
+            break;
+
+        case "rating-desc":
+            sortedRecipes.sort(function (a, b) {
+                return (b.rating || 0) - (a.rating || 0);
+            });
+            break;
+
+        case "rating-asc":
+            sortedRecipes.sort(function (a, b) {
+                return (a.rating || 0) - (b.rating || 0);
+            });
+            break;
+
+        case "time-asc":
+            sortedRecipes.sort(function (a, b) {
+                return a.time - b.time;
+            });
+            break;
+
+        case "time-desc":
+            sortedRecipes.sort(function (a, b) {
+                return b.time - a.time;
+            });
+            break;
+
+        case "views-desc":
+            sortedRecipes.sort(function (a, b) {
+                return (b.views || 0) - (a.views || 0);
+            });
+            break;
+
+        case "views-asc":
+            sortedRecipes.sort(function (a, b) {
+                return (a.views || 0) - (b.views || 0);
+            });
+            break;
+
+        case "newest":
+            sortedRecipes.sort(function (a, b) {
+                return new Date(b.createdAt) - new Date(a.createdAt);
+            });
+            break;
+
+        case "oldest":
+            sortedRecipes.sort(function (a, b) {
+                return new Date(a.createdAt) - new Date(b.createdAt);
+            });
+            break;
+
+        case "name-asc":
+            sortedRecipes.sort(function (a, b) {
+                return a.name.localeCompare(b.name);
+            });
+            break;
+
+        case "name-desc":
+            sortedRecipes.sort(function (a, b) {
+                return b.name.localeCompare(a.name);
+            });
+            break;
+    }
+
+    return sortedRecipes;
+}
+
+function renderRecipes(filteredRecipes = sortRecipes(recipes)) {
     let recipeContainer = document.getElementById("recipeContainer");
     recipeContainer.innerHTML = "";
 
@@ -51,6 +157,9 @@ function renderRecipes(filteredRecipes = recipes) {
                     <h2>${oneRecipe.category}</h2>
                     <h2>${oneRecipe.country}</h2>
                     <a>@${getUserNameById(oneRecipe.author)}</a>
+                    <h2>👁️${oneRecipe.views}</h2>
+                    <h2>❤️${oneRecipe.favoriteCount}</h2>
+                    <h2>⭐${oneRecipe.averageRating}(${oneRecipe.ratingCount})</h2>
                 </div>
                 <div class="diets"></div>
         </div>`;
@@ -87,6 +196,11 @@ function renderRecipes(filteredRecipes = recipes) {
         favorite();
     }
 
+    document.querySelector("#sortRecipes").addEventListener("change", function () {
+        currentSort = this.value;
+        renderRecipes(sortRecipes(recipes));
+    });
+
 }
 
 function favorite() {
@@ -94,9 +208,7 @@ function favorite() {
     for (let heart of hearts) {
         heart.addEventListener("click", async function (e) {
             e.preventDefault();
-
             let recipeId = Number(heart.closest("div").dataset.recipeId);
-
             let body = {
                 recipeId: recipeId
             };
@@ -110,6 +222,8 @@ function favorite() {
                     await api.deleteRequest("/api/favourites/" + recipeId, true);
                     heart.classList.remove("fav");
                 }
+                await getData();
+                renderRecipes(recipes);
             }
             catch (error) {
                 console.log(error);
@@ -286,7 +400,6 @@ function openPopup() {
 
     for (let button of buttons) {
         button.addEventListener("click", function (e) {
-            console.log("Edit klickad");
             e.preventDefault();
             e.stopPropagation();
             selectedRecipeId = Number(button.closest("[data-recipe-id]").dataset.recipeId);
@@ -299,11 +412,10 @@ function editRecipe() {
     if (selectedRecipeId === null) {
         return;
     }
-    window.location.href = "/edit?id=" + selectedRecipeId;
+    window.location.href = "/edit/recipe/" + selectedRecipeId;
 }
 
 function showDeleteConfirmation() {
-    console.log("showDeleteConfirmation");
     document.getElementById("popupTitle").textContent = "Är du säker?";
 
     document.getElementById("contentButtons").innerHTML = `

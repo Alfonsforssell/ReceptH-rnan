@@ -5,7 +5,7 @@
     "email": "alfons@example.com",
     "password": "123",
     "createdAt": "2026-07-16T10:00:00Z",
-    "sessionId": "3a531b68-64c3-4d08-a957-aaeae743ecc5",
+    "sessionId": null,
     "favourites": [
       3
     ]
@@ -43,18 +43,16 @@
     "email": "erik@example.com",
     "password": "password123",
     "createdAt": "2026-07-12T08:15:00Z",
-    "sessionId": null,
+    "sessionId": "4556ab24-81ec-493f-8af7-b50570cb455f",
     "favourites": []
   },
   {
     "email": "random",
-    "username": "slaffe",
+    "username": "affe",
     "password": "123",
     "id": 6,
     "sessionId": "827c2948-60e8-4362-a8bd-5b10425662d1",
-    "favourites": [
-      1
-    ],
+    "favourites": [],
     "createdAt": "2026-07-19T13:33:47.447Z"
   }
 ]

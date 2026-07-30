@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "recipeId": 3,
+    "text": "Fantastisk!",
+    "rating": 5,
+    "createdAt": "2026-07-30T15:05:24.302Z"
+  },
+  {
+    "id": 2,
+    "userId": 2,
+    "recipeId": 3,
+    "text": "Grymt",
+    "rating": 4,
+    "createdAt": "2026-07-30T15:06:01.636Z"
+  },
+  {
+    "id": 3,
+    "userId": 3,
+    "recipeId": 3,
+    "text": "Denna va bra",
+    "rating": 5,
+    "createdAt": "2026-07-30T15:08:22.201Z"
+  },
+  {
+    "id": 4,
+    "userId": 4,
+    "recipeId": 3,
+    "text": "Jag har gjort denna flera gånger sedan jag hittade den. Perfekt för sommaren!",
+    "rating": 5,
+    "createdAt": "2026-07-30T15:10:31.939Z"
+  },
+  {
+    "id": 5,
+    "userId": 5,
+    "recipeId": 3,
+    "text": "svjsnvojwsnvowejnisfcvoijwnelrfviuenshr givuhtrseliguhvlrsieghrisetughvlisrughv blsreia guvhorueaoiguhferailughvglaieruhfnvile aruhgvfnliunligaleriogh7feriufghlaiufhlierufhal ierughvaleiughvfaleiuvrhfaleidughvblaeiruhgvflaeirghuv laeiuhgrvnbgaeliruhgvlieauvhaeliruvhaleigvufhareliuvhafeligfuvhrledigvuhaliguvhbeliugvhgaelrigvhuaerligvuhaerligfvuhgaebrligvuhbgaelirufvhbaleirugvhbglaeiurghvbleairuhgbvlgaiUBHI",
+    "rating": 1,
+    "createdAt": "2026-07-30T15:11:49.385Z"
+  }
+]

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReceptHörnan</title>
+    <link rel="stylesheet" href="/css/create.css">
+</head>
+
+<body>
+    <header>
+        <div id="left"><img class="logo" src="/assets/images/LogoBlack.svg" alt=""></div>
+        <div id="right">
+            <a id="aboutUs" class="headerLink" href="/about">Om oss</a>
+            <a class="myRecipesLink headerLink" href="">Mina Recept</a>
+            <a class="favoritesLink headerLink" href="">Favoriter</a>
+            <a href="/profile"><img src="/assets/icons/profile.png" alt=""></a>
+            <a href=""><img src="/assets/icons/plus.png" alt=""></a>
+        </div>
+    </header>
+
+    <main>
+        <a href="/home">Tillbaka till startsidan</a>
+        <div id="recipeContainer">
+            <div id="image">
+                <label for="recipeImage" id="imageUpload">
+                    <img id="previewImage" src="/assets/images/placeholder.jpg" alt="">
+                    <span>Välj bild</span>
+                </label>
+                <input type="file" id="recipeImage" accept="image/*" hidden>
+            </div>
+            <div id="text">
+                <h1>Ändra recept</h1>
+                <form id="recipeForm">
+                    <div id="description">
+                        <input name="name" id="recipeName" class="titleInput" type="text" placeholder="Receptnamn">
+                        <textarea name="description" id="recipeDescription" class="descriptionInput"
+                            placeholder="Beskrivning av receptet"></textarea>
+                        <div id="info">
+                            <select name="category" id="recipeCategory" class="infoSelect">
+                                <option selected disabled>Kategori</option>
+                                <option value="Frukost">Frukost</option>
+                                <option value="Brunch">Brunch</option>
+                                <option value="Lunch">Lunch</option>
+                                <option value="Middag">Middag</option>
+                                <option value="Dessert">Dessert</option>
+                                <option value="Snack">Snack</option>
+                            </select>
+                            <input name="time" id="recipeTime" class="infoInput small" type="text" placeholder="Tid">
+                            <input name="country" id="recipeCountry" class="infoInput" type="text" placeholder="Land">
+                            <div id="diets">
+                                <label class="dietLabel">
+                                    <input type="checkbox" value="Vegansk">
+                                    Vegansk
+                                </label>
+                                <label class="dietLabel">
+                                    <input type="checkbox" value="Fiskfri">
+                                    Fiskfri
+                                </label>
+                                <label class="dietLabel">
+                                    <input type="checkbox" value="Glutenfri">
+                                    Glutenfri
+                                </label>
+                                <label class="dietLabel">
+                                    <input type="checkbox" value="Laktosfri">
+                                    Laktosfri
+                                </label>
+                                <label class="dietLabel">
+                                    <input type="checkbox" value="Köttfri">
+                                    Köttfri
+                                </label>
+                                <label class="dietLabel">
+                                    <input type="checkbox" value="Halal">
+                                    Halal
+                                </label>
+                                <label class="dietLabel">
+                                    <input type="checkbox" value="Hälsokost">
+                                    Hälsokost
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="cook">
+                        <div id="amount">
+                            <button type="button" class="subtract">-</button>
+                            <button type="button" class="servings">2 portioner</button>
+                            <button type="button" class="add">+</button>
+                        </div>
+                        <div id="ingredients">
+                            <h3>Ingredienser</h3>
+                            <div id="ingredientList">
+                            </div>
+                            <button type="button" id="addIngredient" class="addButton">
+                                + Lägg till ingrediens
+                            </button>
+                        </div>
+                        <div id="instructions">
+                            <h3>Instruktioner</h3>
+                            <div id="instructionList">
+                            </div>
+                            <button type="button" id="addInstruction" class="addButton">
+                                + Lägg till steg
+                            </button>
+                        </div>
+                    </div>
+                    <button id="editRecipe" type="submit">
+                        Uppdatera recept
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div id="copyright">
+            <img src="/assets/images/LogoBlack.svg" alt="">
+            <h1>Copyright © 2026 ReceptHörnan. All Rights Reserved.</h1>
+            <h1>Created by Alfons Forssell</h1>
+        </div>
+        <div id="links">
+            <ul>
+                <li><a class="footerLink" href="/about">Om oss</a></li>
+                <li><a class="myRecipesLink footerLink" href="">Mina recept</a></li>
+                <li><a class="favoritesLink footerLink" href="">Favoriter</a></li>
+                <li><a class="footerLink" href="/profile">Profil</a></li>
+                <li><a class="footerLink" href="/publish">Publicera recept</a></li>
+                <li><a id="logout" class="footerLink" href="">Logga ut</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script type="module" src="/js/edit.js"></script>
+</body>
+
+</html>

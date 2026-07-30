@@ -9,7 +9,7 @@
       "category": "Breakfast",
       "time": 20,
       "dietary": [
-        "Vegan"
+        "Vegansk"
       ],
       "servings": 2,
       "ingredients": [
@@ -34,7 +34,9 @@
         "Heat a frying pan.",
         "Cook until golden."
       ],
-      "imageUrl": "/images/pancakes.jpg"
+      "imageUrl": "/images/pancakes.jpg",
+      "createdAt": "2026-03-29T15:34:53.549Z",
+      "views": 2
     },
     {
       "id": 2,
@@ -63,7 +65,9 @@
         "Add curry paste.",
         "Simmer."
       ],
-      "imageUrl": "/images/curry.jpg"
+      "imageUrl": "/images/curry.jpg",
+      "createdAt": "2026-04-20T15:34:53.549Z",
+      "views": 22
     },
     {
       "id": 3,
@@ -74,8 +78,8 @@
       "category": "Lunch",
       "time": 10,
       "dietary": [
-        "Vegan",
-        "Gluten Free"
+        "Vegansk",
+        "Glutenfri"
       ],
       "servings": 2,
       "ingredients": [
@@ -95,7 +99,9 @@
         "Mix together.",
         "Serve."
       ],
-      "imageUrl": "/images/salad.jpg"
+      "imageUrl": "/images/salad.jpg",
+      "createdAt": "2026-03-19T15:34:53.549Z",
+      "views": 373
     },
     {
       "id": 4,
@@ -106,7 +112,7 @@
       "category": "Dessert",
       "time": 70,
       "dietary": [
-        "Vegan"
+        "Vegansk"
       ],
       "servings": 2,
       "ingredients": [
@@ -126,7 +132,9 @@
         "Bake.",
         "Cool before serving."
       ],
-      "imageUrl": "/images/cake.jpg"
+      "imageUrl": "/images/cake.jpg",
+      "createdAt": "2026-02-01T15:34:53.549Z",
+      "views": 0
     },
     {
       "id": 5,
@@ -155,7 +163,107 @@
         "Roll sushi.",
         "Slice and serve."
       ],
-      "imageUrl": "/images/sushi.jpg"
+      "imageUrl": "/images/sushi.jpg",
+      "createdAt": "2025-10-29T15:34:53.549Z",
+      "views": 4
+    },
+    {
+      "name": "test",
+      "description": "test",
+      "category": "Frukost",
+      "time": 10,
+      "country": "Swe",
+      "servings": 3,
+      "dietary": [
+        "Fiskfri",
+        "Glutenfri",
+        "Laktosfri",
+        "Köttfri",
+        "Halal",
+        "Hälsokost"
+      ],
+      "ingredients": [
+        {
+          "amount": 100,
+          "unit": "g",
+          "name": "bajs"
+        },
+        {
+          "amount": 4,
+          "unit": "",
+          "name": "hej"
+        }
+      ],
+      "instructions": [
+        "bajs",
+        "kiss"
+      ],
+      "imageUrl": "/uploads/99a778f7-bd26-4414-a61a-321d9acb4225.jpg",
+      "id": 6,
+      "author": 1,
+      "createdAt": "2026-07-28T15:34:53.549Z",
+      "views": 5
+    },
+    {
+      "name": "Korv Stroganoff",
+      "description": "Korvstroganoff är en lättlagad och välsmakande korvgryta med bland annat falukorv, lök, grädde och tomatpuré som passar bra som vardagsmiddag. Servera korvstroganoffen med kokt ris.",
+      "category": "Middag",
+      "time": 30,
+      "country": "Sverige",
+      "servings": 2,
+      "dietary": [
+        "Fiskfri"
+      ],
+      "ingredients": [
+        {
+          "amount": 2,
+          "unit": "dl",
+          "name": "Ris"
+        },
+        {
+          "amount": 275,
+          "unit": "g",
+          "name": "Falukorv"
+        },
+        {
+          "amount": 0.5,
+          "unit": "st",
+          "name": "Lök"
+        },
+        {
+          "amount": 1.25,
+          "unit": "dl",
+          "name": "Grädde"
+        },
+        {
+          "amount": 0.5,
+          "unit": "dl",
+          "name": "Mjölk"
+        },
+        {
+          "amount": 0.5,
+          "unit": "",
+          "name": "Soja"
+        },
+        {
+          "amount": 0.5,
+          "unit": "",
+          "name": "Dijonsenap"
+        }
+      ],
+      "instructions": [
+        "Koka riset enligt anvisningen på förpackningen",
+        " Skär korven i stavar. Skala och hacka löken.",
+        "Stek korv och lök i oljan i en stekpanna ca 5 minuter. Tillsätt tomatpuré och fräs någon minut.",
+        "Rör ner grädde, mjölk, soja och dijonsenap. Låt sjuda ca 5 minuter.",
+        " Smaka av med peppar och ev salt.",
+        "Till servering: Servera korvstroganoffen med ris och gärna vitkålssallad eller en sallad med tomat och gurka."
+      ],
+      "imageUrl": "/uploads/891b9043-18df-4a08-8e0a-6ca9ca3c7b36.jpg",
+      "id": 7,
+      "author": 1,
+      "createdAt": "2026-07-29T16:56:33.919Z",
+      "views": 0
     }
   ]
 }

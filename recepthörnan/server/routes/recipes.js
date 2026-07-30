@@ -76,6 +76,25 @@ export function updateRecipe(id, request, userId) {
     return matchedRecipe;
 }
 
+export function addView(id) {
+    const text = Deno.readTextFileSync("data/recipes.json");
+    const data = JSON.parse(text);
+    let recipes = data.recipes;
+
+    for (let recipe of recipes) {
+
+        if (recipe.id === id) {
+            recipe.views++;
+            break;
+        }
+    }
+
+    Deno.writeTextFileSync(
+        "data/recipes.json",
+        JSON.stringify(data, null, 2)
+    );
+}
+
 export function removeRecipe(recipeId, userId) {
     const text = Deno.readTextFileSync("data/recipes.json");
     const data = JSON.parse(text);
@@ -236,4 +255,16 @@ export function getProfileRecipes(request) {
         }
     }
     return matchedRecipes;
+}
+
+export function getFavouriteCount(recipeId) {
+    const text = Deno.readTextFileSync("data/users.json");
+    const data = JSON.parse(text);
+    let count = 0;
+    for (let user of data) {
+        if (user.favourites && user.favourites.includes(recipeId)) {
+            count++;
+        }
+    }
+    return count;
 }

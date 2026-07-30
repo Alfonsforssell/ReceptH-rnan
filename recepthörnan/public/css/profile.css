@@ -60,8 +60,8 @@ header {
 
     a:hover {
         transform: scale(1.05);
-        border-bottom: 1px solid var(--text-light);
     }
+
 }
 
 #left {

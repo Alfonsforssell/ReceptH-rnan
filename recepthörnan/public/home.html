@@ -16,7 +16,7 @@
             <a class="myRecipesLink headerLink" href="">Mina Recept</a>
             <a class="favoritesLink headerLink" href="">Favoriter</a>
             <a href="/profile"><img src="assets/icons/profile.png" alt=""></a>
-            <a href=""><img src="assets/icons/plus.png" alt=""></a>
+            <a href="/publish"><img src="assets/icons/plus.png" alt=""></a>
         </div>
     </header>
     <div id="hero">
@@ -37,8 +37,8 @@
                 hitta inspiration och upptäcka glädjen i att laga mat tillsammans.
             </p>
             <div id="buttons">
-                <button id="profile">Profil</button>
-                <button id="add">Publicera recept</button>
+                <button id="profile"><a href="/profile">Profil</a></button>
+                <button id="add"><a href="/publish">Publicera recept</a></button>
             </div>
         </div>
         <div id="image">
@@ -67,6 +67,21 @@
                 <option value="all">Alla recept</option>
                 <option value="favorites">Endast favoriter</option>
                 <option value="nonfavorites">Exklusive favoriter</option>
+            </select>
+            <select id="sortRecipes">
+                <option value="default">Ingen sortering</option>
+                <option value="popular">🔥Populär</option>
+                <option value="discover">✨Upptäck</option>
+                <option value="rating-desc">📈Högst betyg</option>
+                <option value="rating-asc">📉Lägst betyg</option>
+                <option value="time-asc">⚡Kortast tillagningstid</option>
+                <option value="time-desc">🐌Längst tillagningstid</option>
+                <option value="views-desc">👁Flest visningar</option>
+                <option value="views-asc">🙈Minst visningar</option>
+                <option value="newest">👶Nyast först</option>
+                <option value="oldest">👵🏻Äldst först</option>
+                <option value="name-asc">➡️A-Ö</option>
+                <option value="name-desc">⬅️Ö-A</option>
             </select>
             <button id="filterbutton">Filtrera</button>
         </form>
@@ -101,7 +116,7 @@
                 <li><a class="myRecipesLink footerLink" href="">Mina recept</a></li>
                 <li><a class="favoritesLink footerLink" href="">Favoriter</a></li>
                 <li><a class="footerLink" href="/profile">Profil</a></li>
-                <li><a class="footerLink" href="">Publicera recept</a></li>
+                <li><a class="footerLink" href="/publish">Publicera recept</a></li>
                 <li><a id="logout" class="footerLink" href="">Logga ut</a></li>
             </ul>
         </div>

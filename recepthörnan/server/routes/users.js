@@ -48,6 +48,21 @@ export function createUser(request) {
 
 export function updateUser(id, request) {
     const allUsers = getUsers();
+    for (const otherUser of allUsers) {
+        if (
+            otherUser.id !== id &&
+            otherUser.username.toLowerCase() === request.username.toLowerCase()
+        ) {
+            return "username";
+        }
+
+        if (
+            otherUser.id !== id &&
+            otherUser.email.toLowerCase() === request.email.toLowerCase()
+        ) {
+            return "email";
+        }
+    }
 
     for (const user of allUsers) {
         if (user.id === id) {
@@ -62,6 +77,7 @@ export function updateUser(id, request) {
                 "data/users.json",
                 JSON.stringify(allUsers, null, 2)
             );
+
             return user;
         }
     }
