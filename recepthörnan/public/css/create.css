@@ -20,7 +20,7 @@ html {
     --complementary: #F57C00;
     --link: #58A6FF;
     --error: #F85149;
-    --noFav: #A1A1AA;
+    --noFav: #85322e;
     --fav: #F85149;
 
     --text-light: hsl(0, 0%, 100%);
@@ -182,7 +182,7 @@ main {
                         border: none;
                         border-bottom: 2px solid var(--dominant);
                         color: var(--text-light);
-                        width: 75%;
+                        width: 100%;
                     }
 
                     #recipeName:focus,
@@ -202,7 +202,7 @@ main {
                         border: none;
                         border-bottom: 2px solid var(--dominant);
                         color: var(--text-light);
-                        width: 75%;
+                        width: 100%;
                         height: 50px;
                     }
 

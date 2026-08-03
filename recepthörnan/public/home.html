@@ -46,12 +46,16 @@
     </div>
     <main>
         <form id="filter" action="">
+            <h1>Filtrera</h1>
+            <h2>Land</h2>
             <select name="country" id="country">
                 <option value="All countries">Alla länder</option>
             </select>
+            <h2>Kategori</h2>
             <select name="category" id="category">
                 <option value="All categories">Alla kategorier</option>
             </select>
+            <h2>Tid</h2>
             <select name="time" id="time">
                 <option value="All">Alla tider</option>
                 <option value="15">Mindre än 15min</option>
@@ -60,14 +64,17 @@
                 <option value="60">Mindre än 60min</option>
                 <option value="100">Mer än 60min</option>
             </select>
+            <h2>Preferens</h2>
             <select name="preference" id="preference">
                 <option value="All">Ingen preferens</option>
             </select>
+            <h2>Favoriter</h2>
             <select name="favs" id="favs">
                 <option value="all">Alla recept</option>
                 <option value="favorites">Endast favoriter</option>
                 <option value="nonfavorites">Exklusive favoriter</option>
             </select>
+            <h2>Sortera efter</h2>
             <select id="sortRecipes">
                 <option value="default">Ingen sortering</option>
                 <option value="popular">🔥Populär</option>
@@ -83,11 +90,11 @@
                 <option value="name-asc">➡️A-Ö</option>
                 <option value="name-desc">⬅️Ö-A</option>
             </select>
-            <button id="filterbutton">Filtrera</button>
-        </form>
-        <form id="search" action="">
+            <h2>Sök recept</h2>
             <input id="searchValue" type="text" placeholder="Sök recept...">
-            <button type="button" id="removeFilters">Rensa filter</button>
+            <div id="formButtons">
+                <button type="button" id="removeFilters">Rensa filter</button>
+            </div>
         </form>
         <div id="recipeContainer">
         </div>

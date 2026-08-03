@@ -8,6 +8,7 @@ let countries = [];
 let dietaries = [];
 let currentUser;
 let selectedRecipeId = null;
+let showEditButtons = true;
 
 async function getData() {
     recipes = await api.getRequest("/api/recipes", true);
@@ -123,8 +124,6 @@ function logout() {
     })
 }
 
-
-
 function renderRecipes(filteredRecipes = myRecipes) {
     let recipeContainer = document.getElementById("recipeContainer");
     recipeContainer.innerHTML = "";
@@ -134,42 +133,102 @@ function renderRecipes(filteredRecipes = myRecipes) {
 
         div.dataset.recipeId = oneRecipe.id;
 
+        let buttonHtml;
+
+        if (showEditButtons) {
+            buttonHtml = `<button class="edit">…</button>`;
+        }
+        else {
+            buttonHtml = `<button class="heart">♥</button>`;
+        }
+
         div.innerHTML = `
-        <div class="empty"></div>
-        <div class="content">
-                <h1>${oneRecipe.name}</h1>
-                <p>${oneRecipe.description}</p>
-                <div class="info">
-                    <h2>${oneRecipe.time} min</h2>
-                    <h2>${oneRecipe.category}</h2>
-                    <h2>${oneRecipe.country}</h2>
+            <div class="author">${currentUser.username}</div>
+
+            <div class="image">
+                <img src="assets${oneRecipe.imageUrl}" alt="">
+            </div>
+
+            <div class="content">
+                <h1 class="recipeName">${oneRecipe.name}</h1>
+
+                <div class="stats">
+                    <h2><span class="miniEye"><img src="assets/icons/eye.jpg"></span>${oneRecipe.views}</h2>
+                    <h2><span class="miniHeart">♥</span>${oneRecipe.favoriteCount}</h2>
+                    <h2><span class="miniStar">★</span>${oneRecipe.averageRating}(${oneRecipe.ratingCount})</h2>
                 </div>
+
+                <div class="info">
+                    <p>${oneRecipe.time}min</p>
+                    <p>${oneRecipe.country}</p>
+                    <p>${oneRecipe.category}</p>
+                </div>
+
                 <div class="diets"></div>
-                <button class="edit">&bull;&bull;&bull;</button>
-        </div>`;
-        div.style.backgroundImage = `url(assets${oneRecipe.imageUrl})`
+
+                <div class="cardButtons">
+                    <button class="viewRecipe">Visa recept</button>
+                    ${buttonHtml}
+                </div>
+            </div>
+        `;
+
+        let button = div.querySelector(".heart");
+
+        if (button && oneRecipe.isFavourite) {
+            button.classList.add("fav");
+        }
 
         for (let diet of dietaries) {
             if (oneRecipe.dietary.includes(diet)) {
                 let diets = div.querySelector(".diets");
+
                 let img = document.createElement("img");
                 img.src = `assets/icons/${diet}.svg`;
                 img.classList.add("icon");
+
                 diets.appendChild(img);
             }
         }
+
         recipeContainer.appendChild(div);
         div.classList.add("card");
 
-        div.addEventListener("click", function (e) {
+        // Anpassar storleken på receptnamnet
+        let recipeName = div.querySelector(".recipeName");
+
+        let fontSize = 24;
+
+        recipeName.style.fontSize = fontSize + "px";
+
+        while (
+            recipeName.scrollWidth > recipeName.clientWidth &&
+            fontSize > 14
+        ) {
+            fontSize--;
+
+            recipeName.style.fontSize = fontSize + "px";
+        }
+
+        let view = div.querySelector(".viewRecipe");
+
+        view.addEventListener("click", function () {
             location.href = "/recipe/" + oneRecipe.id;
-        })
+        });
     }
+
     if (recipeContainer.children.length === 0) {
         recipeContainer.innerHTML = `<p id="notFound">Hittade inga recept</p>`;
     }
 
+    if (showEditButtons) {
+        openPopup();
+    }
+    else {
+        favorite();
+    }
 }
+
 function openPopup() {
     let buttons = document.querySelectorAll(".edit");
 

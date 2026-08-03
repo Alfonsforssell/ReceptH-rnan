@@ -1,13 +1,5 @@
 [
   {
-    "id": 1,
-    "userId": 1,
-    "recipeId": 3,
-    "text": "Fantastisk!",
-    "rating": 5,
-    "createdAt": "2026-07-30T15:05:24.302Z"
-  },
-  {
     "id": 2,
     "userId": 2,
     "recipeId": 3,
@@ -38,5 +30,29 @@
     "text": "svjsnvojwsnvowejnisfcvoijwnelrfviuenshr givuhtrseliguhvlrsieghrisetughvlisrughv blsreia guvhorueaoiguhferailughvglaieruhfnvile aruhgvfnliunligaleriogh7feriufghlaiufhlierufhal ierughvaleiughvfaleiuvrhfaleidughvblaeiruhgvflaeirghuv laeiuhgrvnbgaeliruhgvlieauvhaeliruvhaleigvufhareliuvhafeligfuvhrledigvuhaliguvhbeliugvhgaelrigvhuaerligvuhaerligfvuhgaebrligvuhbgaelirufvhbaleirugvhbglaeiurghvbleairuhgbvlgaiUBHI",
     "rating": 1,
     "createdAt": "2026-07-30T15:11:49.385Z"
+  },
+  {
+    "id": 6,
+    "userId": 7,
+    "recipeId": 7,
+    "text": "Detta va jättegott!\n",
+    "rating": 5,
+    "createdAt": "2026-07-30T15:19:05.072Z"
+  },
+  {
+    "id": 7,
+    "userId": 1,
+    "recipeId": 3,
+    "text": "Sämst",
+    "rating": 1,
+    "createdAt": "2026-07-30T15:57:06.744Z"
+  },
+  {
+    "id": 8,
+    "userId": 1,
+    "recipeId": 4,
+    "text": "D[lig",
+    "rating": 1,
+    "createdAt": "2026-08-03T10:12:18.925Z"
   }
 ]

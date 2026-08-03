@@ -47,7 +47,7 @@ function renderRecipe(recipe) {
     let buttonHtml;
 
     for (let diet of recipe.dietary) {
-        diets.push(`<p>${diet}</p>`);
+        diets.push(`<img src="/assets/icons/${diet}.svg">`);
     }
 
     for (let ingredient of recipe.ingredients) {
@@ -79,41 +79,48 @@ function renderRecipe(recipe) {
     }
 
     recipeContainer.innerHTML = `
-    <div id="image"><img src="/assets${recipe.imageUrl}" alt=""></div>
-    <div id="text">
-        ${buttonHtml}
-        <div id="description">
-            <h1>${recipe.name} <span>av ${getUserNameById(recipe.author)}</span></h1>
-            <h2>${recipe.description}</h2>
-            <div id="info">
-                <p>${recipe.category}</p>
-                <p>${recipe.time}min</p>
-                <p>${recipe.country}</p>
-                <p>👁️${recipe.views}</p>
-                <p>❤️${recipe.favoriteCount}</p>
-                <p>⭐${recipe.averageRating}(${recipe.ratingCount})</p>
+    <div class="recipeTop">
+        <div id="image"><img src="/assets${recipe.imageUrl}" alt=""></div>
+        <div id="text">
+            ${buttonHtml}
+            <div id="description">
+                <h1>${recipe.name} <span>av ${getUserNameById(recipe.author)}</span></h1>
+                <h2>${recipe.description}</h2>
+                <div id="info">
+                    <p>${recipe.time}min</p>
+                    <p>${recipe.country}</p>
+                    <p>${recipe.category}</p>
+                    <p>Skapad: ${recipe.createdAt.split("T")[0]}</p>
+                </div>
+                <div id="stats">
+                    <h2><span class="miniEye"><img src="/assets/icons/eye.jpg"></span>${recipe.views}</h2>
+                    <h2><span class="miniHeart">♥</span>${recipe.favoriteCount}</h2>
+                    <h2><span class="miniStar">★</span>${recipe.averageRating}(${recipe.ratingCount})</h2>
+                </div>
                 <div id="diets">
-                    ${diets.join("")}
+                        ${diets.join("")}
+                    </div>
+            </div>
+            <div id="cook">
+                <div id="amount">
+                    <button class="subtract">-</button>
+                    <button class="servings">${recipe.servings} portioner</button>
+                    <button class="add">+</button>
+                </div>
+                <div id="ingredients">
+                    <ul>
+                        ${ingred.join("")}
+                    </ul>
+                </div>
+                <div id="instructions">
+                    <ul>
+                        ${instru.join("")}
+                    </ul>
                 </div>
             </div>
         </div>
-        <div id="cook">
-            <div id="amount">
-                <button class="subtract">-</button>
-                <button class="servings">${recipe.servings} portioner</button>
-                <button class="add">+</button>
-            </div>
-            <div id="ingredients">
-                <ul>
-                    ${ingred.join("")}
-                </ul>
-            </div>
-            <div id="instructions">
-                <ul>
-                    ${instru.join("")}
-                </ul>
-            </div>
-        </div>
+    </div>
+    <div class="recipeBottom">
         <div class="ratingContainer">
             <h2><span>★</span>${recipe.averageRating} (${recipe.ratingCount})</h2>
             <p>Ditt betyg:</p>
@@ -130,10 +137,10 @@ function renderRecipe(recipe) {
         </div>
         <div class="commentsContainer">
             <h2>Recensioner</h2>
-            <div id="comments"></div>
             ${commentForm}
+            <div id="comments"></div>
         </div>
-    </div>
+    </div>        
     `
     recipeContainer.id = "recipeContainer";
     document.querySelector("main").appendChild(recipeContainer);
@@ -341,13 +348,23 @@ async function getComments() {
 function renderComments() {
     let container = document.getElementById("comments");
     container.innerHTML = "";
-
     if (comments.length === 0) {
-        container.innerHTML = "<p>Inga recensioner ännu.</p>";
+        container.innerHTML = "<p>Inga kommentarer ännu.</p>";
         return;
     }
 
-    for (let comment of comments) {
+    let displayedComments = [];
+    if (userComment) {
+        displayedComments.push(userComment);
+    }
+
+    let latestComments = comments
+        .filter(comment => !userComment || comment.id !== userComment.id)
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .slice(0, 5 - displayedComments.length);
+    displayedComments.push(...latestComments);
+
+    for (let comment of displayedComments) {
         let username = getUserNameById(comment.userId);
         let buttons = "";
         if (comment.userId === currentUser.id) {

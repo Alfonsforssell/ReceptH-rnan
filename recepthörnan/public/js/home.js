@@ -27,8 +27,8 @@ function getUserNameById(id) {
 
 function getPopularScore(recipe) {
     let views = recipe.views || 0;
-    let favourites = recipe.favourites || 0;
-    let rating = recipe.rating || 0;
+    let favourites = recipe.favoriteCount || 0;
+    let rating = recipe.averageRating || 0;
 
     return (
         views * 0.2 +
@@ -40,8 +40,8 @@ function getPopularScore(recipe) {
 
 function getDiscoverScore(recipe) {
     let views = recipe.views || 0;
-    let favourites = recipe.favourites || 0;
-    let rating = recipe.rating || 0;
+    let favourites = recipe.favoriteCount || 0;
+    let rating = recipe.averageRating || 0;
 
     return (
         rating * 50 -
@@ -50,10 +50,12 @@ function getDiscoverScore(recipe) {
     );
 }
 
+
 function sortRecipes(recipeList) {
     let sortedRecipes = [...recipeList];
 
     switch (currentSort) {
+
         case "popular":
             sortedRecipes.sort(function (a, b) {
                 return getPopularScore(b) - getPopularScore(a);
@@ -68,13 +70,13 @@ function sortRecipes(recipeList) {
 
         case "rating-desc":
             sortedRecipes.sort(function (a, b) {
-                return (b.rating || 0) - (a.rating || 0);
+                return (b.averageRating || 0) - (a.averageRating || 0);
             });
             break;
 
         case "rating-asc":
             sortedRecipes.sort(function (a, b) {
-                return (a.rating || 0) - (b.rating || 0);
+                return (a.averageRating || 0) - (b.averageRating || 0);
             });
             break;
 
@@ -140,55 +142,93 @@ function renderRecipes(filteredRecipes = sortRecipes(recipes)) {
         div.dataset.recipeId = oneRecipe.id;
 
         let buttonHtml;
+
         if (showEditButtons) {
             buttonHtml = `<button class="edit">…</button>`;
         }
         else {
             buttonHtml = `<button class="heart">♥</button>`;
         }
+
         div.innerHTML = `
-        <div class="empty"></div>
-        ${buttonHtml}
-        <div class="content">
-                <h1>${oneRecipe.name}</h1>
-                <p>${oneRecipe.description}</p>
-                <div class="info">
-                    <h2>${oneRecipe.time} min</h2>
-                    <h2>${oneRecipe.category}</h2>
-                    <h2>${oneRecipe.country}</h2>
-                    <a>@${getUserNameById(oneRecipe.author)}</a>
-                    <h2>👁️${oneRecipe.views}</h2>
-                    <h2>❤️${oneRecipe.favoriteCount}</h2>
-                    <h2>⭐${oneRecipe.averageRating}(${oneRecipe.ratingCount})</h2>
+            <div class="author">${getUserNameById(oneRecipe.author)}</div>
+
+            <div class="image">
+                <img src="assets${oneRecipe.imageUrl}" alt="">
+            </div>
+
+            <div class="content">
+                <h1 class="recipeName">${oneRecipe.name}</h1>
+
+                <div class="stats">
+                    <h2><span class="miniEye"><img src="assets/icons/eye.jpg"></span>${oneRecipe.views}</h2>
+                    <h2><span class="miniHeart">♥</span>${oneRecipe.favoriteCount}</h2>
+                    <h2><span class="miniStar">★</span>${oneRecipe.averageRating}(${oneRecipe.ratingCount})</h2>
                 </div>
+
+                <div class="info">
+                    <p>${oneRecipe.time}min</p>
+                    <p>${oneRecipe.country}</p>
+                    <p>${oneRecipe.category}</p>
+                </div>
+
                 <div class="diets"></div>
-        </div>`;
-        div.style.backgroundImage = `url(assets${oneRecipe.imageUrl})`
+
+                <div class="cardButtons">
+                    <button class="viewRecipe">Visa recept</button>
+                    ${buttonHtml}
+                </div>
+            </div>
+        `;
+
         let button = div.querySelector(".heart");
-        if (oneRecipe.isFavourite) {
+
+        if (button && oneRecipe.isFavourite) {
             button.classList.add("fav");
         }
 
         for (let diet of dietaries) {
             if (oneRecipe.dietary.includes(diet)) {
                 let diets = div.querySelector(".diets");
+
                 let img = document.createElement("img");
                 img.src = `assets/icons/${diet}.svg`;
                 img.classList.add("icon");
+
                 diets.appendChild(img);
             }
         }
+
         recipeContainer.appendChild(div);
         div.classList.add("card");
 
-        let content = div.querySelector(".content");
-        content.addEventListener("click", function (e) {
+        // Anpassar storleken på receptnamnet
+        let recipeName = div.querySelector(".recipeName");
+
+        let fontSize = 24;
+
+        recipeName.style.fontSize = fontSize + "px";
+
+        while (
+            recipeName.scrollWidth > recipeName.clientWidth &&
+            fontSize > 14
+        ) {
+            fontSize--;
+
+            recipeName.style.fontSize = fontSize + "px";
+        }
+
+        let view = div.querySelector(".viewRecipe");
+
+        view.addEventListener("click", function () {
             location.href = "/recipe/" + oneRecipe.id;
-        })
+        });
     }
+
     if (recipeContainer.children.length === 0) {
         recipeContainer.innerHTML = `<p id="notFound">Hittade inga recept</p>`;
     }
+
     if (showEditButtons) {
         openPopup();
     }
@@ -200,15 +240,26 @@ function renderRecipes(filteredRecipes = sortRecipes(recipes)) {
         currentSort = this.value;
         renderRecipes(sortRecipes(recipes));
     });
+}
 
+function sortOnChange() {
+    let select = document.getElementById("sortRecipes")
+    select.addEventListener("change", function () {
+        currentSort = this.value;
+        renderRecipes(sortRecipes(recipes));
+    });
 }
 
 function favorite() {
     let hearts = document.querySelectorAll(".heart");
+
     for (let heart of hearts) {
         heart.addEventListener("click", async function (e) {
             e.preventDefault();
-            let recipeId = Number(heart.closest("div").dataset.recipeId);
+            e.stopPropagation();
+
+            let recipeId = Number(heart.closest(".card").dataset.recipeId);
+
             let body = {
                 recipeId: recipeId
             };
@@ -219,9 +270,13 @@ function favorite() {
                     heart.classList.add("fav");
                 }
                 else {
-                    await api.deleteRequest("/api/favourites/" + recipeId, true);
+                    await api.deleteRequest(
+                        "/api/favourites/" + recipeId,
+                        true
+                    );
                     heart.classList.remove("fav");
                 }
+
                 await getData();
                 renderRecipes(recipes);
             }
@@ -263,56 +318,105 @@ function createForm() {
 
 async function updateRecipes() {
     let form = document.getElementById("filter");
+
     let countryValue = form.elements.country.value;
     let categoryValue = form.elements.category.value;
     let timeValue = form.elements.time.value;
     let dietaryValue = form.elements.preference.value;
     let favValue = form.elements.favs.value;
-
-    let queryParts = [];
-
-    if (!countryValue.includes("All")) {
-        queryParts.push("country=" + countryValue);
-    }
-
-    if (!categoryValue.includes("All")) {
-        queryParts.push("category=" + categoryValue);
-    }
-
-    if (!timeValue.includes("All")) {
-        queryParts.push("time=" + timeValue);
-    }
-
-    if (!dietaryValue.includes("All")) {
-        queryParts.push("dietary=" + dietaryValue);
-    }
-
-    if (favValue !== "All") {
-        queryParts.push("favs=" + favValue);
-    }
-
-    let queryString = queryParts.join("&");
-    let url = "/api/recipes";
-
-    if (queryString) {
-        url += "?" + queryString;
-    }
+    let searchValue = document.getElementById("searchValue").value
+        .trim()
+        .toLowerCase();
 
     try {
-        let recipes = await api.getRequest(url, true);
+        let allRecipes = await api.getRequest("/api/recipes", true);
+        let filteredRecipes = [];
+
+        for (let recipe of allRecipes) {
+
+            // Land
+            if (
+                countryValue !== "All countries" &&
+                recipe.country !== countryValue
+            ) {
+                continue;
+            }
+
+            // Kategori
+            if (
+                categoryValue !== "All categories" &&
+                recipe.category !== categoryValue
+            ) {
+                continue;
+            }
+
+            // Tid
+            if (timeValue !== "All") {
+                if (timeValue === "100" && recipe.time <= 60) {
+                    continue;
+                }
+
+                if (
+                    timeValue !== "100" &&
+                    recipe.time >= Number(timeValue)
+                ) {
+                    continue;
+                }
+            }
+
+            // Preferens
+            if (
+                dietaryValue !== "All" &&
+                !recipe.dietary.includes(dietaryValue)
+            ) {
+                continue;
+            }
+
+            // Favoriter
+            if (
+                favValue === "favorites" &&
+                !recipe.isFavourite
+            ) {
+                continue;
+            }
+
+            if (
+                favValue === "nonfavorites" &&
+                recipe.isFavourite
+            ) {
+                continue;
+            }
+
+            // Sökning
+            if (
+                searchValue !== "" &&
+                !recipe.name.toLowerCase().includes(searchValue)
+            ) {
+                continue;
+            }
+
+            filteredRecipes.push(recipe);
+        }
+
         showEditButtons = false;
-        renderRecipes(recipes);
-    } catch (err) {
-        console.log(err.message);
+
+        renderRecipes(sortRecipes(filteredRecipes));
+
+    }
+    catch (error) {
+        console.log(error);
     }
 }
 
-function submitFilters() {
+function filterOnChange() {
     let form = document.getElementById("filter");
-    form.addEventListener("submit", async function (e) {
-        e.preventDefault();
-        updateRecipes();
-    })
+    let selects = form.querySelectorAll("select");
+
+    for (let select of selects) {
+        select.addEventListener("change", function () {
+            updateRecipes();
+        });
+    }
 }
 
 async function removeFilters() {
@@ -361,23 +465,10 @@ async function showMyRecipes() {
 }
 
 function search() {
-    let search = document.getElementById("search");
-    search.addEventListener("submit", async function (e) {
-        e.preventDefault();
+    let searchInput = document.getElementById("searchValue");
 
-        let searchValue = document.getElementById("searchValue").value;
-        try {
-            let result;
-            if (searchValue.trim() === "") {
-                result = await api.getRequest("/api/recipes", true);
-            } else {
-                result = await api.getRequest("/api/recipes/search?q=" + encodeURIComponent(searchValue), true);
-            }
-            showEditButtons = false;
-            renderRecipes(result);
-        } catch (error) {
-            console.log(error);
-        }
+    searchInput.addEventListener("input", function () {
+        updateRecipes();
     });
 }
 
@@ -479,7 +570,7 @@ async function init() {
     }
     createForm();
     renderRecipes();
-    submitFilters();
+    filterOnChange();
     search();
     showFavorites();
     showMyRecipes();
@@ -487,6 +578,7 @@ async function init() {
     logout();
     closePopup();
     restorePopup();
+    sortOnChange();
 }
 
 init();

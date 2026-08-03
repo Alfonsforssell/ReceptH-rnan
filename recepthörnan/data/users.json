@@ -5,8 +5,9 @@
     "email": "alfons@example.com",
     "password": "123",
     "createdAt": "2026-07-16T10:00:00Z",
-    "sessionId": null,
+    "sessionId": "a94cdd14-713c-4eaf-90e8-d77c179435f8",
     "favourites": [
+      4,
       3
     ]
   },
@@ -43,7 +44,7 @@
     "email": "erik@example.com",
     "password": "password123",
     "createdAt": "2026-07-12T08:15:00Z",
-    "sessionId": "4556ab24-81ec-493f-8af7-b50570cb455f",
+    "sessionId": null,
     "favourites": []
   },
   {
@@ -54,5 +55,16 @@
     "sessionId": "827c2948-60e8-4362-a8bd-5b10425662d1",
     "favourites": [],
     "createdAt": "2026-07-19T13:33:47.447Z"
+  },
+  {
+    "email": "ihuhb",
+    "username": "nathalieloow",
+    "password": "Baloo2018",
+    "id": 7,
+    "sessionId": null,
+    "favourites": [
+      5
+    ],
+    "createdAt": "2026-07-30T15:15:49.200Z"
   }
 ]

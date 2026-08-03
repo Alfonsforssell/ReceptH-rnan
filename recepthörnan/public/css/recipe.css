@@ -20,7 +20,7 @@ html {
     --complementary: #F57C00;
     --link: #58A6FF;
     --error: #F85149;
-    --noFav: #A1A1AA;
+    --noFav: #85322e;
     --fav: #F85149;
 
     --text-light: hsl(0, 0%, 100%);
@@ -115,191 +115,342 @@ main {
         text-decoration: none;
     }
 
+    #overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.75);
+        z-index: 98;
+    }
+
+    #overlay.show {
+        display: block;
+    }
+
+
+
+    #editPopup {
+        width: 500px;
+        height: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: var(--bg-light);
+        color: var(--text-light);
+        position: fixed;
+        top: 50dvh;
+        left: 50dvw;
+        transform: translate(-50%, -50%);
+        z-index: 99;
+        border-radius: 10px;
+    }
+
+
+    #closePopup {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: var(--text-light);
+        font-weight: 800;
+        transition: all .5s ease;
+    }
+
+    #closePopup:hover {
+        transform: scale(1.2);
+    }
+
+    .popupContent {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        h2 {
+            font-size: 15px;
+            font-weight: 500;
+            position: relative;
+            bottom: 75px;
+            text-align: center;
+        }
+
+        #contentButtons {
+            display: flex;
+            gap: 50px;
+
+            button {
+                width: 150px;
+                height: 50px;
+                color: var(--text-light);
+                background-color: var(--bg);
+                border: none;
+                border-radius: 20px;
+                padding: 10px;
+                transition: all .5s ease;
+            }
+
+            button:hover {
+                transform: scale(1.05);
+                cursor: pointer;
+            }
+
+        }
+    }
+
     #recipeContainer {
         width: 100%;
         min-height: 700px;
         display: flex;
+        flex-direction: column;
         border-radius: 20px;
-        background-color: var(--bg-light);
-        align-items: stretch;
+        background-color: var(--bg);
+        align-items: flex-start;
 
-        #image {
-            width: 50%;
-
-            img {
-                display: block;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 20px 0 0 20px;
-            }
-        }
-
-        #text {
-            width: 50%;
-            padding: 50px;
+        .recipeTop {
             display: flex;
-            flex-direction: column;
-            align-items: start;
-            justify-content: start;
-            color: var(--text-light);
+            flex-direction: row;
+            width: 100%;
+            background-color: var(--bg-light);
+            border-radius: 20px;
 
-            #description {
+            #image {
+                width: 50%;
+                aspect-ratio: 1;
+
+                img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 20px 0 0 20px;
+                }
+            }
+
+            #text {
+                width: 50%;
+                padding: 50px;
                 display: flex;
                 flex-direction: column;
+                align-items: start;
+                justify-content: start;
+                color: var(--text-light);
 
-                h1 {
-                    font-size: 50px;
-                    margin-bottom: -10px;
-
-                    span {
-                        font-size: 25px;
-                        margin-left: 10px;
-                        font-weight: 200;
-                        color: var(--text-dark);
-                    }
-                }
-
-                h2 {
-                    font-size: 25px;
-                    font-weight: 400;
-                }
-
-                #info {
+                #description {
                     display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    font-size: 15px;
+                    flex-direction: column;
+
+                    h1 {
+                        font-size: 50px;
+                        margin-bottom: -10px;
+
+                        span {
+                            font-size: 25px;
+                            margin-left: 10px;
+                            font-weight: 200;
+                            color: var(--text-dark);
+                        }
+                    }
+
+                    h2 {
+                        font-size: 25px;
+                        font-weight: 400;
+                    }
+
+                    #info {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        font-size: 15px;
+                    }
 
                     #diets {
                         display: flex;
                         align-items: center;
                         gap: 10px;
-                    }
-                }
 
-            }
-
-            .edit {
-                background: none;
-                color: var(--text-light);
-                font-size: 50px;
-                border: none;
-                position: relative;
-                bottom: 60px;
-                left: 700px;
-            }
-
-            .edit:hover {
-                cursor: pointer;
-            }
-
-            .heart {
-                position: relative;
-                bottom: 50px;
-                left: 700px;
-                background-color: transparent;
-                border: none;
-                font-size: 50px;
-                color: var(--noFav);
-                -webkit-text-stroke: 2px black;
-            }
-
-            .heart:hover {
-                cursor: pointer;
-            }
-
-            .fav {
-                color: var(--fav)
-            }
-
-            #cook {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 50px 1fr;
-                padding: 50px;
-                justify-items: start;
-
-                #amount {
-                    grid-column: 1;
-                    grid-row: 1;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 0px;
-
-                    button {
-                        height: 25px;
-                        background-color: var(--dominant);
-                        color: var(--text-light);
-                        border: none;
-                        padding: 0px 5px;
-                    }
-
-                    .add,
-                    .subtract {
-                        cursor: pointer;
-                    }
-                }
-
-                #ingredients {
-                    grid-column: 1;
-                    grid-row: 2;
-                    margin-right: 10px;
-
-                    ul {
-                        li {
-                            list-style: none;
-                            font-size: 25px;
+                        img {
+                            width: 20px;
                         }
                     }
+
+                    #stats {
+                        display: flex;
+                        gap: 10px;
+                        margin: 5px 0px;
+
+                        .miniEye img {
+                            display: inline-block;
+                            height: 10px;
+                            margin-right: 5px;
+                            margin-top: -5px;
+                            position: relative;
+                            top: 1px;
+                        }
+
+                        .miniHeart {
+                            display: inline-block;
+                            font-size: 12.5px;
+                            margin-right: 5px;
+                            margin-top: -5px;
+                        }
+
+                        .miniStar {
+                            display: inline-block;
+                            font-size: 15px;
+                            margin-right: 5px;
+                            margin-top: -5px;
+                        }
+
+                        h2 {
+                            font-size: 15px;
+                        }
+                    }
+
                 }
 
-                #instructions {
-                    grid-column: 2;
-                    grid-row: 2;
+                .edit {
+                    background: none;
+                    color: var(--text-light);
+                    font-size: 50px;
+                    border: none;
+                    position: relative;
+                    bottom: 60px;
+                    left: 700px;
+                }
 
-                    ul {
-                        li {
-                            list-style: none;
-                            font-size: 20px;
-                            display: flex;
-                            align-items: flex-start;
-                            gap: 10px;
-                            margin-bottom: 10px;
+                .edit:hover {
+                    cursor: pointer;
+                }
 
-                            input[type="checkbox"] {
-                                appearance: none;
-                                -webkit-appearance: none;
-                                width: 20px;
-                                height: 20px;
-                                position: relative;
-                                border: 2px solid var(--dominant);
-                                border-radius: 50%;
-                                cursor: pointer;
-                                margin-right: 10px;
-                                flex-shrink: 0;
-                                margin-top: 6px;
-                            }
+                .heart {
+                    position: relative;
+                    bottom: 50px;
+                    left: 700px;
+                    background-color: transparent;
+                    border: none;
+                    font-size: 50px;
+                    color: var(--noFav);
+                    -webkit-text-stroke: 2px black;
+                }
 
-                            input[type="checkbox"]:checked {
-                                background-color: var(--dominant);
-                                content: "✓";
-                                color: white;
-                            }
+                .heart:hover {
+                    cursor: pointer;
+                }
 
-                            input[type="checkbox"]:checked::after {
-                                content: "✓";
-                                color: white;
-                                position: absolute;
-                                top: 50%;
-                                left: 50%;
-                                transform: translate(-50%, -55%);
+                .fav {
+                    color: var(--fav)
+                }
+
+                #cook {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-rows: 50px 1fr;
+                    padding: 50px;
+                    justify-items: start;
+
+                    #amount {
+                        grid-column: 1;
+                        grid-row: 1;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 0px;
+
+                        button {
+                            height: 25px;
+                            background-color: var(--dominant);
+                            color: var(--text-light);
+                            border: none;
+                            padding: 0px 5px;
+                        }
+
+                        .add,
+                        .subtract {
+                            cursor: pointer;
+                        }
+                    }
+
+                    #ingredients {
+                        grid-column: 1;
+                        grid-row: 2;
+                        margin-right: 10px;
+
+                        ul {
+                            li {
+                                list-style: none;
+                                font-size: 25px;
                             }
                         }
                     }
+
+                    #instructions {
+                        grid-column: 2;
+                        grid-row: 2;
+
+                        ul {
+                            li {
+                                list-style: none;
+                                font-size: 20px;
+                                display: flex;
+                                align-items: flex-start;
+                                gap: 10px;
+                                margin-bottom: 10px;
+
+                                input[type="checkbox"] {
+                                    appearance: none;
+                                    -webkit-appearance: none;
+                                    width: 20px;
+                                    height: 20px;
+                                    position: relative;
+                                    border: 2px solid var(--dominant);
+                                    border-radius: 50%;
+                                    cursor: pointer;
+                                    margin-right: 10px;
+                                    flex-shrink: 0;
+                                    margin-top: 6px;
+                                }
+
+                                input[type="checkbox"]:checked {
+                                    background-color: var(--dominant);
+                                    content: "✓";
+                                    color: white;
+                                }
+
+                                input[type="checkbox"]:checked::after {
+                                    content: "✓";
+                                    color: white;
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 50%;
+                                    transform: translate(-50%, -55%);
+                                }
+                            }
+                        }
+                    }
                 }
             }
+
+            #amount button:nth-child(1) {
+                aspect-ratio: 1/1;
+                border-radius: 50% 0px 0px 50%;
+                cursor: pointer;
+            }
+
+            #amount button:nth-child(3) {
+                aspect-ratio: 1/1;
+                border-radius: 0px 50% 50% 0px;
+                cursor: pointer;
+            }
+        }
+
+        .recipeBottom {
+            padding: 20px;
+            color: var(--text-light);
+            width: 100%;
+            background-color: var(--bg);
 
             .commentsContainer {
                 width: 100%;
@@ -322,7 +473,7 @@ main {
                     }
 
                     .comment {
-                        background-color: var(--bg);
+                        background-color: var(--bg-light);
                         padding: 10px;
                         border-radius: 20px;
                         display: flex;
@@ -335,7 +486,7 @@ main {
                         p {
                             font-size: 20px;
                             font-weight: 900;
-                            max-width: 700px;
+                            max-width: 90%;
                         }
 
                         small {
@@ -424,153 +575,57 @@ main {
                     transition: .25s;
                 }
             }
-        }
 
-        .ratingContainer {
-            width: 100%;
 
-            h2 {
-                font-size: 25px;
-                letter-spacing: 3px;
+            .ratingContainer {
+                width: 100%;
 
-                span {
-                    font-size: 40px;
+                h2 {
+                    font-size: 25px;
+                    letter-spacing: 3px;
+
+                    span {
+                        font-size: 40px;
+                    }
                 }
-            }
 
-            p {
-                font-size: 15px;
-                letter-spacing: 3px;
-            }
+                p {
+                    font-size: 15px;
+                    letter-spacing: 3px;
+                }
 
-            .stars {
-                display: flex;
-                gap: 10px;
+                .stars {
+                    display: flex;
+                    gap: 10px;
 
-                span {
-                    font-size: 50px;
+                    span {
+                        font-size: 50px;
+                        cursor: pointer;
+                        margin: -15px 0px 0px 0px;
+                        color: var(--text-light);
+                    }
+
+                    .rated {
+                        color: var(--dominant);
+                    }
+                }
+
+                #ratingButtons {
+                    display: flex;
+                    gap: 20px;
+                }
+
+                #sendRating,
+                #deleteRating {
+                    padding: 10px 18px;
+                    border: none;
+                    border-radius: 12px;
+                    background: var(--dominant);
+                    color: white;
                     cursor: pointer;
-                    margin: -15px 0px 0px 0px;
-                    color: var(--text-light);
-                }
-
-                .rated {
-                    color: var(--dominant);
+                    transition: .25s;
                 }
             }
-
-            #ratingButtons {
-                display: flex;
-                gap: 20px;
-            }
-
-            #sendRating,
-            #deleteRating {
-                padding: 10px 18px;
-                border: none;
-                border-radius: 12px;
-                background: var(--dominant);
-                color: white;
-                cursor: pointer;
-                transition: .25s;
-            }
-        }
-
-        #amount button:nth-child(1) {
-            aspect-ratio: 1/1;
-            border-radius: 50% 0px 0px 50%;
-            cursor: pointer;
-        }
-
-        #amount button:nth-child(3) {
-            aspect-ratio: 1/1;
-            border-radius: 0px 50% 50% 0px;
-            cursor: pointer;
-        }
-    }
-
-    #overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background-color: rgba(0, 0, 0, 0.75);
-        z-index: 98;
-    }
-
-    #overlay.show {
-        display: block;
-    }
-
-
-
-    #editPopup {
-        width: 500px;
-        height: 250px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        background-color: var(--bg-light);
-        color: var(--text-light);
-        position: fixed;
-        top: 50dvh;
-        left: 50dvw;
-        transform: translate(-50%, -50%);
-        z-index: 99;
-        border-radius: 10px;
-    }
-
-
-    #closePopup {
-        position: absolute;
-        top: 15px;
-        right: 20px;
-        background: none;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-        color: var(--text-light);
-        font-weight: 800;
-        transition: all .5s ease;
-    }
-
-    #closePopup:hover {
-        transform: scale(1.2);
-    }
-
-    .popupContent {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        h2 {
-            font-size: 15px;
-            font-weight: 500;
-            position: relative;
-            bottom: 75px;
-            text-align: center;
-        }
-
-        #contentButtons {
-            display: flex;
-            gap: 50px;
-
-            button {
-                width: 150px;
-                height: 50px;
-                color: var(--text-light);
-                background-color: var(--bg);
-                border: none;
-                border-radius: 20px;
-                padding: 10px;
-                transition: all .5s ease;
-            }
-
-            button:hover {
-                transform: scale(1.05);
-                cursor: pointer;
-            }
-
         }
     }
 }

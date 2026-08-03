@@ -6,7 +6,7 @@
       "name": "Classic Pancakes",
       "description": "Fluffy homemade pancakes.",
       "country": "USA",
-      "category": "Breakfast",
+      "category": "Frukost",
       "time": 20,
       "dietary": [
         "Vegansk"
@@ -14,19 +14,19 @@
       "servings": 2,
       "ingredients": [
         {
-          "name": "Flour",
           "amount": 300,
-          "unit": "g"
+          "unit": "g",
+          "name": "Flour"
         },
         {
-          "name": "Milk",
           "amount": 500,
-          "unit": "ml"
+          "unit": "ml",
+          "name": "Milk"
         },
         {
-          "name": "Egg",
           "amount": 2,
-          "unit": "pcs"
+          "unit": "st",
+          "name": "Egg"
         }
       ],
       "instructions": [
@@ -36,7 +36,7 @@
       ],
       "imageUrl": "/images/pancakes.jpg",
       "createdAt": "2026-03-29T15:34:53.549Z",
-      "views": 2
+      "views": 16
     },
     {
       "id": 2,
@@ -67,7 +67,7 @@
       ],
       "imageUrl": "/images/curry.jpg",
       "createdAt": "2026-04-20T15:34:53.549Z",
-      "views": 22
+      "views": 43
     },
     {
       "id": 3,
@@ -101,7 +101,7 @@
       ],
       "imageUrl": "/images/salad.jpg",
       "createdAt": "2026-03-19T15:34:53.549Z",
-      "views": 373
+      "views": 494
     },
     {
       "id": 4,
@@ -134,7 +134,7 @@
       ],
       "imageUrl": "/images/cake.jpg",
       "createdAt": "2026-02-01T15:34:53.549Z",
-      "views": 0
+      "views": 9
     },
     {
       "id": 5,
@@ -165,7 +165,7 @@
       ],
       "imageUrl": "/images/sushi.jpg",
       "createdAt": "2025-10-29T15:34:53.549Z",
-      "views": 4
+      "views": 6
     },
     {
       "name": "test",
@@ -202,7 +202,7 @@
       "id": 6,
       "author": 1,
       "createdAt": "2026-07-28T15:34:53.549Z",
-      "views": 5
+      "views": 9
     },
     {
       "name": "Korv Stroganoff",
@@ -263,7 +263,476 @@
       "id": 7,
       "author": 1,
       "createdAt": "2026-07-29T16:56:33.919Z",
-      "views": 0
+      "views": 2
+    },
+    {
+      "id": 8,
+      "author": 2,
+      "name": "Avocado Toast",
+      "description": "Simple and creamy avocado toast with lemon and chili.",
+      "country": "USA",
+      "category": "Frukost",
+      "time": 10,
+      "dietary": [
+        "Vegansk",
+        "Köttfri"
+      ],
+      "servings": 2,
+      "ingredients": [
+        {
+          "amount": 2,
+          "unit": "skivor",
+          "name": "Bröd"
+        },
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Avokado"
+        },
+        {
+          "amount": 0.5,
+          "unit": "st",
+          "name": "Citron"
+        },
+        {
+          "amount": 1,
+          "unit": "krm",
+          "name": "Chiliflakes"
+        }
+      ],
+      "instructions": [
+        "Rosta brödet.",
+        "Mosa avokadon och blanda med lite citronsaft.",
+        "Bred avokadon på brödet och toppa med chiliflakes."
+      ],
+      "imageUrl": "/images/pancakes.jpg",
+      "createdAt": "2026-05-02T10:20:00.000Z",
+      "views": 88
+    },
+    {
+      "id": 9,
+      "author": 3,
+      "name": "Butter Chicken",
+      "description": "Creamy Indian chicken cooked in a rich tomato sauce.",
+      "country": "India",
+      "category": "Middag",
+      "time": 50,
+      "dietary": [
+        "Glutenfri"
+      ],
+      "servings": 4,
+      "ingredients": [
+        {
+          "amount": 500,
+          "unit": "g",
+          "name": "Kyckling"
+        },
+        {
+          "amount": 400,
+          "unit": "g",
+          "name": "Krossade tomater"
+        },
+        {
+          "amount": 2,
+          "unit": "dl",
+          "name": "Grädde"
+        },
+        {
+          "amount": 2,
+          "unit": "msk",
+          "name": "Currypasta"
+        },
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Gul lök"
+        }
+      ],
+      "instructions": [
+        "Skär kycklingen i mindre bitar.",
+        "Stek kyckling och lök tills kycklingen fått färg.",
+        "Tillsätt currypasta och krossade tomater.",
+        "Häll i grädden och låt sjuda i cirka 15 minuter.",
+        "Servera med ris."
+      ],
+      "imageUrl": "/images/curry.jpg",
+      "createdAt": "2026-04-15T14:30:00.000Z",
+      "views": 342
+    },
+    {
+      "id": 10,
+      "author": 4,
+      "name": "Caprese Salad",
+      "description": "Fresh Italian salad with tomatoes, mozzarella and basil.",
+      "country": "Italien",
+      "category": "Lunch",
+      "time": 10,
+      "dietary": [
+        "Köttfri",
+        "Glutenfri"
+      ],
+      "servings": 2,
+      "ingredients": [
+        {
+          "amount": 3,
+          "unit": "st",
+          "name": "Tomater"
+        },
+        {
+          "amount": 125,
+          "unit": "g",
+          "name": "Mozzarella"
+        },
+        {
+          "amount": 10,
+          "unit": "blad",
+          "name": "Basilika"
+        },
+        {
+          "amount": 1,
+          "unit": "msk",
+          "name": "Olivolja"
+        }
+      ],
+      "instructions": [
+        "Skiva tomater och mozzarella.",
+        "Varva tomat och mozzarella på ett fat.",
+        "Toppa med basilika och olivolja."
+      ],
+      "imageUrl": "/images/salad.jpg",
+      "createdAt": "2026-06-01T09:15:00.000Z",
+      "views": 156
+    },
+    {
+      "id": 11,
+      "author": 5,
+      "name": "Chocolate Brownies",
+      "description": "Soft and fudgy chocolate brownies with a rich chocolate flavor.",
+      "country": "USA",
+      "category": "Dessert",
+      "time": 35,
+      "dietary": [
+        "Köttfri"
+      ],
+      "servings": 8,
+      "ingredients": [
+        {
+          "amount": 150,
+          "unit": "g",
+          "name": "Smör"
+        },
+        {
+          "amount": 200,
+          "unit": "g",
+          "name": "Socker"
+        },
+        {
+          "amount": 100,
+          "unit": "g",
+          "name": "Mjöl"
+        },
+        {
+          "amount": 50,
+          "unit": "g",
+          "name": "Kakao"
+        },
+        {
+          "amount": 2,
+          "unit": "st",
+          "name": "Ägg"
+        }
+      ],
+      "instructions": [
+        "Smält smöret.",
+        "Blanda ner socker och ägg.",
+        "Tillsätt mjöl och kakao.",
+        "Häll smeten i en form.",
+        "Grädda i 175 grader i cirka 20 minuter."
+      ],
+      "imageUrl": "/images/cake.jpg",
+      "createdAt": "2026-05-20T18:45:00.000Z",
+      "views": 623
+    },
+    {
+      "id": 12,
+      "author": 2,
+      "name": "Salmon Sushi",
+      "description": "Homemade sushi rolls with fresh salmon and creamy avocado.",
+      "country": "Japan",
+      "category": "Middag",
+      "time": 55,
+      "dietary": [],
+      "servings": 3,
+      "ingredients": [
+        {
+          "amount": 300,
+          "unit": "g",
+          "name": "Sushiris"
+        },
+        {
+          "amount": 200,
+          "unit": "g",
+          "name": "Lax"
+        },
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Avokado"
+        },
+        {
+          "amount": 4,
+          "unit": "st",
+          "name": "Noriark"
+        }
+      ],
+      "instructions": [
+        "Koka sushiriset enligt förpackningen.",
+        "Skär lax och avokado i tunna stavar.",
+        "Lägg ett noriark på en bambumatta.",
+        "Fördela ris, lax och avokado över arket.",
+        "Rulla ihop och skär i bitar."
+      ],
+      "imageUrl": "/images/sushi.jpg",
+      "createdAt": "2026-03-10T12:00:00.000Z",
+      "views": 43
+    },
+    {
+      "id": 13,
+      "author": 6,
+      "name": "Blueberry Pancakes",
+      "description": "Fluffy pancakes filled with fresh blueberries.",
+      "country": "USA",
+      "category": "Frukost",
+      "time": 25,
+      "dietary": [
+        "Köttfri"
+      ],
+      "servings": 3,
+      "ingredients": [
+        {
+          "amount": 250,
+          "unit": "g",
+          "name": "Mjöl"
+        },
+        {
+          "amount": 3,
+          "unit": "dl",
+          "name": "Mjölk"
+        },
+        {
+          "amount": 2,
+          "unit": "st",
+          "name": "Ägg"
+        },
+        {
+          "amount": 100,
+          "unit": "g",
+          "name": "Blåbär"
+        }
+      ],
+      "instructions": [
+        "Blanda mjöl, mjölk och ägg till en jämn smet.",
+        "Vänd försiktigt ner blåbären.",
+        "Stek pannkakorna i en varm stekpanna.",
+        "Servera med blåbär och lönnsirap."
+      ],
+      "imageUrl": "/images/pancakes.jpg",
+      "createdAt": "2026-06-15T08:30:00.000Z",
+      "views": 214
+    },
+    {
+      "id": 14,
+      "author": 3,
+      "name": "Thai Red Curry",
+      "description": "Spicy and creamy Thai curry with vegetables.",
+      "country": "Thailand",
+      "category": "Middag",
+      "time": 40,
+      "dietary": [
+        "Vegansk",
+        "Glutenfri"
+      ],
+      "servings": 4,
+      "ingredients": [
+        {
+          "amount": 400,
+          "unit": "ml",
+          "name": "Kokosmjölk"
+        },
+        {
+          "amount": 2,
+          "unit": "msk",
+          "name": "Röd currypasta"
+        },
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Paprika"
+        },
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Morot"
+        },
+        {
+          "amount": 150,
+          "unit": "g",
+          "name": "Broccoli"
+        }
+      ],
+      "instructions": [
+        "Stek currypastan i lite olja.",
+        "Tillsätt kokosmjölk och låt koka upp.",
+        "Lägg i grönsakerna.",
+        "Låt sjuda tills grönsakerna är mjuka.",
+        "Servera med ris."
+      ],
+      "imageUrl": "/images/curry.jpg",
+      "createdAt": "2026-04-28T16:00:00.000Z",
+      "views": 389
+    },
+    {
+      "id": 15,
+      "author": 4,
+      "name": "Greek Feta Bowl",
+      "description": "Fresh Mediterranean bowl with vegetables, feta and herbs.",
+      "country": "Greece",
+      "category": "Lunch",
+      "time": 15,
+      "dietary": [
+        "Köttfri",
+        "Glutenfri"
+      ],
+      "servings": 2,
+      "ingredients": [
+        {
+          "amount": 2,
+          "unit": "st",
+          "name": "Tomater"
+        },
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Gurka"
+        },
+        {
+          "amount": 150,
+          "unit": "g",
+          "name": "Fetaost"
+        },
+        {
+          "amount": 50,
+          "unit": "g",
+          "name": "Oliver"
+        }
+      ],
+      "instructions": [
+        "Skär tomater och gurka.",
+        "Smula fetaosten.",
+        "Lägg alla ingredienser i en skål.",
+        "Toppa med olivolja och örter."
+      ],
+      "imageUrl": "/images/salad.jpg",
+      "createdAt": "2026-05-30T11:45:00.000Z",
+      "views": 98
+    },
+    {
+      "id": 16,
+      "author": 5,
+      "name": "Swedish Chocolate Cake",
+      "description": "Classic Swedish sticky chocolate cake with a soft center.",
+      "country": "Sverige",
+      "category": "Dessert",
+      "time": 30,
+      "dietary": [
+        "Köttfri"
+      ],
+      "servings": 8,
+      "ingredients": [
+        {
+          "amount": 150,
+          "unit": "g",
+          "name": "Smör"
+        },
+        {
+          "amount": 3,
+          "unit": "dl",
+          "name": "Socker"
+        },
+        {
+          "amount": 2,
+          "unit": "st",
+          "name": "Ägg"
+        },
+        {
+          "amount": 1.5,
+          "unit": "dl",
+          "name": "Mjöl"
+        },
+        {
+          "amount": 4,
+          "unit": "msk",
+          "name": "Kakao"
+        }
+      ],
+      "instructions": [
+        "Smält smöret.",
+        "Blanda ner socker och ägg.",
+        "Tillsätt mjöl och kakao.",
+        "Häll smeten i en smord form.",
+        "Grädda i 175 grader i cirka 15–20 minuter."
+      ],
+      "imageUrl": "/images/cake.jpg",
+      "createdAt": "2026-06-20T17:20:00.000Z",
+      "views": 517
+    },
+    {
+      "id": 17,
+      "author": 6,
+      "name": "Spicy Salmon Sushi",
+      "description": "Fresh sushi rolls with spicy salmon and avocado.",
+      "country": "Japan",
+      "category": "Lunch",
+      "time": 65,
+      "dietary": [],
+      "servings": 2,
+      "ingredients": [
+        {
+          "amount": 250,
+          "unit": "g",
+          "name": "Sushiris"
+        },
+        {
+          "amount": 150,
+          "unit": "g",
+          "name": "Lax"
+        },
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Avokado"
+        },
+        {
+          "amount": 3,
+          "unit": "st",
+          "name": "Noriark"
+        },
+        {
+          "amount": 1,
+          "unit": "msk",
+          "name": "Sriracha"
+        }
+      ],
+      "instructions": [
+        "Koka sushiriset.",
+        "Blanda laxen med sriracha.",
+        "Lägg ris, lax och avokado på noriarken.",
+        "Rulla ihop och skär i bitar.",
+        "Servera med soja."
+      ],
+      "imageUrl": "/images/sushi.jpg",
+      "createdAt": "2026-02-15T13:10:00.000Z",
+      "views": 31
     }
   ]
 }

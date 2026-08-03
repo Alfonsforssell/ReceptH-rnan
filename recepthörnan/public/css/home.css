@@ -20,8 +20,9 @@ html {
     --complementary: #F57C00;
     --link: #58A6FF;
     --error: #F85149;
-    --noFav: #A1A1AA;
+    --noFav: #85322e;
     --fav: #F85149;
+    --background: hsla(0, 0%, 90%, 0.75);
 
     --text-light: hsl(0, 0%, 100%);
     --text: hsl(0, 0%, 90%);
@@ -29,7 +30,7 @@ html {
 
     --bg-dark: hsl(0, 0%, 0%);
     --bg: hsl(0, 0%, 15%);
-    --bg-light: hsl(0, 0%, 30%);
+    --bg-light: hsl(0, 0%, 20%);
 }
 
 body {
@@ -197,43 +198,54 @@ header {
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 100%;
-    padding: 20px;
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
 
-    form {
+    #filter {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        width: 75%;
-        margin: 5px;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+        gap: 20px;
+        width: 25%;
+        padding: 20px;
+        color: var(--text-light);
+        background-color: var(--bg-light);
+        margin: 50px 0px 0px 0px;
+        border-radius: 0px 20px 0px 0px;
 
-        select {
-            flex: 1;
-            aspect-ratio: 5/1;
+        h2 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: -15px;
+        }
+
+        select,
+        button,
+        input {
+            width: 100%;
+            height: 40px;
             border-radius: 10px;
             font-weight: 800;
             padding: 10px;
             border: none;
             background-color: var(--dominant);
-            color: var(--bg);
+            color: var(--bg-light);
             cursor: pointer;
         }
 
+        #formButtons {
+            width: 100%;
+        }
+
         button {
-            width: 10%;
-            aspect-ratio: 4/1;
-            border-radius: 10px;
-            font-weight: 800;
-            padding: 10px;
-            border: none;
-            background-color: var(--dominant);
-            color: var(--bg);
+            background-color: var(--complementary);
             transition: all .5s ease;
+            width: 100%;
+            aspect-ratio: 8/1;
+            font-size: 12.5px;
         }
 
         button:hover {
@@ -243,6 +255,17 @@ main {
 
         button:active {
             transform: scale(.8);
+        }
+
+        #removeFilters {
+            color: var(--complementary);
+            background-color: transparent;
+            border: 2.5px solid var(--complementary);
+        }
+
+        #searchValue {
+            cursor: text;
+            min-height: 35px;
         }
     }
 
@@ -269,7 +292,7 @@ main {
 
     #recipeContainer {
         width: 75%;
-        margin: 50px auto;
+        margin: 50px;
         position: relative;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -278,134 +301,129 @@ main {
         background-position: center;
         gap: 20px;
 
-        .content {
-            width: 100%;
-            height: 50%;
-            padding: 90px 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background: linear-gradient(transparent, rgba(0, 0, 0, .85) 25%);
-        }
-
-        a {
-            text-decoration: none;
-        }
-
         .card {
-            width: 100%;
-            aspect-ratio: 1/1.1;
             display: flex;
             flex-direction: column;
+            justify-content: space-evenly;
             align-items: start;
-            justify-content: space-between;
-            color: var(--text-light);
-            background-color: var(--bg-light);
-            border-radius: 10px;
-            background-position: center;
-            background-size: cover;
             position: relative;
-            transition: all .5s ease;
-            border-radius: 20px 20px 0px 0px;
+            background-color: var(--bg-light);
+            border-radius: 20px;
+            padding: 10px;
 
-            img {
+            .author {
+                font-size: 15px;
+                border: 2px solid var(--bg-dark);
+                border-radius: 10px;
+                background-color: var(--background);
+                color: var(--bg-dark);
+                padding: 5px;
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                font-weight: 500;
+            }
+
+            .image img {
                 width: 100%;
                 aspect-ratio: 1.5/1;
+                height: 100%;
                 object-fit: cover;
-                object-position: center;
-                border-radius: 10px 10px 0px 0px;
+                border-radius: 10px;
             }
 
             .content {
-                cursor: pointer;
-            }
-
-            h1,
-            p {
-                margin-left: 10px;
-                letter-spacing: 2px;
-                line-height: 1.3;
-            }
-
-            p {
-                font-size: 10px;
-            }
-
-            h1 {
-                font-size: 30px;
-            }
-
-            .info {
+                width: 100%;
+                height: 100%;
+                padding: 0px 10px;
                 display: flex;
-                justify-content: start;
-                align-items: center;
-                gap: 10px;
-                margin: 10px 0px 0px 5px;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: start;
+                color: var(--text-light);
 
-                h2 {
-                    font-size: 10px;
-                    padding: 5px;
-                    color: var(--text-light);
+                .recipeName {
+                    width: 100%;
+                    white-space: nowrap;
                 }
 
-                a {
-                    border: 2px solid var(--text-light);
-                    border-radius: 10px;
-                    font-size: 10px;
-                    padding: 5px;
-                    color: var(--text-light);
-                    background-color: var(--bg);
+                .stats {
+                    display: flex;
+                    gap: 10px;
+
+                    h2 {
+                        font-size: 10px;
+                        font-weight: 500;
+                        color: var(--text-dark);
+                    }
+
+                    .miniEye img {
+                        display: inline-block;
+                        height: 10px;
+                        margin-right: 5px;
+                        margin-top: -5px;
+                        position: relative;
+                        top: 1px;
+                    }
+
+                    .miniHeart {
+                        display: inline-block;
+                        font-size: 12.5px;
+                        margin-right: 5px;
+                        margin-top: -5px;
+                    }
+
+                    .miniStar {
+                        display: inline-block;
+                        font-size: 15px;
+                        margin-right: 5px;
+                        margin-top: -5px;
+                    }
                 }
-            }
 
-            .diets {
-                display: flex;
-                justify-content: start;
-                align-items: center;
-                gap: 10px;
-                padding: 20px 10px;
-                height: 20px;
+                .info {
+                    display: flex;
+                    gap: 10px;
+                    margin: 10px 0px;
+                }
 
-                .icon {
-                    width: 20px;
+                .diets {
+                    display: flex;
+                    gap: 10px;
                     height: 20px;
+
+                    .icon {
+                        height: 20px;
+                    }
                 }
-            }
 
-            .heart {
-                position: relative;
-                bottom: 90px;
-                left: 350px;
-                background-color: transparent;
-                border: none;
-                font-size: 40px;
-                color: var(--noFav);
-                -webkit-text-stroke: 2px black;
-                cursor: pointer;
-            }
+                .cardButtons {
+                    display: grid;
+                    grid-template-columns: 5fr 1fr;
+                    gap: 10px;
+                    width: 100%;
+                    margin: 10px 0px;
 
-            .fav {
-                color: var(--fav)
-            }
+                    button {
+                        height: 40px;
+                        border: none;
+                        border-radius: 10px;
+                        background-color: var(--dominant);
+                        color: var(--text-light);
+                        cursor: pointer;
+                        font-size: 20px;
+                    }
 
-            .edit {
-                height: 40px;
-                width: 40px;
-                padding: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                position: absolute;
-                top: 10px;
-                right: 15px;
-                border: none;
-                font-size: 20px;
-                text-align: center;
-                z-index: 5;
-                background-color: var(--text-light);
-                border-radius: 50%;
-                cursor: pointer;
-                border: 2px solid var(--bg-light);
+                    .heart {
+                        color: var(--noFav);
+                        font-size: 25px;
+                        background-color: var(--dominant);
+                    }
+
+                    .fav {
+                        color: var(--fav);
+                    }
+                }
             }
         }
 
