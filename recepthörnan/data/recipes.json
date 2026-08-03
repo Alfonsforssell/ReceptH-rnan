@@ -3,736 +3,1014 @@
     {
       "id": 1,
       "author": 1,
-      "name": "Classic Pancakes",
-      "description": "Fluffy homemade pancakes.",
-      "country": "USA",
-      "category": "Frukost",
-      "time": 20,
-      "dietary": [
-        "Vegansk"
-      ],
-      "servings": 2,
-      "ingredients": [
-        {
-          "amount": 300,
-          "unit": "g",
-          "name": "Flour"
-        },
-        {
-          "amount": 500,
-          "unit": "ml",
-          "name": "Milk"
-        },
-        {
-          "amount": 2,
-          "unit": "st",
-          "name": "Egg"
-        }
-      ],
-      "instructions": [
-        "Mix the ingredients.",
-        "Heat a frying pan.",
-        "Cook until golden."
-      ],
-      "imageUrl": "/images/pancakes.jpg",
-      "createdAt": "2026-03-29T15:34:53.549Z",
-      "views": 16
-    },
-    {
-      "id": 2,
-      "author": 1,
-      "name": "Chicken Curry",
-      "description": "Creamy chicken curry.",
-      "country": "India",
-      "category": "Dinner",
-      "time": 45,
-      "dietary": [],
-      "servings": 2,
-      "ingredients": [
-        {
-          "name": "Chicken",
-          "amount": 500,
-          "unit": "g"
-        },
-        {
-          "name": "Curry paste",
-          "amount": 2,
-          "unit": "tbsp"
-        }
-      ],
-      "instructions": [
-        "Cook the chicken.",
-        "Add curry paste.",
-        "Simmer."
-      ],
-      "imageUrl": "/images/curry.jpg",
-      "createdAt": "2026-04-20T15:34:53.549Z",
-      "views": 43
-    },
-    {
-      "id": 3,
-      "author": 3,
-      "name": "Greek Salad",
-      "description": "Fresh summer salad.",
-      "country": "Greece",
-      "category": "Lunch",
-      "time": 10,
-      "dietary": [
-        "Vegansk",
-        "Glutenfri"
-      ],
-      "servings": 2,
-      "ingredients": [
-        {
-          "name": "Tomatoes",
-          "amount": 3,
-          "unit": "pcs"
-        },
-        {
-          "name": "Feta cheese",
-          "amount": 150,
-          "unit": "g"
-        }
-      ],
-      "instructions": [
-        "Chop vegetables.",
-        "Mix together.",
-        "Serve."
-      ],
-      "imageUrl": "/images/salad.jpg",
-      "createdAt": "2026-03-19T15:34:53.549Z",
-      "views": 494
-    },
-    {
-      "id": 4,
-      "author": 4,
-      "name": "Chocolate Cake",
-      "description": "Rich chocolate cake.",
-      "country": "Sweden",
-      "category": "Dessert",
-      "time": 70,
-      "dietary": [
-        "Vegansk"
-      ],
-      "servings": 2,
-      "ingredients": [
-        {
-          "name": "Flour",
-          "amount": 250,
-          "unit": "g"
-        },
-        {
-          "name": "Cocoa",
-          "amount": 50,
-          "unit": "g"
-        }
-      ],
-      "instructions": [
-        "Mix ingredients.",
-        "Bake.",
-        "Cool before serving."
-      ],
-      "imageUrl": "/images/cake.jpg",
-      "createdAt": "2026-02-01T15:34:53.549Z",
-      "views": 9
-    },
-    {
-      "id": 5,
-      "author": 5,
-      "name": "Sushi Rolls",
-      "description": "Homemade sushi.",
-      "country": "Japan",
-      "category": "Dinner",
-      "time": 60,
-      "dietary": [],
-      "servings": 2,
-      "ingredients": [
-        {
-          "name": "Sushi rice",
-          "amount": 300,
-          "unit": "g"
-        },
-        {
-          "name": "Salmon",
-          "amount": 200,
-          "unit": "g"
-        }
-      ],
-      "instructions": [
-        "Cook rice.",
-        "Roll sushi.",
-        "Slice and serve."
-      ],
-      "imageUrl": "/images/sushi.jpg",
-      "createdAt": "2025-10-29T15:34:53.549Z",
-      "views": 6
-    },
-    {
-      "name": "test",
-      "description": "test",
-      "category": "Frukost",
-      "time": 10,
-      "country": "Swe",
-      "servings": 3,
-      "dietary": [
-        "Fiskfri",
-        "Glutenfri",
-        "Laktosfri",
-        "Köttfri",
-        "Halal",
-        "Hälsokost"
-      ],
-      "ingredients": [
-        {
-          "amount": 100,
-          "unit": "g",
-          "name": "bajs"
-        },
-        {
-          "amount": 4,
-          "unit": "",
-          "name": "hej"
-        }
-      ],
-      "instructions": [
-        "bajs",
-        "kiss"
-      ],
-      "imageUrl": "/uploads/99a778f7-bd26-4414-a61a-321d9acb4225.jpg",
-      "id": 6,
-      "author": 1,
-      "createdAt": "2026-07-28T15:34:53.549Z",
-      "views": 9
-    },
-    {
-      "name": "Korv Stroganoff",
-      "description": "Korvstroganoff är en lättlagad och välsmakande korvgryta med bland annat falukorv, lök, grädde och tomatpuré som passar bra som vardagsmiddag. Servera korvstroganoffen med kokt ris.",
+      "name": "Korvstroganoff med ris",
+      "description": "En krämig och lättlagad korvgryta med falukorv, lök och tomat som passar bra till vardags.",
+      "country": "Sverige",
       "category": "Middag",
       "time": 30,
-      "country": "Sverige",
-      "servings": 2,
       "dietary": [
         "Fiskfri"
-      ],
-      "ingredients": [
-        {
-          "amount": 2,
-          "unit": "dl",
-          "name": "Ris"
-        },
-        {
-          "amount": 275,
-          "unit": "g",
-          "name": "Falukorv"
-        },
-        {
-          "amount": 0.5,
-          "unit": "st",
-          "name": "Lök"
-        },
-        {
-          "amount": 1.25,
-          "unit": "dl",
-          "name": "Grädde"
-        },
-        {
-          "amount": 0.5,
-          "unit": "dl",
-          "name": "Mjölk"
-        },
-        {
-          "amount": 0.5,
-          "unit": "",
-          "name": "Soja"
-        },
-        {
-          "amount": 0.5,
-          "unit": "",
-          "name": "Dijonsenap"
-        }
-      ],
-      "instructions": [
-        "Koka riset enligt anvisningen på förpackningen",
-        " Skär korven i stavar. Skala och hacka löken.",
-        "Stek korv och lök i oljan i en stekpanna ca 5 minuter. Tillsätt tomatpuré och fräs någon minut.",
-        "Rör ner grädde, mjölk, soja och dijonsenap. Låt sjuda ca 5 minuter.",
-        " Smaka av med peppar och ev salt.",
-        "Till servering: Servera korvstroganoffen med ris och gärna vitkålssallad eller en sallad med tomat och gurka."
-      ],
-      "imageUrl": "/uploads/891b9043-18df-4a08-8e0a-6ca9ca3c7b36.jpg",
-      "id": 7,
-      "author": 1,
-      "createdAt": "2026-07-29T16:56:33.919Z",
-      "views": 2
-    },
-    {
-      "id": 8,
-      "author": 2,
-      "name": "Avocado Toast",
-      "description": "Simple and creamy avocado toast with lemon and chili.",
-      "country": "USA",
-      "category": "Frukost",
-      "time": 10,
-      "dietary": [
-        "Vegansk",
-        "Köttfri"
-      ],
-      "servings": 2,
-      "ingredients": [
-        {
-          "amount": 2,
-          "unit": "skivor",
-          "name": "Bröd"
-        },
-        {
-          "amount": 1,
-          "unit": "st",
-          "name": "Avokado"
-        },
-        {
-          "amount": 0.5,
-          "unit": "st",
-          "name": "Citron"
-        },
-        {
-          "amount": 1,
-          "unit": "krm",
-          "name": "Chiliflakes"
-        }
-      ],
-      "instructions": [
-        "Rosta brödet.",
-        "Mosa avokadon och blanda med lite citronsaft.",
-        "Bred avokadon på brödet och toppa med chiliflakes."
-      ],
-      "imageUrl": "/images/pancakes.jpg",
-      "createdAt": "2026-05-02T10:20:00.000Z",
-      "views": 88
-    },
-    {
-      "id": 9,
-      "author": 3,
-      "name": "Butter Chicken",
-      "description": "Creamy Indian chicken cooked in a rich tomato sauce.",
-      "country": "India",
-      "category": "Middag",
-      "time": 50,
-      "dietary": [
-        "Glutenfri"
       ],
       "servings": 4,
       "ingredients": [
         {
-          "amount": 500,
+          "amount": 4,
+          "unit": "port",
+          "name": "Ris"
+        },
+        {
+          "amount": 550,
           "unit": "g",
-          "name": "Kyckling"
-        },
-        {
-          "amount": 400,
-          "unit": "g",
-          "name": "Krossade tomater"
-        },
-        {
-          "amount": 2,
-          "unit": "dl",
-          "name": "Grädde"
-        },
-        {
-          "amount": 2,
-          "unit": "msk",
-          "name": "Currypasta"
+          "name": "Falukorv"
         },
         {
           "amount": 1,
           "unit": "st",
           "name": "Gul lök"
-        }
-      ],
-      "instructions": [
-        "Skär kycklingen i mindre bitar.",
-        "Stek kyckling och lök tills kycklingen fått färg.",
-        "Tillsätt currypasta och krossade tomater.",
-        "Häll i grädden och låt sjuda i cirka 15 minuter.",
-        "Servera med ris."
-      ],
-      "imageUrl": "/images/curry.jpg",
-      "createdAt": "2026-04-15T14:30:00.000Z",
-      "views": 342
-    },
-    {
-      "id": 10,
-      "author": 4,
-      "name": "Caprese Salad",
-      "description": "Fresh Italian salad with tomatoes, mozzarella and basil.",
-      "country": "Italien",
-      "category": "Lunch",
-      "time": 10,
-      "dietary": [
-        "Köttfri",
-        "Glutenfri"
-      ],
-      "servings": 2,
-      "ingredients": [
-        {
-          "amount": 3,
-          "unit": "st",
-          "name": "Tomater"
-        },
-        {
-          "amount": 125,
-          "unit": "g",
-          "name": "Mozzarella"
-        },
-        {
-          "amount": 10,
-          "unit": "blad",
-          "name": "Basilika"
         },
         {
           "amount": 1,
           "unit": "msk",
-          "name": "Olivolja"
+          "name": "Olja"
+        },
+        {
+          "amount": 3,
+          "unit": "msk",
+          "name": "Tomatpuré"
+        },
+        {
+          "amount": 2.5,
+          "unit": "dl",
+          "name": "Matlagningsgrädde"
+        },
+        {
+          "amount": 1,
+          "unit": "dl",
+          "name": "Mjölk"
+        },
+        {
+          "amount": 1,
+          "unit": "msk",
+          "name": "Japansk soja"
+        },
+        {
+          "amount": 1,
+          "unit": "tsk",
+          "name": "Dijonsenap"
+        },
+        {
+          "amount": 0,
+          "unit": "",
+          "name": "Peppar"
+        },
+        {
+          "amount": 0,
+          "unit": "",
+          "name": "Salt"
         }
       ],
       "instructions": [
-        "Skiva tomater och mozzarella.",
-        "Varva tomat och mozzarella på ett fat.",
-        "Toppa med basilika och olivolja."
+        "Koka riset enligt anvisningarna på förpackningen.",
+        "Skär falukorven i stavar.",
+        "Skala löken.",
+        "Hacka löken.",
+        "Stek korven i olja i en stekpanna.",
+        "Tillsätt löken.",
+        "Stek korv och lök i ungefär 5 minuter.",
+        "Tillsätt tomatpurén.",
+        "Fräs tomatpurén tillsammans med korven och löken.",
+        "Tillsätt grädde.",
+        "Tillsätt mjölk.",
+        "Tillsätt soja.",
+        "Tillsätt dijonsenap.",
+        "Låt såsen sjuda i ungefär 5 minuter.",
+        "Smaka av med peppar.",
+        "Tillsätt salt efter smak.",
+        "Servera korvstroganoffen tillsammans med ris."
       ],
-      "imageUrl": "/images/salad.jpg",
-      "createdAt": "2026-06-01T09:15:00.000Z",
-      "views": 156
+      "imageUrl": "/images/placeholder.jpg",
+      "createdAt": "2026-08-01T10: 00: 00.000Z",
+      "views": 1
     },
     {
-      "id": 11,
-      "author": 5,
-      "name": "Chocolate Brownies",
-      "description": "Soft and fudgy chocolate brownies with a rich chocolate flavor.",
+      "id": 2,
+      "author": 1,
+      "name": "Marry Me Chicken",
+      "description": "Krämig kyckling i en smakrik sås med soltorkade tomater, vitlök, parmesan och basilika.",
       "country": "USA",
-      "category": "Dessert",
-      "time": 35,
+      "category": "Middag",
+      "time": 45,
       "dietary": [
-        "Köttfri"
+        "Fiskfri"
       ],
-      "servings": 8,
+      "servings": 4,
       "ingredients": [
         {
-          "amount": 150,
-          "unit": "g",
-          "name": "Smör"
+          "amount": 4,
+          "unit": "st",
+          "name": "Kycklingfiléer"
+        },
+        {
+          "amount": 0.5,
+          "unit": "dl",
+          "name": "Vetemjöl"
         },
         {
           "amount": 200,
           "unit": "g",
-          "name": "Socker"
+          "name": "Soltorkade tomater"
         },
         {
-          "amount": 100,
-          "unit": "g",
-          "name": "Mjöl"
-        },
-        {
-          "amount": 50,
-          "unit": "g",
-          "name": "Kakao"
+          "amount": 2,
+          "unit": "msk",
+          "name": "Olivolja"
         },
         {
           "amount": 2,
           "unit": "st",
-          "name": "Ägg"
-        }
-      ],
-      "instructions": [
-        "Smält smöret.",
-        "Blanda ner socker och ägg.",
-        "Tillsätt mjöl och kakao.",
-        "Häll smeten i en form.",
-        "Grädda i 175 grader i cirka 20 minuter."
-      ],
-      "imageUrl": "/images/cake.jpg",
-      "createdAt": "2026-05-20T18:45:00.000Z",
-      "views": 623
-    },
-    {
-      "id": 12,
-      "author": 2,
-      "name": "Salmon Sushi",
-      "description": "Homemade sushi rolls with fresh salmon and creamy avocado.",
-      "country": "Japan",
-      "category": "Middag",
-      "time": 55,
-      "dietary": [],
-      "servings": 3,
-      "ingredients": [
-        {
-          "amount": 300,
-          "unit": "g",
-          "name": "Sushiris"
+          "name": "Vitlöksklyftor"
         },
         {
-          "amount": 200,
-          "unit": "g",
-          "name": "Lax"
+          "amount": 1,
+          "unit": "krm",
+          "name": "Chiliflakes"
+        },
+        {
+          "amount": 0.5,
+          "unit": "tsk",
+          "name": "Torkad oregano"
+        },
+        {
+          "amount": 0.5,
+          "unit": "tsk",
+          "name": "Torkad timjan"
+        },
+        {
+          "amount": 2.5,
+          "unit": "dl",
+          "name": "Vatten"
+        },
+        {
+          "amount": 0.5,
+          "unit": "st",
+          "name": "Kycklingbuljongtärning"
+        },
+        {
+          "amount": 2.5,
+          "unit": "dl",
+          "name": "Vispgrädde"
+        },
+        {
+          "amount": 1.5,
+          "unit": "dl",
+          "name": "Parmesan"
         },
         {
           "amount": 1,
           "unit": "st",
-          "name": "Avokado"
+          "name": "Basilika"
         },
         {
           "amount": 4,
-          "unit": "st",
-          "name": "Noriark"
+          "unit": "port",
+          "name": "Ris"
         }
       ],
       "instructions": [
-        "Koka sushiriset enligt förpackningen.",
-        "Skär lax och avokado i tunna stavar.",
-        "Lägg ett noriark på en bambumatta.",
-        "Fördela ris, lax och avokado över arket.",
-        "Rulla ihop och skär i bitar."
+        "Koka riset enligt anvisningarna på förpackningen.",
+        "Krydda kycklingfiléerna med salt och peppar.",
+        "Vänd kycklingfiléerna i vetemjöl.",
+        "Häll av de soltorkade tomaterna.",
+        "Bryn kycklingen i hälften av olivoljan.",
+        "Lägg den brynta kycklingen åt sidan.",
+        "Tillsätt resten av olivoljan i stekpannan.",
+        "Pressa ner vitlöken.",
+        "Tillsätt de soltorkade tomaterna.",
+        "Fräs vitlök och tomater i ungefär 1 minut.",
+        "Tillsätt chiliflakes.",
+        "Tillsätt oregano.",
+        "Tillsätt timjan.",
+        "Häll i vattnet.",
+        "Smula ner buljongtärningen.",
+        "Tillsätt grädden.",
+        "Tillsätt parmesan.",
+        "Rör om och låt såsen koka upp.",
+        "Lägg tillbaka kycklingen i såsen.",
+        "Låt kycklingen sjuda i ungefär 15 minuter.",
+        "Vänd kycklingen några gånger under tillagningen.",
+        "Kontrollera att kycklingen har en innertemperatur på minst 70 grader.",
+        "Strimla basilikan.",
+        "Rör ner basilikan i såsen.",
+        "Servera kycklingen med ris."
       ],
-      "imageUrl": "/images/sushi.jpg",
-      "createdAt": "2026-03-10T12:00:00.000Z",
-      "views": 43
+      "imageUrl": "/images/placeholder.jpg",
+      "createdAt": "2026-08-01T10: 05: 00.000Z",
+      "views": 0
     },
     {
-      "id": 13,
-      "author": 6,
-      "name": "Blueberry Pancakes",
-      "description": "Fluffy pancakes filled with fresh blueberries.",
-      "country": "USA",
-      "category": "Frukost",
-      "time": 25,
+      "id": 3,
+      "author": 1,
+      "name": "Spaghetti och köttfärssås",
+      "description": "En klassisk och smakrik köttfärssås med tomat, morötter och lök som serveras med spaghetti.",
+      "country": "Italien",
+      "category": "Middag",
+      "time": 30,
       "dietary": [
-        "Köttfri"
+        "Fiskfri"
       ],
-      "servings": 3,
+      "servings": 4,
       "ingredients": [
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Gul lök"
+        },
+        {
+          "amount": 2,
+          "unit": "st",
+          "name": "Vitlöksklyftor"
+        },
+        {
+          "amount": 2,
+          "unit": "st",
+          "name": "Morötter"
+        },
+        {
+          "amount": 500,
+          "unit": "g",
+          "name": "Nötfärs"
+        },
+        {
+          "amount": 2,
+          "unit": "msk",
+          "name": "Matolja"
+        },
+        {
+          "amount": 0.5,
+          "unit": "dl",
+          "name": "Tomatpuré"
+        },
+        {
+          "amount": 500,
+          "unit": "g",
+          "name": "Krossade tomater"
+        },
+        {
+          "amount": 2.5,
+          "unit": "dl",
+          "name": "Vatten"
+        },
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Kycklingbuljongtärning"
+        },
+        {
+          "amount": 1,
+          "unit": "tsk",
+          "name": "Kinesisk soja"
+        },
+        {
+          "amount": 4,
+          "unit": "port",
+          "name": "Spaghetti"
+        },
+        {
+          "amount": 0,
+          "unit": "",
+          "name": "Salt"
+        },
+        {
+          "amount": 0,
+          "unit": "",
+          "name": "Svartpeppar"
+        }
+      ],
+      "instructions": [
+        "Skala löken.",
+        "Hacka löken.",
+        "Skala vitlöken.",
+        "Hacka vitlöken.",
+        "Skala morötterna.",
+        "Riv morötterna grovt.",
+        "Bryn köttfärsen i olja i en stor stekpanna eller gryta.",
+        "Tillsätt lök och vitlök.",
+        "Tillsätt de rivna morötterna.",
+        "Stek grönsakerna tillsammans med köttfärsen.",
+        "Tillsätt tomatpurén.",
+        "Fräs tomatpurén tillsammans med färsen.",
+        "Tillsätt de krossade tomaterna.",
+        "Häll i vattnet.",
+        "Smula ner buljongtärningen.",
+        "Tillsätt soja.",
+        "Låt såsen koka på låg värme i ungefär 15 minuter.",
+        "Smaka av med salt.",
+        "Smaka av med svartpeppar.",
+        "Koka spaghettin enligt anvisningarna på förpackningen.",
+        "Servera köttfärssåsen tillsammans med spaghettin.",
+        "Servera gärna med riven parmesan."
+      ],
+      "imageUrl": "/images/placeholder.jpg",
+      "createdAt": "2026-08-01T10: 10: 00.000Z",
+      "views": 0
+    },
+    {
+      "id": 4,
+      "author": 1,
+      "name": "Fläskfilégryta med champinjoner",
+      "description": "En krämig och mustig gryta med fläskfilé och champinjoner som passar bra tillsammans med ris eller potatis.",
+      "country": "Sverige",
+      "category": "Middag",
+      "time": 45,
+      "dietary": [
+        "Fiskfri"
+      ],
+      "servings": 4,
+      "ingredients": [
+        {
+          "amount": 500,
+          "unit": "g",
+          "name": "Fläskfilé"
+        },
+        {
+          "amount": 2,
+          "unit": "msk",
+          "name": "Smör"
+        },
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Gul lök"
+        },
         {
           "amount": 250,
           "unit": "g",
-          "name": "Mjöl"
+          "name": "Champinjoner"
+        },
+        {
+          "amount": 2,
+          "unit": "tsk",
+          "name": "Tomatpuré"
+        },
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Hönsbuljongtärning"
         },
         {
           "amount": 3,
+          "unit": "dl",
+          "name": "Vispgrädde"
+        },
+        {
+          "amount": 2,
           "unit": "dl",
           "name": "Mjölk"
         },
         {
           "amount": 2,
-          "unit": "st",
-          "name": "Ägg"
+          "unit": "msk",
+          "name": "Japansk soja"
         },
         {
-          "amount": 100,
-          "unit": "g",
-          "name": "Blåbär"
+          "amount": 2,
+          "unit": "tsk",
+          "name": "Dijonsenap"
+        },
+        {
+          "amount": 1,
+          "unit": "tsk",
+          "name": "Majsstärkelse"
+        },
+        {
+          "amount": 0,
+          "unit": "",
+          "name": "Salt"
+        },
+        {
+          "amount": 0,
+          "unit": "",
+          "name": "Peppar"
         }
       ],
       "instructions": [
-        "Blanda mjöl, mjölk och ägg till en jämn smet.",
-        "Vänd försiktigt ner blåbären.",
-        "Stek pannkakorna i en varm stekpanna.",
-        "Servera med blåbär och lönnsirap."
+        "Skär fläskfilén i strimlor.",
+        "Bryn fläskfilén i hälften av smöret.",
+        "Salta och peppra köttet.",
+        "Lägg köttet åt sidan.",
+        "Skala löken.",
+        "Hacka löken.",
+        "Ansa champinjonerna.",
+        "Dela champinjonerna.",
+        "Bryn lök och svamp i resten av smöret.",
+        "Tillsätt tomatpurén.",
+        "Fräs tomatpurén tillsammans med grönsakerna.",
+        "Smula ner buljongtärningen.",
+        "Tillsätt grädde.",
+        "Tillsätt mjölk.",
+        "Låt såsen koka upp.",
+        "Tillsätt soja.",
+        "Tillsätt dijonsenap.",
+        "Smaka av med salt och peppar.",
+        "Rör ut majsstärkelsen i lite vatten.",
+        "Rör ner majsstärkelsen i grytan.",
+        "Lägg tillbaka köttet i grytan.",
+        "Låt grytan bli varm.",
+        "Servera med ris eller kokt potatis."
       ],
-      "imageUrl": "/images/pancakes.jpg",
-      "createdAt": "2026-06-15T08:30:00.000Z",
-      "views": 214
+      "imageUrl": "/images/placeholder.jpg",
+      "createdAt": "2026-08-01T10: 15: 00.000Z",
+      "views": 0
     },
     {
-      "id": 14,
-      "author": 3,
-      "name": "Thai Red Curry",
-      "description": "Spicy and creamy Thai curry with vegetables.",
-      "country": "Thailand",
+      "id": 5,
+      "author": 1,
+      "name": "Ugnsstekt kycklingklubba",
+      "description": "Ugnsstekta kycklingklubbor med soja, ketchup, örter och vitlök.",
+      "country": "Sverige",
       "category": "Middag",
-      "time": 40,
+      "time": 60,
       "dietary": [
-        "Vegansk",
-        "Glutenfri"
+        "Fiskfri"
       ],
       "servings": 4,
       "ingredients": [
         {
-          "amount": 400,
-          "unit": "ml",
-          "name": "Kokosmjölk"
+          "amount": 1,
+          "unit": "kg",
+          "name": "Kycklingklubbor"
         },
         {
-          "amount": 2,
+          "amount": 2.5,
           "unit": "msk",
-          "name": "Röd currypasta"
+          "name": "Japansk soja"
+        },
+        {
+          "amount": 1,
+          "unit": "msk",
+          "name": "Ketchup"
+        },
+        {
+          "amount": 1,
+          "unit": "tsk",
+          "name": "Rosmarin"
+        },
+        {
+          "amount": 1,
+          "unit": "tsk",
+          "name": "Oregano"
+        },
+        {
+          "amount": 1,
+          "unit": "msk",
+          "name": "Rapsolja"
+        },
+        {
+          "amount": 0.5,
+          "unit": "tsk",
+          "name": "Svartpeppar"
         },
         {
           "amount": 1,
           "unit": "st",
-          "name": "Paprika"
-        },
-        {
-          "amount": 1,
-          "unit": "st",
-          "name": "Morot"
-        },
-        {
-          "amount": 150,
-          "unit": "g",
-          "name": "Broccoli"
-        }
-      ],
-      "instructions": [
-        "Stek currypastan i lite olja.",
-        "Tillsätt kokosmjölk och låt koka upp.",
-        "Lägg i grönsakerna.",
-        "Låt sjuda tills grönsakerna är mjuka.",
-        "Servera med ris."
-      ],
-      "imageUrl": "/images/curry.jpg",
-      "createdAt": "2026-04-28T16:00:00.000Z",
-      "views": 389
-    },
-    {
-      "id": 15,
-      "author": 4,
-      "name": "Greek Feta Bowl",
-      "description": "Fresh Mediterranean bowl with vegetables, feta and herbs.",
-      "country": "Greece",
-      "category": "Lunch",
-      "time": 15,
-      "dietary": [
-        "Köttfri",
-        "Glutenfri"
-      ],
-      "servings": 2,
-      "ingredients": [
-        {
-          "amount": 2,
-          "unit": "st",
-          "name": "Tomater"
-        },
-        {
-          "amount": 1,
-          "unit": "st",
-          "name": "Gurka"
-        },
-        {
-          "amount": 150,
-          "unit": "g",
-          "name": "Fetaost"
-        },
-        {
-          "amount": 50,
-          "unit": "g",
-          "name": "Oliver"
-        }
-      ],
-      "instructions": [
-        "Skär tomater och gurka.",
-        "Smula fetaosten.",
-        "Lägg alla ingredienser i en skål.",
-        "Toppa med olivolja och örter."
-      ],
-      "imageUrl": "/images/salad.jpg",
-      "createdAt": "2026-05-30T11:45:00.000Z",
-      "views": 98
-    },
-    {
-      "id": 16,
-      "author": 5,
-      "name": "Swedish Chocolate Cake",
-      "description": "Classic Swedish sticky chocolate cake with a soft center.",
-      "country": "Sverige",
-      "category": "Dessert",
-      "time": 30,
-      "dietary": [
-        "Köttfri"
-      ],
-      "servings": 8,
-      "ingredients": [
-        {
-          "amount": 150,
-          "unit": "g",
-          "name": "Smör"
+          "name": "Vitlöksklyfta"
         },
         {
           "amount": 3,
+          "unit": "msk",
+          "name": "Smör"
+        },
+        {
+          "amount": 1,
           "unit": "dl",
-          "name": "Socker"
+          "name": "Vatten"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 225 grader över- och undervärme.",
+        "Blanda soja med ketchup.",
+        "Tillsätt rosmarin.",
+        "Tillsätt oregano.",
+        "Tillsätt rapsolja.",
+        "Tillsätt svartpeppar.",
+        "Skala vitlöken.",
+        "Pressa ner vitlöken i marinaden.",
+        "Lägg kycklingklubborna i en ugnssäker form.",
+        "Pensla kycklingklubborna med marinaden.",
+        "Klicka över smöret.",
+        "Häll vatten i botten av formen.",
+        "Stek kycklingklubborna i ugnen i ungefär 45 minuter.",
+        "Kontrollera att innertemperaturen är 82 grader intill benet.",
+        "Ös kycklingen några gånger under tillagningen.",
+        "Tillsätt mer vatten om det behövs.",
+        "Spara gärna stekskyn.",
+        "Servera kycklingen med rostade rotfrukter och yoghurtsås."
+      ],
+      "imageUrl": "/images/placeholder.jpg",
+      "createdAt": "2026-08-01T10: 20: 00.000Z",
+      "views": 0
+    },
+    {
+      "id": 6,
+      "author": 1,
+      "name": "Chili cheeseburgare med chips",
+      "description": "Saftiga högrevsburgare med cheddar, jalapeño, karamelliserad lök och en krämig jalapenodressing.",
+      "country": "USA",
+      "category": "Middag",
+      "time": 30,
+      "dietary": [
+        "Fiskfri"
+      ],
+      "servings": 4,
+      "ingredients": [
+        {
+          "amount": 4,
+          "unit": "st",
+          "name": "Hamburgerbröd"
+        },
+        {
+          "amount": 600,
+          "unit": "g",
+          "name": "Högrevsfärs"
+        },
+        {
+          "amount": 8,
+          "unit": "skivor",
+          "name": "Cheddarost"
+        },
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Jalapeño"
+        },
+        {
+          "amount": 2,
+          "unit": "dl",
+          "name": "Lättsaltade chips"
         },
         {
           "amount": 2,
           "unit": "st",
-          "name": "Ägg"
+          "name": "Gula lökar"
         },
         {
-          "amount": 1.5,
+          "amount": 1,
+          "unit": "tsk",
+          "name": "Strösocker"
+        },
+        {
+          "amount": 0.5,
           "unit": "dl",
-          "name": "Mjöl"
+          "name": "Vatten"
+        },
+        {
+          "amount": 1,
+          "unit": "dl",
+          "name": "Gräddfil"
+        },
+        {
+          "amount": 1,
+          "unit": "dl",
+          "name": "Majonnäs"
+        },
+        {
+          "amount": 8,
+          "unit": "skivor",
+          "name": "Inlagd jalapeño"
+        },
+        {
+          "amount": 0.5,
+          "unit": "kruka",
+          "name": "Färsk koriander"
+        },
+        {
+          "amount": 0.5,
+          "unit": "st",
+          "name": "Lime"
+        }
+      ],
+      "instructions": [
+        "Skala löken.",
+        "Skiva löken tunt.",
+        "Fräs löken mjuk i smör.",
+        "Tillsätt strösocker.",
+        "Tillsätt vatten.",
+        "Låt löken koka ihop.",
+        "Hacka jalapeño.",
+        "Hacka koriandern.",
+        "Blanda jalapeño och koriander med gräddfil.",
+        "Tillsätt majonnäs.",
+        "Pressa ner limejuice.",
+        "Smaka av dressingen med salt.",
+        "Skiva den färska jalapeñon tunt.",
+        "Rosta hamburgerbröden i ugn eller stekpanna.",
+        "Dela färsen i fyra delar.",
+        "Forma fyra burgare.",
+        "Salta och peppra burgarna.",
+        "Grilla eller stek burgarna i ungefär 3 minuter på varje sida.",
+        "Lägg cheddarost på burgarna när de vänds.",
+        "Lägg på färsk jalapeño.",
+        "Låt osten smälta.",
+        "Montera burgarna med dressing.",
+        "Lägg på burgaren.",
+        "Lägg på karamelliserad lök.",
+        "Toppa med lätt krossade chips."
+      ],
+      "imageUrl": "/images/placeholder.jpg",
+      "createdAt": "2026-08-01T10: 25: 00.000Z",
+      "views": 0
+    },
+    {
+      "id": 7,
+      "author": 1,
+      "name": "Högrevsgryta med svamp",
+      "description": "En mustig långkokt gryta med högrev, rött vin, svamp, pancetta och grönsaker.",
+      "country": "Frankrike",
+      "category": "Middag",
+      "time": 120,
+      "dietary": [
+        "Fiskfri"
+      ],
+      "servings": 5,
+      "ingredients": [
+        {
+          "amount": 1,
+          "unit": "kg",
+          "name": "Högrev"
+        },
+        {
+          "amount": 2,
+          "unit": "st",
+          "name": "Morötter"
+        },
+        {
+          "amount": 3,
+          "unit": "st",
+          "name": "Selleristjälkar"
+        },
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Gul lök"
+        },
+        {
+          "amount": 3,
+          "unit": "klyftor",
+          "name": "Vitlök"
         },
         {
           "amount": 4,
           "unit": "msk",
-          "name": "Kakao"
-        }
-      ],
-      "instructions": [
-        "Smält smöret.",
-        "Blanda ner socker och ägg.",
-        "Tillsätt mjöl och kakao.",
-        "Häll smeten i en smord form.",
-        "Grädda i 175 grader i cirka 15–20 minuter."
-      ],
-      "imageUrl": "/images/cake.jpg",
-      "createdAt": "2026-06-20T17:20:00.000Z",
-      "views": 517
-    },
-    {
-      "id": 17,
-      "author": 6,
-      "name": "Spicy Salmon Sushi",
-      "description": "Fresh sushi rolls with spicy salmon and avocado.",
-      "country": "Japan",
-      "category": "Lunch",
-      "time": 65,
-      "dietary": [],
-      "servings": 2,
-      "ingredients": [
+          "name": "Tomatpuré"
+        },
+        {
+          "amount": 2,
+          "unit": "msk",
+          "name": "Vetemjöl"
+        },
+        {
+          "amount": 5,
+          "unit": "dl",
+          "name": "Rött vin"
+        },
+        {
+          "amount": 3,
+          "unit": "kvistar",
+          "name": "Färsk timjan"
+        },
+        {
+          "amount": 4,
+          "unit": "st",
+          "name": "Lagerblad"
+        },
+        {
+          "amount": 5,
+          "unit": "msk",
+          "name": "Koncentrerad kalvfond"
+        },
+        {
+          "amount": 5,
+          "unit": "dl",
+          "name": "Vatten"
+        },
         {
           "amount": 250,
           "unit": "g",
-          "name": "Sushiris"
+          "name": "Steklök"
         },
         {
-          "amount": 150,
+          "amount": 250,
           "unit": "g",
-          "name": "Lax"
+          "name": "Svamp"
+        },
+        {
+          "amount": 200,
+          "unit": "g",
+          "name": "Pancetta"
+        },
+        {
+          "amount": 0,
+          "unit": "",
+          "name": "Olja"
+        },
+        {
+          "amount": 0,
+          "unit": "",
+          "name": "Salt"
+        },
+        {
+          "amount": 0,
+          "unit": "",
+          "name": "Peppar"
+        }
+      ],
+      "instructions": [
+        "Skär högreven i bitar.",
+        "Bryn köttet i en stor gryta tillsammans med olja.",
+        "Salta och peppra köttet.",
+        "Ta upp köttet ur grytan.",
+        "Skär morötterna i grova bitar.",
+        "Skiva sellerin.",
+        "Hacka löken.",
+        "Skiva vitlöken tunt.",
+        "Fräs grönsakerna i grytan.",
+        "Tillsätt tomatpurén.",
+        "Tillsätt vetemjölet.",
+        "Rosta ingredienserna tillsammans i någon minut.",
+        "Häll i det röda vinet.",
+        "Tillsätt timjan.",
+        "Tillsätt lagerblad.",
+        "Koka upp grytan.",
+        "Låt vinet puttra i ungefär 5 minuter.",
+        "Lägg tillbaka köttet i grytan.",
+        "Tillsätt kalvfonden.",
+        "Tillsätt vatten så att köttet täcks.",
+        "Låt köttet puttra i 1–2 timmar tills det är mört.",
+        "Skär svampen i kvartar.",
+        "Skala steklöken.",
+        "Bryn pancettan i en stekpanna.",
+        "Lägg pancettan åt sidan.",
+        "Stek svampen.",
+        "Stek steklöken tills den fått färg.",
+        "Lägg svamp, lök och pancetta i grytan.",
+        "Låt grytan puttra ytterligare 20 minuter.",
+        "Servera med bröd eller pressad potatis."
+      ],
+      "imageUrl": "/images/placeholder.jpg",
+      "createdAt": "2026-08-01T10: 30: 00.000Z",
+      "views": 1
+    },
+    {
+      "id": 8,
+      "author": 1,
+      "name": "Grillad kyckling med potatis",
+      "description": "Grillad kyckling med krispig smashed potatis, sparris, basilikaolja och parmesan.",
+      "country": "Sverige",
+      "category": "Middag",
+      "time": 40,
+      "dietary": [
+        "Fiskfri"
+      ],
+      "servings": 4,
+      "ingredients": [
+        {
+          "amount": 800,
+          "unit": "g",
+          "name": "Marinerad kycklinglårfilé"
         },
         {
           "amount": 1,
           "unit": "st",
-          "name": "Avokado"
+          "name": "Basilika"
         },
         {
-          "amount": 3,
-          "unit": "st",
-          "name": "Noriark"
+          "amount": 50,
+          "unit": "g",
+          "name": "Parmesanost"
+        },
+        {
+          "amount": 1,
+          "unit": "kg",
+          "name": "Delikatesspotatis"
+        },
+        {
+          "amount": 250,
+          "unit": "g",
+          "name": "Sparris"
+        },
+        {
+          "amount": 2,
+          "unit": "msk",
+          "name": "Olivolja"
+        },
+        {
+          "amount": 1,
+          "unit": "krm",
+          "name": "Svartpeppar"
+        },
+        {
+          "amount": 1,
+          "unit": "klyfta",
+          "name": "Vitlök"
+        },
+        {
+          "amount": 0.5,
+          "unit": "tsk",
+          "name": "Flingsalt"
+        },
+        {
+          "amount": 1,
+          "unit": "tsk",
+          "name": "Salt"
+        }
+      ],
+      "instructions": [
+        "Värm ugnen till 200 grader.",
+        "Tänd grillen om du vill grilla kyckling och sparris utomhus.",
+        "Tvätta potatisen.",
+        "Koka potatisen mjuk i saltat vatten.",
+        "Skala vitlöken.",
+        "Riv vitlöken.",
+        "Finhacka basilikan.",
+        "Blanda vitlök och basilika med olivolja.",
+        "Tillsätt en nypa salt och peppar.",
+        "Finriv parmesanosten.",
+        "Sila av potatisvattnet.",
+        "Lägg potatisarna på en plåt med bakplåtspapper.",
+        "Låt potatisarna svalna något.",
+        "Tryck till potatisarna med undersidan av ett glas eller en stekspade.",
+        "Pensla potatisarna med basilikaoljan.",
+        "Strö över parmesanosten.",
+        "Rosta potatisarna i ugnen i ungefär 15 minuter.",
+        "Grilla kycklingen.",
+        "Grilla sparrisen.",
+        "Ta ut potatisen ur ugnen.",
+        "Strö över flingsalt.",
+        "Servera kycklingen med smashed potatis och grillad sparris."
+      ],
+      "imageUrl": "/images/placeholder.jpg",
+      "createdAt": "2026-08-01T10: 35: 00.000Z",
+      "views": 0
+    },
+    {
+      "id": 9,
+      "author": 1,
+      "name": "Pho med kyckling",
+      "description": "En smakrik vietnamesisk nudelsoppa med kyckling, grönsaker, örter och cashewnötter.",
+      "country": "Vietnam",
+      "category": "Middag",
+      "time": 30,
+      "dietary": [
+        "Fiskfri"
+      ],
+      "servings": 4,
+      "ingredients": [
+        {
+          "amount": 2,
+          "unit": "msk",
+          "name": "Kycklingfond"
         },
         {
           "amount": 1,
           "unit": "msk",
-          "name": "Sriracha"
+          "name": "Olivolja"
+        },
+        {
+          "amount": 1,
+          "unit": "krm",
+          "name": "Hela nejlikor"
+        },
+        {
+          "amount": 1,
+          "unit": "l",
+          "name": "Vatten"
+        },
+        {
+          "amount": 2,
+          "unit": "klyftor",
+          "name": "Vitlök"
+        },
+        {
+          "amount": 20,
+          "unit": "g",
+          "name": "Citrongräs"
+        },
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Röd chili"
+        },
+        {
+          "amount": 2.5,
+          "unit": "msk",
+          "name": "Fisksås"
+        },
+        {
+          "amount": 1,
+          "unit": "msk",
+          "name": "Färsk ingefära"
+        },
+        {
+          "amount": 2,
+          "unit": "msk",
+          "name": "Tamarisoja"
+        },
+        {
+          "amount": 500,
+          "unit": "g",
+          "name": "Kycklingfilé"
+        },
+        {
+          "amount": 250,
+          "unit": "g",
+          "name": "Shiitakesvamp"
+        },
+        {
+          "amount": 200,
+          "unit": "g",
+          "name": "Glasnudlar"
+        },
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Lime"
+        },
+        {
+          "amount": 300,
+          "unit": "g",
+          "name": "Pak choi"
+        },
+        {
+          "amount": 180,
+          "unit": "g",
+          "name": "Böngroddar"
+        },
+        {
+          "amount": 0.5,
+          "unit": "st",
+          "name": "Purjolök"
+        },
+        {
+          "amount": 1,
+          "unit": "st",
+          "name": "Koriander"
+        },
+        {
+          "amount": 0.5,
+          "unit": "st",
+          "name": "Mynta"
+        },
+        {
+          "amount": 40,
+          "unit": "g",
+          "name": "Cashewnötter"
         }
       ],
       "instructions": [
-        "Koka sushiriset.",
-        "Blanda laxen med sriracha.",
-        "Lägg ris, lax och avokado på noriarken.",
-        "Rulla ihop och skär i bitar.",
-        "Servera med soja."
+        "Finhacka chilin.",
+        "Skala vitlöken.",
+        "Riv vitlöken.",
+        "Skala ingefäran.",
+        "Skär ingefäran i tjocka skivor.",
+        "Banka citrongräset.",
+        "Hetta upp oljan i en stor kastrull.",
+        "Fräs vitlök, chili och nejlikor.",
+        "Tillsätt vatten.",
+        "Tillsätt kycklingfond.",
+        "Tillsätt soja.",
+        "Tillsätt fisksås.",
+        "Tillsätt citrongräs.",
+        "Tillsätt ingefära.",
+        "Koka upp buljongen.",
+        "Låt buljongen sjuda i ungefär 15 minuter.",
+        "Tillred glasnudlarna enligt anvisningarna på förpackningen.",
+        "Skölj de färdigkokta nudlarna i kallt vatten.",
+        "Strimla purjolöken.",
+        "Skär pak choi i stora bitar.",
+        "Skiva shiitakesvampen.",
+        "Tillsätt purjolök, pak choi och shiitakesvamp i buljongen.",
+        "Låt grönsakerna sjuda i ungefär 5 minuter.",
+        "Salta kycklingen.",
+        "Peppra kycklingen.",
+        "Stek kycklingen i olja på medelhög värme.",
+        "Lägg på ett lock.",
+        "Stek kycklingen färdig på låg värme.",
+        "Låt kycklingen svalna något.",
+        "Strimla kycklingen.",
+        "Smaka av buljongen med limesaft.",
+        "Smaka av med salt och peppar.",
+        "Fördela glasnudlarna i djupa skålar.",
+        "Häll över buljong och grönsaker.",
+        "Toppa med kycklingen.",
+        "Tillsätt böngroddar.",
+        "Tillsätt mynta.",
+        "Tillsätt koriander.",
+        "Grovhacka cashewnötterna.",
+        "Toppa soppan med cashewnötterna."
       ],
-      "imageUrl": "/images/sushi.jpg",
-      "createdAt": "2026-02-15T13:10:00.000Z",
-      "views": 31
+      "imageUrl": "/images/placeholder.jpg",
+      "createdAt": "2026-08-01T10: 40: 00.000Z",
+      "views": 0
     }
   ]
 }

@@ -1,70 +1,29 @@
 [
   {
     "id": 1,
-    "username": "slaffe",
-    "email": "alfons@example.com",
+    "username": "admin",
+    "email": "recepthornan@gmail.com",
     "password": "123",
-    "createdAt": "2026-07-16T10:00:00Z",
-    "sessionId": "a94cdd14-713c-4eaf-90e8-d77c179435f8",
-    "favourites": [
-      4,
-      3
-    ]
+    "createdAt": "2026-07-15T10:00:00Z",
+    "sessionId": null,
+    "favourites": []
   },
   {
     "id": 2,
-    "username": "emma",
-    "email": "emma@example.com",
-    "password": "password123",
-    "createdAt": "2026-07-15T18:20:00Z",
-    "sessionId": null,
+    "username": "affeforssell",
+    "email": "affeforssell@gmail.com",
+    "password": "Alfons782",
+    "createdAt": "2026-07-16T18:20:00Z",
+    "sessionId": "7d4853d3-d5cd-4de6-90ee-e19c8a79c845",
     "favourites": []
   },
   {
-    "id": 3,
-    "username": "lucas",
-    "email": "lucas@example.com",
-    "password": "password123",
-    "createdAt": "2026-07-14T13:42:00Z",
-    "sessionId": null,
-    "favourites": []
-  },
-  {
-    "id": 4,
-    "username": "sofia",
-    "email": "sofia@example.com",
-    "password": "password123",
-    "createdAt": "2026-07-13T11:30:00Z",
-    "sessionId": null,
-    "favourites": []
-  },
-  {
-    "id": 5,
-    "username": "erik",
-    "email": "erik@example.com",
-    "password": "password123",
-    "createdAt": "2026-07-12T08:15:00Z",
-    "sessionId": null,
-    "favourites": []
-  },
-  {
-    "email": "random",
-    "username": "affe",
-    "password": "123",
-    "id": 6,
-    "sessionId": "827c2948-60e8-4362-a8bd-5b10425662d1",
-    "favourites": [],
-    "createdAt": "2026-07-19T13:33:47.447Z"
-  },
-  {
-    "email": "ihuhb",
+    "email": "nathalieloow@hotmail.com",
     "username": "nathalieloow",
     "password": "Baloo2018",
-    "id": 7,
+    "id": 3,
     "sessionId": null,
-    "favourites": [
-      5
-    ],
+    "favourites": [],
     "createdAt": "2026-07-30T15:15:49.200Z"
   }
 ]

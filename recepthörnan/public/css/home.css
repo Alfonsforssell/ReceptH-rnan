@@ -295,7 +295,7 @@ main {
         margin: 50px;
         position: relative;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 400px);
         align-items: flex-start;
         background-size: cover;
         background-position: center;
