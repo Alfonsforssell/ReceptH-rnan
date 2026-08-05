@@ -93,7 +93,8 @@ main {
 }
 
 #signUp form input,
-#signUp form button {
+#signUp form button,
+#signUp select {
     width: 50%;
     height: 50px;
     color: var(--text-light);
@@ -102,6 +103,51 @@ main {
     border-radius: 20px;
     padding: 10px;
     transition: all .5s ease;
+}
+
+#level {
+    margin-top: -20px;
+}
+
+.interests {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: 10px;
+    margin-top: -20px;
+}
+
+#signUp label {
+    font-size: 15px;
+}
+
+#signUp input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    border: 2px solid var(--dominant);
+    background-color: var(--bg);
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 0px 0px -4px 5px;
+}
+
+#signUp input[type="checkbox"]:checked {
+    background-color: var(--dominant);
+    content: "✓";
+    color: white;
+}
+
+#signUp input[type="checkbox"]:checked::after {
+    content: "✓";
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
 }
 
 #login {

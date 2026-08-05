@@ -1,12 +1,18 @@
 [
   {
     "id": 1,
-    "username": "admin",
+    "username": "Recepthörnan",
     "email": "recepthornan@gmail.com",
     "password": "123",
     "createdAt": "2026-07-15T10:00:00Z",
-    "sessionId": null,
-    "favourites": []
+    "sessionId": "4f6166fc-f7dd-4e7d-876a-cd3b545a18c1",
+    "favourites": [],
+    "level": "professional",
+    "interests": [
+      "share",
+      "inspiration"
+    ],
+    "selectedTitle": "Uppmärksammad receptskapare"
   },
   {
     "id": 2,
@@ -14,8 +20,20 @@
     "email": "affeforssell@gmail.com",
     "password": "Alfons782",
     "createdAt": "2026-07-16T18:20:00Z",
-    "sessionId": "7d4853d3-d5cd-4de6-90ee-e19c8a79c845",
-    "favourites": []
+    "sessionId": null,
+    "favourites": [
+      2,
+      1,
+      3,
+      4,
+      5
+    ],
+    "level": "beginner",
+    "interests": [
+      "learn",
+      "inspiration"
+    ],
+    "selectedTitle": "Matlärling"
   },
   {
     "email": "nathalieloow@hotmail.com",
@@ -23,7 +41,14 @@
     "password": "Baloo2018",
     "id": 3,
     "sessionId": null,
-    "favourites": [],
-    "createdAt": "2026-07-30T15:15:49.200Z"
+    "favourites": [
+      1
+    ],
+    "createdAt": "2026-07-30T15:15:49.200Z",
+    "level": "enthusiast",
+    "interests": [
+      "share",
+      "inspiration"
+    ]
   }
 ]

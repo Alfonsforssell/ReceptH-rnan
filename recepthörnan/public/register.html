@@ -21,6 +21,55 @@
                 <input name="signUpUsername" type="text" placeholder="Användarnamn" required>
                 <input name="signUpPassword" type="password" placeholder="Lösenord" required>
                 <input name="signUpRepeatPassword" type="password" placeholder="Upprepa lösenordet" required>
+                <h2>Hur van är du vid köket?</h2>
+                <select id="level" name="cookingLevel">
+                    <option value="" disabled selected>Välj din nivå</option>
+                    <option value="never">Aldrig lagat mat</option>
+                    <option value="beginner">Nybörjare</option>
+                    <option value="amateur">Amatör</option>
+                    <option value="enthusiast">Entusiast</option>
+                    <option value="professional">Professionell</option>
+                    <option value="restaurateur">Krögare</option>
+                    <option value="chef">Kock</option>
+                    <option value="michelin">Michelinkock</option>
+                </select>
+                <h2>Vad är du intresserad av?</h2>
+                <div class="interests">
+                    <label>
+                        <input type="checkbox" name="interests" value="learn">
+                        Lära mig laga mat
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="interests" value="inspiration">
+                        Hitta inspiration
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="interests" value="share">
+                        Dela med mig av mina recept
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="interests" value="discover">
+                        Upptäcka nya maträtter
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="interests" value="techniques">
+                        Lära mig nya tekniker
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="interests" value="healthy">
+                        Hitta hälsosam mat
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="interests" value="culture">
+                        Upptäcka mat från olika kulturer
+                    </label>
+                </div>
                 <span id="signUpError"></span>
                 <button id="signUpButton">Skapa konto</button>
                 <a href="/login">Har du redan konto?</a>

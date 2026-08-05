@@ -76,15 +76,119 @@ async function handler(request) {
     if (url.pathname.startsWith("/api/")) {
 
         if (request.method === "GET") {
+            if (url.pathname === "/api/users/search") {
+                if (!validateJsonAccept(request)) {
+                    return notAcceptable();
+                }
+
+                let username = url.searchParams.get("username");
+
+                if (!username || username.trim() === "") {
+                    return jsonResponse([]);
+                }
+
+                let results = users.searchUsers(username.trim());
+                for (let user of results) {
+                    let userRecipes = recipes.getProfileRecipes(user.id);
+                    user.recipeCount = userRecipes.length;
+
+                }
+
+                return jsonResponse(results);
+            }
 
             if (url.pathname === "/api/profile") {
                 if (!validateJsonAccept(request)) {
                     return notAcceptable();
                 }
+
                 let user = login.getProfile(request);
+
                 if (!user) {
                     return unauthorized();
                 }
+                let userRecipes = recipes.getProfileRecipes(user.id);
+                let allRecipes = recipes.getRecipes();
+
+                let totalRecipeViews = users.getTotalRecipeViews(
+                    user.id,
+                    allRecipes
+                );
+                let highestRecipeFavouriteCount = recipes.getHighestRecipeFavouriteCount(
+                    user.id,
+                    allRecipes
+                );
+
+                let allComments = comments.getComments();
+                user.recipeCount = userRecipes.length;
+
+                let ratingCount = users.getUserRatingCount(
+                    user.id,
+                    allComments
+                );
+
+                let favouriteCount = users.getUserFavouriteCount(user);
+
+                let commentCount = users.getUserCommentCount(
+                    user.id,
+                    allComments
+                );
+
+                let uniqueCountryCount = recipes.getUniqueCountryCount(
+                    user.id,
+                    allRecipes
+                );
+
+                let averageRecipeRating = recipes.getAverageRecipeRating(
+                    user.id,
+                    allRecipes
+                );
+
+                let highestCategoryRecipeCount =
+                    recipes.getHighestCategoryRecipeCount(
+                        user.id,
+                        allRecipes
+                    );
+
+                let perfectScore = recipes.hasPerfectScore(
+                    user.id,
+                    allRecipes,
+                    allComments
+                );
+
+                user.unlockedTitles = users.getUnlockedTitles(
+                    user,
+                    user.recipeCount,
+                    ratingCount,
+                    favouriteCount,
+                    commentCount,
+                    highestRecipeFavouriteCount,
+                    totalRecipeViews,
+                    uniqueCountryCount,
+                    averageRecipeRating,
+                    highestCategoryRecipeCount,
+                    perfectScore
+                );
+
+                if (!user.selectedTitle) {
+                    user.selectedTitle = users.getUserTitle(user);
+                }
+
+                if (typeof user.selectedTitle === "object") {
+                    user.selectedTitle = user.selectedTitle.name;
+                }
+
+                user.title = user.selectedTitle;
+
+                let rating = users.getUserRating(
+                    user.id,
+                    userRecipes,
+                    allComments
+                );
+
+                user.averageRating = rating.averageRating;
+                user.ratingCount = rating.ratingAmount;
+
                 return jsonResponse(user);
             }
 
@@ -237,6 +341,133 @@ async function handler(request) {
                 }
 
                 return jsonResponse(myRecipes);
+            }
+
+            if (url.pathname.startsWith("/api/users/") &&
+                url.pathname.endsWith("/recipes")) {
+
+                if (!validateJsonAccept(request)) {
+                    return notAcceptable();
+                }
+
+                let parts = url.pathname.split("/");
+                let id = Number(parts[3]);
+
+                if (!Number.isInteger(id)) {
+                    return notFound();
+                }
+
+                let profileUser = users.getUserById(id);
+
+                if (!profileUser) {
+                    return notFound();
+                }
+
+                let loggedInUser = login.getProfile(request);
+
+                if (!loggedInUser) {
+                    return unauthorized();
+                }
+
+                let userRecipes = recipes.getProfileRecipes(id);
+
+                for (let recipe of userRecipes) {
+                    recipe.isFavourite =
+                        loggedInUser.favourites.includes(recipe.id);
+
+                    recipe.favoriteCount =
+                        recipes.getFavouriteCount(recipe.id);
+
+                    let rating =
+                        comments.getRating(recipe.id);
+
+                    recipe.averageRating = rating.average;
+                    recipe.ratingCount = rating.amount;
+                }
+
+                return jsonResponse(userRecipes);
+            }
+
+            if (url.pathname.startsWith("/api/users/")) {
+                if (!validateJsonAccept(request)) {
+                    return notAcceptable();
+                }
+
+                let id = Number(url.pathname.split("/")[3]);
+
+                if (Number.isNaN(id)) {
+                    return notFound();
+                }
+
+                let user = users.getPublicUserById(id);
+
+                if (!user) {
+                    return notFound();
+                }
+
+                return jsonResponse(user);
+            }
+
+            if (url.pathname.startsWith("/api/users/")) {
+                if (!validateJsonAccept(request)) {
+                    return notAcceptable();
+                }
+
+                let id = Number(url.pathname.split("/")[3]);
+
+                if (!Number.isInteger(id)) {
+                    return notFound();
+                }
+
+                let user = users.getUserById(id);
+
+                if (!user) {
+                    return notFound();
+                }
+
+                let publicUser = {
+                    id: user.id,
+                    username: user.username,
+                    email: user.email,
+                    createdAt: user.createdAt,
+                    favourites: user.favourites
+                };
+
+                return jsonResponse(publicUser);
+            }
+
+            if (url.pathname.startsWith("/api/users/") &&
+                url.pathname.endsWith("/recipes")) {
+
+                if (!validateJsonAccept(request)) {
+                    return notAcceptable();
+                }
+
+                let parts = url.pathname.split("/");
+                let id = Number(parts[3]);
+
+                if (Number.isNaN(id)) {
+                    return notFound();
+                }
+
+                let user = users.getUserById(id);
+
+                if (!user) {
+                    return notFound();
+                }
+
+                let userRecipes = recipes.getProfileRecipes(user.id);
+
+                for (let recipe of userRecipes) {
+                    recipe.favoriteCount = recipes.getFavouriteCount(recipe.id);
+
+                    let rating = comments.getRating(recipe.id);
+
+                    recipe.averageRating = rating.average;
+                    recipe.ratingCount = rating.amount;
+                }
+
+                return jsonResponse(userRecipes);
             }
 
             const userRatingRoute = new URLPattern({
@@ -493,6 +724,35 @@ async function handler(request) {
         }
 
         if (request.method === "PATCH") {
+            if (url.pathname === "/api/profile/title") {
+                if (!validateJsonAccept(request)) {
+                    return notAcceptable();
+                }
+
+                let user = login.getProfile(request);
+                if (!user) {
+                    return unauthorized();
+                }
+
+                let body = await request.json();
+                if (!body.selectedTitle) {
+                    return badRequest("Titel saknas.");
+                }
+
+                let updatedUser = users.updateSelectedTitle(
+                    user.id,
+                    body.selectedTitle
+                );
+
+                if (!updatedUser) {
+                    return badRequest("Titeln är inte upplåst.");
+                }
+
+                return jsonResponse({
+                    selectedTitle: updatedUser.selectedTitle
+                });
+            }
+
             if (url.pathname === "/api/profile") {
                 if (!validateJsonAccept(request)) {
                     return notAcceptable();

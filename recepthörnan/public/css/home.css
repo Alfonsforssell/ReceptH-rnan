@@ -263,10 +263,12 @@ main {
             border: 2.5px solid var(--complementary);
         }
 
-        #searchValue {
+        #searchValue,
+        #profileSearchValue {
             cursor: text;
             min-height: 35px;
         }
+
     }
 
     input {
@@ -322,6 +324,13 @@ main {
                 top: 20px;
                 left: 20px;
                 font-weight: 500;
+                cursor: pointer;
+                transition: all .5s ease;
+            }
+
+            .author:hover {
+                transform: scale(1.05);
+                background-color: var(--text);
             }
 
             .image img {
@@ -425,6 +434,72 @@ main {
                     }
                 }
             }
+        }
+
+        .userCard {
+            min-height: 120px;
+            display: flex;
+            flex-direction: row !important;
+            align-items: center;
+            gap: 20px;
+            padding: 20px !important;
+            cursor: pointer;
+            transition: all .3s ease;
+            color: var(--text-light);
+
+            img {
+                width: 10px;
+            }
+
+            p {
+                font-size: 15px;
+                color: var(--text-dark);
+            }
+        }
+
+        .userCard:hover {
+            transform: scale(1.02);
+        }
+
+        .userProfileIcon {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: var(--text);
+            color: var(--bg-dark);
+            font-size: 45px;
+            font-weight: 600;
+
+        }
+
+        .userProfileContent {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .userProfileUsername {
+            margin: 0;
+            font-size: 25px;
+            letter-spacing: 2px;
+        }
+
+        .userProfileStats {
+            display: flex;
+            gap: 20px;
+            color: var(–text-dark);
+            font-size: 12px;
+        }
+
+        .userProfileStats span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         #notFound {

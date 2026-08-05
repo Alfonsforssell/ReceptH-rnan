@@ -9,19 +9,163 @@ let dietaries = [];
 let currentUser;
 let selectedRecipeId = null;
 let showEditButtons = true;
+let profileId = null;
+let isOwnProfile = true;
+
+function translateRarity(rarity) {
+    if (rarity === "common") {
+        return "VANLIG";
+    }
+
+    if (rarity === "uncommon") {
+        return "OVANLIG";
+    }
+
+    if (rarity === "rare") {
+        return "SÄLLSYNT";
+    }
+
+    if (rarity === "epic") {
+        return "EPISK";
+    }
+
+    if (rarity === "legendary") {
+        return "LEGENDARISK";
+    }
+
+    return rarity;
+}
 
 async function getData() {
     recipes = await api.getRequest("/api/recipes", true);
-    myRecipes = await api.getRequest("/api/profile/recipes", true);
+
     categories = await api.getRequest("/api/categories");
     countries = await api.getRequest("/api/countries");
     dietaries = await api.getRequest("/api/dietaries");
+
+    let params = new URLSearchParams(window.location.search);
+
+    profileId = params.get("id");
+
+    // Om ett profil-ID finns i URL:en
+    if (profileId) {
+
+        // Hämta den inloggade användaren
+        let loggedInUser = await api.getRequest(
+            "/api/profile",
+            true
+        );
+
+        // Om profilen som visas är den inloggade användaren
+        if (Number(profileId) === Number(loggedInUser.id)) {
+
+            isOwnProfile = true;
+            profileId = null;
+
+            currentUser = loggedInUser;
+
+            myRecipes = await api.getRequest(
+                "/api/profile/recipes",
+                true
+            );
+
+            showEditButtons = true;
+        }
+        else {
+
+            isOwnProfile = false;
+
+            currentUser = await api.getRequest(
+                "/api/users/" + profileId,
+                true
+            );
+
+            myRecipes = await api.getRequest(
+                "/api/users/" + profileId + "/recipes",
+                true
+            );
+
+            showEditButtons = false;
+        }
+
+    }
+    else {
+
+        // Ingen profil angiven → visa min egen profil
+        isOwnProfile = true;
+
+        currentUser = await api.getRequest(
+            "/api/profile",
+            true
+        );
+
+        myRecipes = await api.getRequest(
+            "/api/profile/recipes",
+            true
+        );
+
+        showEditButtons = true;
+    }
 }
 
 async function getUser() {
-    currentUser = await api.getRequest("/api/profile", true);
     createUserInfo(currentUser);
-    generateForm(currentUser);
+
+    if (isOwnProfile) {
+        generateForm(currentUser);
+    }
+
+    let recipeTitle = document.getElementById("recipeTitle");
+
+    if (isOwnProfile) {
+        recipeTitle.textContent = "Mina Recept";
+    }
+    else {
+        recipeTitle.textContent =
+            "Recept av " + currentUser.username;
+
+        showEditButtons = false;
+    }
+}
+
+function isOtherProfile() {
+    let params = new URLSearchParams(window.location.search);
+
+    return params.get("id") !== null;
+}
+
+function setupProfilePage() {
+
+    let form = document.querySelector("form");
+    let recipeTitle = document.getElementById("recipeTitle");
+    let myProfileButton = document.getElementById("myProfileButton");
+
+    if (isOwnProfile) {
+
+        form.style.display = "grid";
+        myProfileButton.style.display = "none";
+
+        generateForm(currentUser);
+
+        recipeTitle.textContent = "Mina Recept";
+
+    }
+    else {
+
+        form.style.display = "none";
+        myProfileButton.style.display = "block";
+
+        recipeTitle.textContent =
+            "Recept av " + currentUser.username;
+    }
+}
+
+function myProfileButton() {
+    let button = document.getElementById("myProfileButton");
+    button.addEventListener("click", function () {
+        window.location.href = "/profile";
+    });
+
 }
 
 function getRecipeAmount() {
@@ -41,15 +185,75 @@ function createUserInfo(user) {
     let userInfo = document.getElementById("userInfo");
     let firstLetter = user.username.charAt(0).toUpperCase();
 
+    let params = new URLSearchParams(window.location.search);
+    let isOtherProfile = params.get("id") !== null;
+
+    let emailHtml = "";
+
+    if (!isOtherProfile) {
+        emailHtml = `<h2 id="two">${user.email}</h2>`;
+    }
+
+    let titleHtml = "";
+
+    if (isOwnProfile) {
+        titleHtml = `
+        <select id="title">
+            ${user.unlockedTitles.map(function (title) {
+            return `
+                    <option value="${title.name}" ${title.name === user.selectedTitle ? "selected" : ""}>
+                        ${title.name} - ${translateRarity(title.rarity)}
+                    </option>
+                `;
+        }).join("")}
+        </select>
+    `;
+    }
+    else {
+        titleHtml = `<h2 id="title">${user.title}</h2>`;
+    }
+
+    let ratingHtml = "";
+
+    if (user.ratingCount > 0) {
+        ratingHtml = `
+            <h2 id="rating">
+                <span>★</span>${user.averageRating} (${user.ratingCount} betyg)
+            </h2>
+        `;
+    }
+    else {
+        ratingHtml = `
+            <h2 id="rating">
+                <span>★</span>Inga betyg ännu
+            </h2>
+        `;
+    }
+
     userInfo.innerHTML = `
-    <p>${firstLetter}</p>
-            <div id="info">
-                <h1 id="one">${user.username.toUpperCase()}</h1 >
-                <h2 id="two">${user.email}</h2>
-                <h2 id="three">${getDate(user)}</h2>
-                <h2 id="four"><img src="assets/icons/recipe.png" alt="">${getRecipeAmount()}</h2>
-                <h2 id="five"><img src="assets/icons/heart.png" alt="">${getFavAmount(user)}</h2>
-            </div >
+        <p>${firstLetter}</p>
+
+        <div id="info">
+            <h1 id="one">${user.username.toUpperCase()}</h1>
+
+            ${emailHtml}
+
+            ${titleHtml}
+
+            <h2 id="three">${getDate(user)}</h2>
+
+            <h2 id="four">
+                <img src="assets/icons/recipe.png" alt="">
+                ${getRecipeAmount()}
+            </h2>
+
+            <h2 id="five">
+                <img src="assets/icons/heart.png" alt="">
+                ${getFavAmount(user)}
+            </h2>
+
+            ${ratingHtml}
+        </div>
     `;
 }
 
@@ -300,25 +504,140 @@ function closePopup() {
         restorePopup();
         selectedRecipeId = null;
     });
+}
 
+function searchUsers() {
+    let input = document.getElementById("userSearchInput");
+    let resultsContainer = document.getElementById("userSearchResults");
+
+    input.addEventListener("input", async function () {
+
+        let searchValue = input.value.trim();
+
+        resultsContainer.innerHTML = "";
+
+        if (searchValue === "") {
+            return;
+        }
+
+        try {
+            let results = await api.getRequest(
+                "/api/users/search?username=" +
+                encodeURIComponent(searchValue)
+            );
+
+            for (let user of results) {
+                let result = document.createElement("div");
+                result.classList.add("userSearchResult");
+                result.textContent = user.username;
+                result.addEventListener("click", function () {
+                    window.location.href = "/profile?id=" + user.id;
+                });
+
+                resultsContainer.appendChild(result);
+            }
+
+            if (results.length === 0) {
+                resultsContainer.innerHTML =
+                    "<p>Ingen användare hittades.</p>";
+            }
+
+        }
+        catch (error) {
+            console.log(error);
+        }
+    });
+}
+
+function favorite() {
+    let buttons = document.querySelectorAll(".heart");
+
+    for (let button of buttons) {
+        button.addEventListener("click", async function () {
+
+            let card = button.closest(".card");
+            let recipeId = Number(card.dataset.recipeId);
+
+            try {
+                if (button.classList.contains("fav")) {
+
+                    await api.deleteRequest(
+                        "/api/favourites/" + recipeId,
+                        true
+                    );
+
+                    button.classList.remove("fav");
+                }
+                else {
+
+                    await api.postRequest(
+                        "/api/favourites",
+                        {
+                            recipeId: recipeId
+                        },
+                        true
+                    );
+
+                    button.classList.add("fav");
+                }
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
+}
+
+function titleSelector() {
+    if (!isOwnProfile) {
+        return;
+    }
+
+    let title = document.getElementById("title");
+
+    title.addEventListener("change", async function () {
+        try {
+            await api.patchRequest(
+                "/api/profile/title",
+                {
+                    selectedTitle: title.value
+                },
+                true
+            );
+
+            currentUser.selectedTitle = title.value;
+            currentUser.title = title.value;
+        }
+        catch (error) {
+            console.log("Kunde inte uppdatera titel:", error);
+        }
+    });
 }
 
 async function init() {
     try {
         await getData();
-        await getUser();
     }
     catch (error) {
         window.location.href = "/login";
         return;
     }
 
-    updateUserInfo();
-    logout();
+    createUserInfo(currentUser);
+
+    if (isOwnProfile) {
+        titleSelector();
+        updateUserInfo();
+        logout();
+        openPopup();
+        closePopup();
+        restorePopup();
+    }
+
+    setupProfilePage();
+    searchUsers();
+    myProfileButton();
     renderRecipes();
-    openPopup();
-    closePopup();
-    restorePopup();
 }
 
 init();

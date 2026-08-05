@@ -1,3 +1,5 @@
+import * as comments from "./comments.js";
+
 export function getRecipes() {
     let text = Deno.readTextFileSync("data/recipes.json");
     let data = JSON.parse(text);
@@ -267,4 +269,126 @@ export function getFavouriteCount(recipeId) {
         }
     }
     return count;
+}
+
+export function getHighestRecipeFavouriteCount(userId, allRecipes) {
+    let highest = 0;
+
+    for (let recipe of allRecipes) {
+        if (Number(recipe.author) === Number(userId)) {
+
+            let favouriteCount = getFavouriteCount(recipe.id);
+
+            if (favouriteCount > highest) {
+                highest = favouriteCount;
+            }
+        }
+    }
+
+    return highest;
+}
+
+export function getUniqueCountryCount(userId, allRecipes) {
+    let countries = [];
+
+    for (let recipe of allRecipes) {
+        if (Number(recipe.author) === Number(userId)) {
+
+            if (
+                recipe.country &&
+                !countries.includes(recipe.country)
+            ) {
+                countries.push(recipe.country);
+            }
+        }
+    }
+
+    return countries.length;
+}
+
+export function getAverageRecipeRating(userId, allRecipes) {
+    let totalRating = 0;
+    let ratingCount = 0;
+
+    for (let recipe of allRecipes) {
+        if (Number(recipe.author) === Number(userId)) {
+            let rating = comments.getRating(recipe.id);
+
+            totalRating += rating.average * rating.amount;
+            ratingCount += rating.amount;
+        }
+    }
+
+    if (ratingCount === 0) {
+        return 0;
+    }
+
+    return totalRating / ratingCount;
+}
+
+export function getHighestCategoryRecipeCount(userId, allRecipes) {
+    let categoryCounts = {};
+
+    for (let recipe of allRecipes) {
+        if (Number(recipe.author) !== Number(userId)) {
+            continue;
+        }
+
+        if (!recipe.category) {
+            continue;
+        }
+
+        if (!categoryCounts[recipe.category]) {
+            categoryCounts[recipe.category] = 0;
+        }
+
+        categoryCounts[recipe.category]++;
+    }
+
+    let highestCategory = null;
+    let highestCount = 0;
+
+    for (let category in categoryCounts) {
+        if (categoryCounts[category] > highestCount) {
+            highestCount = categoryCounts[category];
+            highestCategory = category;
+        }
+    }
+
+    return {
+        category: highestCategory,
+        count: highestCount
+    };
+}
+
+export function hasPerfectScore(userId, allRecipes, allComments) {
+    for (let recipe of allRecipes) {
+        if (Number(recipe.author) !== Number(userId)) {
+            continue;
+        }
+
+        let ratingCount = 0;
+        let allRatingsAreFive = true;
+
+        for (let comment of allComments) {
+            if (
+                Number(comment.recipeId) === Number(recipe.id) &&
+                comment.rating !== null &&
+                comment.rating !== undefined
+            ) {
+                ratingCount++;
+
+                if (Number(comment.rating) !== 5) {
+                    allRatingsAreFive = false;
+                    break;
+                }
+            }
+        }
+
+        if (ratingCount >= 25 && allRatingsAreFive) {
+            return true;
+        }
+    }
+
+    return false;
 }

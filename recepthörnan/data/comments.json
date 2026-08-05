@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "id": 1,
+    "userId": 2,
+    "recipeId": 1,
+    "text": "Hej",
+    "rating": 5,
+    "createdAt": "2026-08-04T19:47:58.686Z"
+  },
+  {
+    "id": 2,
+    "userId": 2,
+    "recipeId": 2,
+    "text": "k",
+    "rating": 3,
+    "createdAt": "2026-08-05T09:19:04.146Z"
+  },
+  {
+    "id": 3,
+    "userId": 2,
+    "recipeId": 3,
+    "text": "h",
+    "rating": 3,
+    "createdAt": "2026-08-05T09:19:11.426Z"
+  },
+  {
+    "id": 4,
+    "userId": 2,
+    "recipeId": 4,
+    "text": "h",
+    "rating": 4,
+    "createdAt": "2026-08-05T09:19:18.363Z"
+  },
+  {
+    "id": 5,
+    "userId": 2,
+    "recipeId": 5,
+    "text": "hh",
+    "rating": 2,
+    "createdAt": "2026-08-05T09:19:26.878Z"
+  },
+  {
+    "id": 6,
+    "userId": 2,
+    "recipeId": 6,
+    "text": "hhhh",
+    "rating": 3,
+    "createdAt": "2026-08-05T09:19:46.379Z"
+  }
+]

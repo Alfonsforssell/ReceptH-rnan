@@ -15,7 +15,7 @@
       "ingredients": [
         {
           "amount": 4,
-          "unit": "port",
+          "unit": "",
           "name": "Ris"
         },
         {
@@ -30,12 +30,12 @@
         },
         {
           "amount": 1,
-          "unit": "msk",
+          "unit": "",
           "name": "Olja"
         },
         {
           "amount": 3,
-          "unit": "msk",
+          "unit": "",
           "name": "Tomatpuré"
         },
         {
@@ -50,22 +50,22 @@
         },
         {
           "amount": 1,
-          "unit": "msk",
+          "unit": "",
           "name": "Japansk soja"
         },
         {
           "amount": 1,
-          "unit": "tsk",
+          "unit": "",
           "name": "Dijonsenap"
         },
         {
-          "amount": 0,
-          "unit": "",
+          "amount": 1,
+          "unit": "tsk",
           "name": "Peppar"
         },
         {
-          "amount": 0,
-          "unit": "",
+          "amount": 1,
+          "unit": "tsk",
           "name": "Salt"
         }
       ],
@@ -88,9 +88,9 @@
         "Tillsätt salt efter smak.",
         "Servera korvstroganoffen tillsammans med ris."
       ],
-      "imageUrl": "/images/placeholder.jpg",
+      "imageUrl": "/uploads/894929bb-2e94-4f1b-a716-61414df1f639.jpg",
       "createdAt": "2026-08-01T10: 00: 00.000Z",
-      "views": 1
+      "views": 20
     },
     {
       "id": 2,
@@ -122,7 +122,7 @@
         },
         {
           "amount": 2,
-          "unit": "msk",
+          "unit": "",
           "name": "Olivolja"
         },
         {
@@ -132,17 +132,17 @@
         },
         {
           "amount": 1,
-          "unit": "krm",
+          "unit": "",
           "name": "Chiliflakes"
         },
         {
           "amount": 0.5,
-          "unit": "tsk",
+          "unit": "",
           "name": "Torkad oregano"
         },
         {
           "amount": 0.5,
-          "unit": "tsk",
+          "unit": "",
           "name": "Torkad timjan"
         },
         {
@@ -172,7 +172,7 @@
         },
         {
           "amount": 4,
-          "unit": "port",
+          "unit": "",
           "name": "Ris"
         }
       ],
@@ -203,9 +203,9 @@
         "Rör ner basilikan i såsen.",
         "Servera kycklingen med ris."
       ],
-      "imageUrl": "/images/placeholder.jpg",
+      "imageUrl": "/uploads/6fd40152-c246-4efe-b27a-8008776c6cef.jpg",
       "createdAt": "2026-08-01T10: 05: 00.000Z",
-      "views": 0
+      "views": 14
     },
     {
       "id": 3,
@@ -242,7 +242,7 @@
         },
         {
           "amount": 2,
-          "unit": "msk",
+          "unit": "",
           "name": "Matolja"
         },
         {
@@ -267,12 +267,12 @@
         },
         {
           "amount": 1,
-          "unit": "tsk",
+          "unit": "",
           "name": "Kinesisk soja"
         },
         {
           "amount": 4,
-          "unit": "port",
+          "unit": "",
           "name": "Spaghetti"
         },
         {
@@ -310,9 +310,9 @@
         "Servera köttfärssåsen tillsammans med spaghettin.",
         "Servera gärna med riven parmesan."
       ],
-      "imageUrl": "/images/placeholder.jpg",
+      "imageUrl": "/uploads/d5a69b0d-5957-4e79-9239-71b55f3f9af3.jpg",
       "createdAt": "2026-08-01T10: 10: 00.000Z",
-      "views": 0
+      "views": 52
     },
     {
       "id": 4,
@@ -334,7 +334,7 @@
         },
         {
           "amount": 2,
-          "unit": "msk",
+          "unit": "",
           "name": "Smör"
         },
         {
@@ -349,7 +349,7 @@
         },
         {
           "amount": 2,
-          "unit": "tsk",
+          "unit": "",
           "name": "Tomatpuré"
         },
         {
@@ -369,17 +369,17 @@
         },
         {
           "amount": 2,
-          "unit": "msk",
+          "unit": "",
           "name": "Japansk soja"
         },
         {
           "amount": 2,
-          "unit": "tsk",
+          "unit": "",
           "name": "Dijonsenap"
         },
         {
           "amount": 1,
-          "unit": "tsk",
+          "unit": "",
           "name": "Majsstärkelse"
         },
         {
@@ -418,9 +418,9 @@
         "Låt grytan bli varm.",
         "Servera med ris eller kokt potatis."
       ],
-      "imageUrl": "/images/placeholder.jpg",
+      "imageUrl": "/uploads/9c2e94a4-102c-4654-91e6-7ccf451a5255.jpg",
       "createdAt": "2026-08-01T10: 15: 00.000Z",
-      "views": 0
+      "views": 5
     },
     {
       "id": 5,
@@ -437,37 +437,37 @@
       "ingredients": [
         {
           "amount": 1,
-          "unit": "kg",
+          "unit": "",
           "name": "Kycklingklubbor"
         },
         {
           "amount": 2.5,
-          "unit": "msk",
+          "unit": "",
           "name": "Japansk soja"
         },
         {
           "amount": 1,
-          "unit": "msk",
+          "unit": "",
           "name": "Ketchup"
         },
         {
           "amount": 1,
-          "unit": "tsk",
+          "unit": "",
           "name": "Rosmarin"
         },
         {
           "amount": 1,
-          "unit": "tsk",
+          "unit": "",
           "name": "Oregano"
         },
         {
           "amount": 1,
-          "unit": "msk",
+          "unit": "",
           "name": "Rapsolja"
         },
         {
           "amount": 0.5,
-          "unit": "tsk",
+          "unit": "",
           "name": "Svartpeppar"
         },
         {
@@ -477,7 +477,7 @@
         },
         {
           "amount": 3,
-          "unit": "msk",
+          "unit": "",
           "name": "Smör"
         },
         {
@@ -506,9 +506,9 @@
         "Spara gärna stekskyn.",
         "Servera kycklingen med rostade rotfrukter och yoghurtsås."
       ],
-      "imageUrl": "/images/placeholder.jpg",
+      "imageUrl": "/uploads/f6b627bb-8d2d-4775-9f98-2b77e0865994.jpg",
       "createdAt": "2026-08-01T10: 20: 00.000Z",
-      "views": 0
+      "views": 4
     },
     {
       "id": 6,
@@ -535,7 +535,7 @@
         },
         {
           "amount": 8,
-          "unit": "skivor",
+          "unit": "",
           "name": "Cheddarost"
         },
         {
@@ -555,7 +555,7 @@
         },
         {
           "amount": 1,
-          "unit": "tsk",
+          "unit": "",
           "name": "Strösocker"
         },
         {
@@ -575,12 +575,12 @@
         },
         {
           "amount": 8,
-          "unit": "skivor",
+          "unit": "",
           "name": "Inlagd jalapeño"
         },
         {
           "amount": 0.5,
-          "unit": "kruka",
+          "unit": "",
           "name": "Färsk koriander"
         },
         {
@@ -616,9 +616,9 @@
         "Lägg på karamelliserad lök.",
         "Toppa med lätt krossade chips."
       ],
-      "imageUrl": "/images/placeholder.jpg",
+      "imageUrl": "/uploads/752c3558-9a0e-49b7-be18-b306899bcba6.jpg",
       "createdAt": "2026-08-01T10: 25: 00.000Z",
-      "views": 0
+      "views": 5
     },
     {
       "id": 7,
@@ -635,7 +635,7 @@
       "ingredients": [
         {
           "amount": 1,
-          "unit": "kg",
+          "unit": "",
           "name": "Högrev"
         },
         {
@@ -655,17 +655,17 @@
         },
         {
           "amount": 3,
-          "unit": "klyftor",
+          "unit": "",
           "name": "Vitlök"
         },
         {
           "amount": 4,
-          "unit": "msk",
+          "unit": "",
           "name": "Tomatpuré"
         },
         {
           "amount": 2,
-          "unit": "msk",
+          "unit": "",
           "name": "Vetemjöl"
         },
         {
@@ -675,7 +675,7 @@
         },
         {
           "amount": 3,
-          "unit": "kvistar",
+          "unit": "",
           "name": "Färsk timjan"
         },
         {
@@ -685,7 +685,7 @@
         },
         {
           "amount": 5,
-          "unit": "msk",
+          "unit": "",
           "name": "Koncentrerad kalvfond"
         },
         {
@@ -756,9 +756,9 @@
         "Låt grytan puttra ytterligare 20 minuter.",
         "Servera med bröd eller pressad potatis."
       ],
-      "imageUrl": "/images/placeholder.jpg",
+      "imageUrl": "/uploads/4e0c6f92-eab3-4b06-8b8c-31be01bae58c.jpg",
       "createdAt": "2026-08-01T10: 30: 00.000Z",
-      "views": 1
+      "views": 4
     },
     {
       "id": 8,
@@ -790,7 +790,7 @@
         },
         {
           "amount": 1,
-          "unit": "kg",
+          "unit": "",
           "name": "Delikatesspotatis"
         },
         {
@@ -800,27 +800,27 @@
         },
         {
           "amount": 2,
-          "unit": "msk",
+          "unit": "",
           "name": "Olivolja"
         },
         {
           "amount": 1,
-          "unit": "krm",
+          "unit": "",
           "name": "Svartpeppar"
         },
         {
           "amount": 1,
-          "unit": "klyfta",
+          "unit": "",
           "name": "Vitlök"
         },
         {
           "amount": 0.5,
-          "unit": "tsk",
+          "unit": "",
           "name": "Flingsalt"
         },
         {
           "amount": 1,
-          "unit": "tsk",
+          "unit": "",
           "name": "Salt"
         }
       ],
@@ -848,9 +848,9 @@
         "Strö över flingsalt.",
         "Servera kycklingen med smashed potatis och grillad sparris."
       ],
-      "imageUrl": "/images/placeholder.jpg",
+      "imageUrl": "/uploads/e0a5ecc7-6e4d-41b2-98f2-e4081ead4209.jpg",
       "createdAt": "2026-08-01T10: 35: 00.000Z",
-      "views": 0
+      "views": 4
     },
     {
       "id": 9,
@@ -867,17 +867,17 @@
       "ingredients": [
         {
           "amount": 2,
-          "unit": "msk",
+          "unit": "",
           "name": "Kycklingfond"
         },
         {
           "amount": 1,
-          "unit": "msk",
+          "unit": "",
           "name": "Olivolja"
         },
         {
           "amount": 1,
-          "unit": "krm",
+          "unit": "",
           "name": "Hela nejlikor"
         },
         {
@@ -887,7 +887,7 @@
         },
         {
           "amount": 2,
-          "unit": "klyftor",
+          "unit": "",
           "name": "Vitlök"
         },
         {
@@ -902,17 +902,17 @@
         },
         {
           "amount": 2.5,
-          "unit": "msk",
+          "unit": "",
           "name": "Fisksås"
         },
         {
           "amount": 1,
-          "unit": "msk",
+          "unit": "",
           "name": "Färsk ingefära"
         },
         {
           "amount": 2,
-          "unit": "msk",
+          "unit": "",
           "name": "Tamarisoja"
         },
         {
@@ -1008,9 +1008,9 @@
         "Grovhacka cashewnötterna.",
         "Toppa soppan med cashewnötterna."
       ],
-      "imageUrl": "/images/placeholder.jpg",
+      "imageUrl": "/uploads/97ac2d52-7071-4c9d-b5f0-cab9f6ab8367.jpg",
       "createdAt": "2026-08-01T10: 40: 00.000Z",
-      "views": 0
+      "views": 2
     }
   ]
 }

@@ -119,6 +119,91 @@ main {
     color: var(--text-light);
     padding: 50px;
 
+    #myProfileButton {
+        width: 250px;
+        height: 45px;
+        margin-bottom: 15px;
+        color: var(--text-light);
+        background-color: var(--dominant);
+        border: none;
+        border-radius: 20px;
+        padding: 10px;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all .5s ease;
+        display: none;
+    }
+
+    #myProfileButton:hover {
+        background-color: var(–dominant-hover);
+        transform: scale(1.05);
+    }
+
+    #myProfileButton:active {
+        transform: scale(.95);
+    }
+
+    #userSearch {
+        background-color: var(--bg-light);
+        border: 3px solid var(--bg-light);
+        border-radius: 40px;
+        padding: 10px 20px;
+        position: relative;
+
+        h1 {
+            font-size: 25px;
+            letter-spacing: 5px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #userSearchInput {
+            width: 100%;
+            height: 50px;
+            color: var(--text-light);
+            background-color: var(--bg);
+            border: none;
+            border-radius: 20px;
+            padding: 10px;
+            transition: all .5s ease;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        #userSearchResults {
+            position: absolute;
+            top: 105px;
+            left: 20px;
+            width: calc(100% - 40px);
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            overflow: hidden;
+            z-index: 10;
+
+            .userSearchResult {
+                padding: 12px 15px;
+                cursor: pointer;
+                transition: all .2s ease;
+                border: 2px solid var(--bg);
+                background-color: var(--bg-light);
+                width: 100%;
+            }
+
+            .userSearchResult:hover {
+                background-color: var(--dominant);
+            }
+
+            p {
+                padding: 12px 15px;
+                color: var(--text-dark);
+            }
+        }
+    }
+
+
+
     #userInfo {
         display: flex;
         justify-content: start;
@@ -139,20 +224,35 @@ main {
 
         #info {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-            width: 250px;
+            grid-template-columns: 1.5fr 1fr 1fr 2fr;
+            grid-template-rows: repeat(4, 1fr);
+            width: 500px;
             height: 100px;
             margin-left: 10px;
 
             #one {
-                grid-column: 1/4;
+                grid-column: 1/5;
                 grid-row: 1;
+            }
+
+            #title {
+                grid-column: 1/5;
+                grid-row: 4;
+                font-size: 15px;
+                font-weight: 600;
+                color: var(--dominant-light);
+                padding: 5px;
+                background-color: var(--dominant);
+                border: 2px solid var(--dominant-light);
+                border-radius: 10px;
+                width: fit-content;
+                margin-top: 10px;
             }
 
             #two {
                 grid-column: 1/4;
                 grid-row: 2;
+                margin-top: -15px;
             }
 
             #three {
@@ -160,7 +260,7 @@ main {
                 grid-row: 3;
                 font-size: 10px;
                 color: var(--text);
-                margin: 0px auto;
+                margin: 0px;
             }
 
             #four {
@@ -168,7 +268,7 @@ main {
                 grid-row: 3;
                 font-size: 10px;
                 color: var(--text);
-                margin: 0px auto;
+                margin: 0px;
 
                 img {
                     width: 10px;
@@ -181,11 +281,25 @@ main {
                 grid-row: 3;
                 font-size: 10px;
                 color: var(--text);
-                margin: 0px auto;
+                margin: 0px;
 
                 img {
                     width: 10px;
                     margin-right: 2px;
+                }
+            }
+
+            #rating {
+                grid-column: 4;
+                grid-row: 3;
+                font-size: 10px;
+                color: var(--text);
+                margin: 0px;
+
+                span {
+                    display: inline-block;
+                    font-size: 15px;
+                    margin-top: -10px;
                 }
             }
         }
@@ -288,6 +402,10 @@ main {
 
     h1 {
         margin-left: 25px;
+    }
+
+    h1:first-child {
+        margin-left: 0px;
     }
 
     #recipeContainer {
@@ -520,6 +638,8 @@ main {
 
         }
     }
+
+
 }
 
 footer {

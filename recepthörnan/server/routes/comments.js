@@ -159,3 +159,31 @@ export function getRating(recipeId) {
         amount: amount
     };
 }
+
+export function getUserRating(userId, recipes) {
+    const comments = getComments();
+
+    let total = 0;
+    let amount = 0;
+    for (let recipe of recipes) {
+        if (recipe.author === userId) {
+            for (let comment of comments) {
+                if (comment.recipeId === recipe.id) {
+                    total += comment.rating;
+                    amount++;
+                }
+            }
+        }
+    }
+    if (amount === 0) {
+        return {
+            average: 0,
+            amount: 0
+        };
+    }
+    return {
+        average: Number((total / amount).toFixed(1)),
+        amount: amount
+    };
+
+}

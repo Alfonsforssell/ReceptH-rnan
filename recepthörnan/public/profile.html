@@ -17,38 +17,46 @@
         </div>
     </header>
     <main>
+        <button id="myProfileButton">Tillbaka till min profil</button>
+        <div id="userSearch">
+            <h1>Sök användare</h1>
+            <input type="text" id="userSearchInput" placeholder="Sök användare...">
+            <div id="userSearchResults"></div>
+        </div>
         <div id="userInfo"></div>
-        <form action="">
-            <h2>Användarnamn</h2>
-            <h2>Mail-adress</h2>
+        <div id="editProfile">
+            <form action="">
+                <h2>Användarnamn</h2>
+                <h2>Mail-adress</h2>
 
-            <div>
-                <input type="text" name="username" placeholder="Användarnamn">
-                <span id="usernameError" class="profileError"></span>
-            </div>
+                <div>
+                    <input type="text" name="username" placeholder="Användarnamn">
+                    <span id="usernameError" class="profileError"></span>
+                </div>
 
-            <div>
-                <input type="text" name="mail" placeholder="Mail">
-                <span id="mailError" class="profileError"></span>
-            </div>
+                <div>
+                    <input type="text" name="mail" placeholder="Mail">
+                    <span id="mailError" class="profileError"></span>
+                </div>
 
-            <h2>Lösenord</h2>
-            <h2>Uppdatera lösenord</h2>
+                <h2>Lösenord</h2>
+                <h2>Uppdatera lösenord</h2>
 
-            <div>
-                <input type="password" name="password" placeholder="Lösenord">
-            </div>
+                <div>
+                    <input type="password" name="password" placeholder="Lösenord">
+                </div>
 
-            <div>
-                <input type="password" name="repeatPassword" placeholder="Upprepa lösenord">
-                <span id="passwordError" class="profileError"></span>
-            </div>
+                <div>
+                    <input type="password" name="repeatPassword" placeholder="Upprepa lösenord">
+                    <span id="passwordError" class="profileError"></span>
+                </div>
 
-            <button id="updateProfile" type="button">
-                Uppdatera uppgifter
-            </button>
-        </form>
-        <h1>Mina Recept</h1>
+                <button id="updateProfile" type="button">
+                    Uppdatera uppgifter
+                </button>
+            </form>
+        </div>
+        <h1 id="recipeTitle">Mina Recept</h1>
         <div id="recipeContainer"></div>
         <div id="overlay">
             <div id="editPopup">

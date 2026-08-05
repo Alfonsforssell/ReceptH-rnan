@@ -151,7 +151,9 @@ function renderRecipes(filteredRecipes = sortRecipes(recipes)) {
         }
 
         div.innerHTML = `
-            <div class="author">${getUserNameById(oneRecipe.author)}</div>
+            <div class="author" data-user-id="${oneRecipe.author}">
+                ${getUserNameById(oneRecipe.author)}
+            </div>
 
             <div class="image">
                 <img src="assets${oneRecipe.imageUrl}" alt="">
@@ -223,6 +225,14 @@ function renderRecipes(filteredRecipes = sortRecipes(recipes)) {
         view.addEventListener("click", function () {
             location.href = "/recipe/" + oneRecipe.id;
         });
+
+        let author = div.querySelector(".author");
+
+        author.addEventListener("click", function () {
+            let userId = author.dataset.userId;
+
+            window.location.href = "/profile?id=" + userId;
+        });
     }
 
     if (recipeContainer.children.length === 0) {
@@ -235,18 +245,14 @@ function renderRecipes(filteredRecipes = sortRecipes(recipes)) {
     else {
         favorite();
     }
-
-    document.querySelector("#sortRecipes").addEventListener("change", function () {
-        currentSort = this.value;
-        renderRecipes(sortRecipes(recipes));
-    });
 }
 
 function sortOnChange() {
-    let select = document.getElementById("sortRecipes")
+    let select = document.getElementById("sortRecipes");
+
     select.addEventListener("change", function () {
         currentSort = this.value;
-        renderRecipes(sortRecipes(recipes));
+        updateRecipes();
     });
 }
 
@@ -258,7 +264,9 @@ function favorite() {
             e.preventDefault();
             e.stopPropagation();
 
-            let recipeId = Number(heart.closest(".card").dataset.recipeId);
+            let recipeId = Number(
+                heart.closest(".card").dataset.recipeId
+            );
 
             let body = {
                 recipeId: recipeId
@@ -266,19 +274,22 @@ function favorite() {
 
             try {
                 if (!heart.classList.contains("fav")) {
-                    await api.postRequest("/api/favourites", body, true);
-                    heart.classList.add("fav");
+                    await api.postRequest(
+                        "/api/favourites",
+                        body,
+                        true
+                    );
                 }
                 else {
                     await api.deleteRequest(
                         "/api/favourites/" + recipeId,
                         true
                     );
-                    heart.classList.remove("fav");
                 }
 
                 await getData();
-                renderRecipes(recipes);
+
+                updateRecipes(recipes);
             }
             catch (error) {
                 console.log(error);
@@ -316,7 +327,7 @@ function createForm() {
     }
 }
 
-async function updateRecipes() {
+async function updateRecipes(recipeList = recipes) {
     let form = document.getElementById("filter");
 
     let countryValue = form.elements.country.value;
@@ -328,84 +339,70 @@ async function updateRecipes() {
         .trim()
         .toLowerCase();
 
-    try {
-        let allRecipes = await api.getRequest("/api/recipes", true);
-        let filteredRecipes = [];
+    let filteredRecipes = [];
 
-        for (let recipe of allRecipes) {
+    for (let recipe of recipeList) {
 
-            // Land
-            if (
-                countryValue !== "All countries" &&
-                recipe.country !== countryValue
-            ) {
-                continue;
-            }
-
-            // Kategori
-            if (
-                categoryValue !== "All categories" &&
-                recipe.category !== categoryValue
-            ) {
-                continue;
-            }
-
-            // Tid
-            if (timeValue !== "All") {
-                if (timeValue === "100" && recipe.time <= 60) {
-                    continue;
-                }
-
-                if (
-                    timeValue !== "100" &&
-                    recipe.time >= Number(timeValue)
-                ) {
-                    continue;
-                }
-            }
-
-            // Preferens
-            if (
-                dietaryValue !== "All" &&
-                !recipe.dietary.includes(dietaryValue)
-            ) {
-                continue;
-            }
-
-            // Favoriter
-            if (
-                favValue === "favorites" &&
-                !recipe.isFavourite
-            ) {
-                continue;
-            }
-
-            if (
-                favValue === "nonfavorites" &&
-                recipe.isFavourite
-            ) {
-                continue;
-            }
-
-            // Sökning
-            if (
-                searchValue !== "" &&
-                !recipe.name.toLowerCase().includes(searchValue)
-            ) {
-                continue;
-            }
-
-            filteredRecipes.push(recipe);
+        if (
+            countryValue !== "All countries" &&
+            recipe.country !== countryValue
+        ) {
+            continue;
         }
 
-        showEditButtons = false;
+        if (
+            categoryValue !== "All categories" &&
+            recipe.category !== categoryValue
+        ) {
+            continue;
+        }
 
-        renderRecipes(sortRecipes(filteredRecipes));
+        if (timeValue !== "All") {
+            if (timeValue === "100" && recipe.time <= 60) {
+                continue;
+            }
 
+            if (
+                timeValue !== "100" &&
+                recipe.time >= Number(timeValue)
+            ) {
+                continue;
+            }
+        }
+
+        if (
+            dietaryValue !== "All" &&
+            !recipe.dietary.includes(dietaryValue)
+        ) {
+            continue;
+        }
+
+        if (
+            favValue === "favorites" &&
+            !recipe.isFavourite
+        ) {
+            continue;
+        }
+
+        if (
+            favValue === "nonfavorites" &&
+            recipe.isFavourite
+        ) {
+            continue;
+        }
+
+        if (
+            searchValue !== "" &&
+            !recipe.name.toLowerCase().includes(searchValue)
+        ) {
+            continue;
+        }
+
+        filteredRecipes.push(recipe);
     }
-    catch (error) {
-        console.log(error);
-    }
+
+    showEditButtons = false;
+    renderRecipes(sortRecipes(filteredRecipes));
 }
 
 function filterOnChange() {
@@ -425,9 +422,9 @@ async function removeFilters() {
         document.getElementById("searchValue").value = "";
         let filterForm = document.getElementById("filter");
         filterForm.reset();
-        let recipes = await api.getRequest("/api/recipes", true);
+        let allRecipes = await api.getRequest("/api/recipes", true);
         showEditButtons = false;
-        renderRecipes(recipes);
+        renderRecipes(allRecipes);
     });
 }
 
@@ -466,10 +463,15 @@ async function showMyRecipes() {
 
 function search() {
     let searchInput = document.getElementById("searchValue");
+    let userSearchInput = document.getElementById("profileSearchValue");
 
     searchInput.addEventListener("input", function () {
+        if (searchInput.value.trim() !== "") {
+            userSearchInput.value = "";
+        }
         updateRecipes();
     });
+
 }
 
 function logout() {
@@ -561,6 +563,85 @@ function closePopup() {
 
 }
 
+function searchProfiles() {
+    let input = document.getElementById("profileSearchValue");
+    let recipeInput = document.getElementById("searchValue");
+    let recipeContainer = document.getElementById("recipeContainer");
+
+    input.addEventListener("input", async function () {
+        let searchValue = input.value.trim();
+        // Töm receptsökningen när profilsökningen används
+        if (searchValue !== "") {
+            recipeInput.value = "";
+        }
+        // Om profilsökningen är tom visas recepten igen
+        if (searchValue === "") {
+            renderRecipes();
+            return;
+        }
+        recipeContainer.innerHTML = "";
+        try {
+            let results = await api.getRequest(
+                "/api/users/search?username=" +
+                encodeURIComponent(searchValue)
+            );
+            if (results.length === 0) {
+                recipeContainer.innerHTML =
+                    `<p id="notFound">Ingen användare hittades.</p>`;
+                return;
+            }
+            for (let user of results) {
+                let card = document.createElement("div");
+                card.classList.add("card", "userCard");
+                let firstLetter =
+                    user.username.charAt(0).toUpperCase();
+                let recipeAmount = user.recipeCount ?? 0;
+                let favouriteAmount = user.favouriteCount ?? 0;
+                card.innerHTML = `
+                <div class="userProfileIcon">
+                    ${firstLetter}
+                </div>
+                <div class="userProfileContent">
+                    <h1 class="userProfileUsername">
+                        ${user.username}
+                    </h1>
+                    <p class="userProfileDate">
+                        Registrerades ${formatDate(user.createdAt)}
+                    </p>
+                    <div class="userProfileStats">
+                        <span>
+                            <img src="assets/icons/recipe.png" alt="">${recipeAmount} recept
+                        </span>
+                        <span>
+                            ♥ ${favouriteAmount} favoriter
+                        </span>
+                    </div>
+                </div>
+            `;
+                card.addEventListener("click", function () {
+                    window.location.href =
+                        "/profile?id=" + user.id;
+                });
+                recipeContainer.appendChild(card);
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    });
+}
+
+function formatDate(date) {
+    let dateObject = new Date(date);
+
+    return dateObject.toLocaleDateString("sv-SE", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
+
+}
+
 async function init() {
     try {
         await getData();
@@ -579,6 +660,7 @@ async function init() {
     closePopup();
     restorePopup();
     sortOnChange();
+    searchProfiles();
 }
 
 init();
